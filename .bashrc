@@ -64,15 +64,16 @@ if [ "$unameType" != "$macType" ]; then
 fi
 
 #--- set up terminal working preferences
-set -o vi
-set -o history
 shopt -s histappend
 shopt -s extglob
 export EDITOR=vim
+export HISTFILE="$HOME/.bash_history"
 export HISTFILESIZE=200000
 export HISTSIZE=200000
 export HISTIGNORE="clear:ls:pwd:history:hig"
 export HISTTIMEFORMAT='%F %T '
+set -o vi
+set -o history
 
 
 export PROMPT_COMMAND="history -a; history -c; history -r;"
@@ -107,4 +108,12 @@ if [ "$unameType" == "$macType" ]; then
 else
   doNothing=""
 fi
+
+#--- clear out .bashrc commands from history
+history -c
+#--- if history file doesn't exist, create it
+[ -f .bash_history ] || history -w
+
+#--- reload history file into buffer
+history -r
 
