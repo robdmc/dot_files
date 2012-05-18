@@ -113,7 +113,7 @@ fi
 #--- clear out .bashrc commands from history
 history -c
 #--- if history file doesn't exist, create it
-[ -f .bash_history ] || history -w
+[ -f $HOME/.bash_history ] || history -w
 
 #--- reload history file into buffer
 history -r
