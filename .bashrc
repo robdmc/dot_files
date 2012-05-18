@@ -14,6 +14,7 @@ macType="Darwin"
 
 #--- add pwd and home bin area to path
 export PATH="$HOME/bin/:./:$PATH/"
+export PATH=$HOME/local/dataProductivityToolkit:$PATH
 
 #--- example code for testing if this is a mac or not
 #if [ "$unameType" == "$macType" ]; then 
