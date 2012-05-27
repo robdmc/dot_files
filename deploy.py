@@ -29,7 +29,7 @@ if not os.path.isdir(binDir):
     os.makedirs(binDir)
 
 #--- link the git diff wrapper
-cmd = "cd ~/bin; ln -s ~/setupFiles/git_diff_wrapper ."
+cmd = "cd ~/bin; ln -sf ~/setupFiles/git_diff_wrapper ."
 print cmd
 os.system(cmd)
 
