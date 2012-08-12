@@ -1,5 +1,6 @@
 
 "--- This is some standard stuff
+set rtp+=/usr/local/go/misc/vim
 syntax on
 filetype plugin indent on
 set autoindent
