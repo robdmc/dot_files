@@ -8,7 +8,8 @@ linkFileList = [
                '.bashrc',
                '.inputrc',
                '.vim',
-               '.vimrc'
+               '.vimrc',
+               '.mongorc.js',
                ]
 
 #--- link the files to home
