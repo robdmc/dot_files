@@ -27,6 +27,10 @@ set ww=h,l,b,s,<,>
 set t_Co=256
 highlight DiffText term=standout ctermfg=0 ctermbg=11
 
+"--- This improves colors in autocompletion
+highlight PmenuSel ctermfg=11 ctermbg=18
+highlight Pmenu ctermfg=0 ctermbg=7
+
 "--- This is a shortcut for the NERDTree plugin
 "nmap <C-t> :NERDTreeToggle<cr>
 
