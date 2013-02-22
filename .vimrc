@@ -25,6 +25,7 @@ set ww=h,l,b,s,<,>
 
 "--- This improves highlight colors in vimdiff
 set t_Co=256
+colo ron
 highlight DiffText term=standout ctermfg=0 ctermbg=11
 
 "--- This improves colors in autocompletion
