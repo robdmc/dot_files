@@ -1,3 +1,8 @@
+"--- add entries to run time path
+set rtp+=$GOROOT/misc/vim
+
+"--- handle special case for golang
+autocmd FileType go setlocal nolist noexpandtab shiftwidth=4 softtabstop=4 tabstop=4
 
 "--- This is some standard stuff
 syntax on
@@ -96,3 +101,4 @@ endif
 
 "---this sets vim to understand relative tag path
 set tagrelative
+
