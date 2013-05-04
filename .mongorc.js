@@ -17,6 +17,7 @@ _INITFUNC = function(){
     print(dbList[nr]);
   }
   print("\n");
+  print("\nWhile youre at it, try vim zz\n\n")
 }
 _INITFUNC();
 
