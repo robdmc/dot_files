@@ -10,8 +10,8 @@ linkFileList = [
                '.vim',
                '.vimrc',
                '.mongorc.js',
-               '.zshenv'
-               '.zshrc'
+               '.zshenv',
+               '.zshrc',
                ]
 
 #--- link the files to home
