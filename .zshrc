@@ -17,6 +17,9 @@ autoload -U compinit
 compinit
 setopt completeinword
 
+#--- set up zmv
+autoload -U zmv
+
 #I think this is for emacs mode so you can delete it if you want??
 #autoload select-word-style
 #select-word-style shell
@@ -41,3 +44,9 @@ fi
 #--- allow for backward history search using up arrows
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
+
+#--- allow for tab expansion undo by hitting shift tab
+bindkey '^[[Z' undo
+
+#--- set up extended globbing
+setopt extended_glob
