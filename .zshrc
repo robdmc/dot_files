@@ -4,8 +4,8 @@ stty start '' >& /dev/null
 
 HISTFILE=$HOME/.zsh_history    # enable history saving on shell exit
 setopt APPEND_HISTORY          # append rather than overwrite history file.
-HISTSIZE=100000                # lines of history to maintain memory
-SAVEHIST=100000                # lines of history to maintain in history file.
+HISTSIZE=1000000               # lines of history to maintain memory
+SAVEHIST=1000000               # lines of history to maintain in history file.
 setopt HIST_EXPIRE_DUPS_FIRST  # allow dups, but expire old ones when I hit HISTSIZE
 setopt EXTENDED_HISTORY        # save timestamp and runtime information
 
@@ -16,13 +16,14 @@ export EDITOR=vim
 autoload -U compinit
 compinit
 setopt completeinword
+zstyle ':completion:*' menu select
 
 #--- set up zmv
 autoload -U zmv
 
-#I think this is for emacs mode so you can delete it if you want??
-#autoload select-word-style
-#select-word-style shell
+#I think this selects what is defined as a word for movement
+autoload select-word-style
+select-word-style bash
 
 #--- make it so that cd issues a pushd
 setopt AUTO_PUSHD
