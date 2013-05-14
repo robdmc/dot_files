@@ -18,6 +18,7 @@ _INITFUNC = function(){
   }
   print("\n");
   print("\nWhile youre at it, try vim zz\n\n")
+  print("\nalso... try this in zsh: for f (*.txt) {wc -l $f;  cat $f}\n\n")
 }
 _INITFUNC();
 
