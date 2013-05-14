@@ -18,6 +18,11 @@ compinit
 setopt completeinword
 zstyle ':completion:*' menu select
 
+#--- allow for opening command line in editor
+autoload edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+
 #--- set up zmv
 autoload -U zmv
 
@@ -45,6 +50,12 @@ fi
 #--- allow for backward history search using up arrows
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
+
+##--- make home and end keys work
+#bindkey "e[1~" beginning-of-line
+#bindkey "e[4~" end-of-line
+bindkey "^[[1~" beginning-of-line
+bindkey "^[[4~" end-of-line
 
 #--- allow for tab expansion undo by hitting shift tab
 bindkey '^[[Z' undo
