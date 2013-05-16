@@ -8,6 +8,7 @@ HISTSIZE=1000000               # lines of history to maintain memory
 SAVEHIST=1000000               # lines of history to maintain in history file.
 setopt HIST_EXPIRE_DUPS_FIRST  # allow dups, but expire old ones when I hit HISTSIZE
 setopt EXTENDED_HISTORY        # save timestamp and runtime information
+setopt SHARE_HISTORY           #share history among shells
 
 #--- set editor preference
 export EDITOR=vim
@@ -32,6 +33,9 @@ select-word-style bash
 
 #--- make it so that cd issues a pushd
 setopt AUTO_PUSHD
+
+#--- allow interactive commenting
+setopt INTERACTIVE_COMMENTS
 
 #--- make dirs automatically show numbers
 alias dirs='dirs -v'
