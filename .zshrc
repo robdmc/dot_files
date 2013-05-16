@@ -19,6 +19,9 @@ alias history=' history'
 #--- set editor preference
 export EDITOR=vim
 
+#--- set vi mode command line
+setopt VI
+
 #--- set up autocompletion
 autoload -U compinit
 compinit
