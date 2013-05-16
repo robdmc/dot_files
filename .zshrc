@@ -9,6 +9,12 @@ SAVEHIST=1000000               # lines of history to maintain in history file.
 setopt HIST_EXPIRE_DUPS_FIRST  # allow dups, but expire old ones when I hit HISTSIZE
 setopt EXTENDED_HISTORY        # save timestamp and runtime information
 setopt SHARE_HISTORY           #share history among shells
+setopt HIST_IGNORE_SPACE       #ignore commands that start with a space
+
+#--- alias hist-ignore commands to start with a space
+alias clear=' clear'
+alias pwd=' pwd'
+alias history=' history'
 
 #--- set editor preference
 export EDITOR=vim
@@ -45,10 +51,10 @@ macType="Darwin"
 unameType=$(uname)
 if [ "$unameType" = "$macType" ]; then 
   export PROMPT="<<%n@mac %1~]$ "
-  alias ls='gls --color=tty' #gls installed from macports coreutils
+  alias ls=' gls --color=tty' #gls installed from macports coreutils
 else
   export PROMPT="<<%n@%m %1~]$ "
-  alias ls='ls --color=tty'
+  alias ls=' ls --color=tty'
 fi
 
 #--- allow for backward history search using up arrows
