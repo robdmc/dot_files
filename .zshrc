@@ -120,5 +120,3 @@ bindkey '^[[Z' undo
 #--- allow for backward history search using up arrows
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
-
-
