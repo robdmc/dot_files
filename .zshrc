@@ -118,5 +118,10 @@ setopt extended_glob
 bindkey '^[[Z' undo
 
 #--- allow for backward history search using up arrows
-bindkey "^[[A" history-search-backward
-bindkey "^[[B" history-search-forward
+#bindkey "^[[A" history-search-backward
+#bindkey "^[[B" history-search-forward
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
+
+
+
