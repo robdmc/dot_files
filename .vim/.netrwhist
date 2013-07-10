@@ -1,10 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/Users/rob/rob/webDevel/static2010fips/geoRelationships/output'
-let g:netrw_dirhist_2='/Users/rob/tmp/deleteme/static2010fips/geoRelationships/output'
-let g:netrw_dirhist_3='/Users/rob/rob/webDevel/static2010fips/geoRelationships/output'
-let g:netrw_dirhist_4='/Users/rob/rob/webDevel/staticCoords/blockgroup/bytract'
-let g:netrw_dirhist_5='/Users/rob/rob/webDevel/territoryManagementProject/flatFiles'
-let g:netrw_dirhist_6='/Users/rob/rob/webDevel/territoryManagementProject/cacheFiles/countyQueries'
-let g:netrw_dirhist_7='/srv/sitesmac/campaignProject/server_manager'
-let g:netrw_dirhist_8='/srv/sitesmac/campaignProject'
+let g:netrw_dirhist_cnt =0

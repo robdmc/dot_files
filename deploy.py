@@ -12,6 +12,7 @@ linkFileList = [
                '.mongorc.js',
                '.zshenv',
                '.zshrc',
+               'pandasSetup.py',
                ]
 
 #--- link the files to home
