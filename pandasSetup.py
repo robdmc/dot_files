@@ -7,8 +7,10 @@ import matplotlib
 import statsmodels.api as sm
 import pymc
 
-pd.set_option('max_rows',600)
-pd.set_option('max_columns',300)
+pd.set_option('display.max_rows',600)
+pd.set_option('display.max_columns',300)
+pd.set_option('display.height',600)
+pd.set_option('display.width',1800)
 pd.set_option('mode.use_inf_as_null',True)
 
 from IPython.core.display import HTML
