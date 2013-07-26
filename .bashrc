@@ -69,8 +69,8 @@ if [ "$unameType" == "$macType" ]; then
   export PATH=$HOME/usr/python/bin:$PATH
   export PATH=$HOME/usr/node/bin:$PATH
 
-#--- export the goroot directory
-export GOROOT=/usr/local/go
+  #--- export the goroot directory
+  export GOROOT=/usr/local/go
 
 #--- define linux specific stuff
 else
