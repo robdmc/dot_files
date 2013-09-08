@@ -63,6 +63,7 @@ alias dirs='dirs -v'
 #--- define mac specific stuff
 if [ "$unameType" == "$macType" ]; then 
   alias ipyw='ipython notebook --pylab=tk'
+  alias ipywi='ipython notebook --pylab=inline'
   export PATH=/opt/local/libexec/gnubin/:$PATH
   export PATH=.:/opt/local/bin:/opt/local/sbin:$PATH
   export PATH=$HOME/bin:$HOME/usr/bin:$PATH
