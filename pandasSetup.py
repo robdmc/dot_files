@@ -5,7 +5,7 @@ import pylab as pl
 import pandas as pd
 import matplotlib
 import statsmodels.api as sm
-import pymc
+#import pymc
 
 pd.set_option('display.max_rows',600)
 pd.set_option('display.max_columns',300)
