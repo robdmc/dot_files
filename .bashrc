@@ -49,7 +49,7 @@ export PROMPT_COMMAND="history -a; history -c; history -r;"
 #--- set the appropriate prompt for the system you're on
 if [ "$unameType" == "$macType" ]; then 
   PS1='<mac \W]\$ '
-  alias ls=' gls --color=tty' #gls installed from macports coreutils
+  alias ls=' ls --color=tty' #gls installed from macports coreutils
 else
   PS1='<\h \W]\$ '
   alias ls='ls --color=tty'
