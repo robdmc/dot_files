@@ -27,6 +27,7 @@ set number
 set ofu=syntaxcomplete#Complete
 set viminfo='100,f1
 set ww=h,l,b,s,<,>
+set cm=blowfish
 
 "--- This improves highlight colors in vimdiff
 set t_Co=256
