@@ -50,6 +50,9 @@ export PROMPT_COMMAND="history -a; history -c; history -r;"
 if [ "$unameType" == "$macType" ]; then 
   PS1='<mac \W]\$ '
   alias ls=' ls --color=tty' #gls installed from macports coreutils
+
+  #--- add path element to use proper version of postgres
+  PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
 else
   PS1='<\h \W]\$ '
   alias ls='ls --color=tty'
