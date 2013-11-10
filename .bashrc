@@ -48,16 +48,23 @@ export PROMPT_COMMAND="history -a; history -c; history -r;"
 
 #--- set the appropriate prompt for the system you're on
 if [ "$unameType" == "$macType" ]; then 
-  PS1='<mac \W]\$ '
-  alias ls=' ls --color=tty' #gls installed from macports coreutils
 
-  #--- add path element to use proper version of postgres
-  PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
+  #--- update path for homebrew packages
+  export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+  export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
+  export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+
+  #--- update manpath for homebrew gnu packages
+  export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+  export MANPATH="/usr/local/opt/gnu-tar/libexec/gnuman:$MANPATH"
+  export MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"
+
+  PS1='<mac \W]\$ '
 else
   PS1='<\h \W]\$ '
-  alias ls='ls --color=tty'
 fi
 
+alias ls=' ls --color=tty' 
 alias higa="history | grep "
 alias hig="history | grep $(date +%F)  | grep "
 alias less='less -R'
@@ -65,13 +72,24 @@ alias dirs='dirs -v'
 
 #--- define mac specific stuff
 if [ "$unameType" == "$macType" ]; then 
+  #--- ipython notebook aliases
   alias ipyw='ipython notebook --pylab'
   alias ipywi='ipython notebook --pylab=inline'
+
+  #--- macports directories (in case they exists)
   export PATH=/opt/local/libexec/gnubin/:$PATH
   export PATH=.:/opt/local/bin:/opt/local/sbin:$PATH
+
+  #--- homebrew directories (in case they exist)
+  export PATH=/usr/local/bin:$PATH
+
+  #--- add my personal stuff to the path
   export PATH=$HOME/bin:$HOME/usr/bin:$PATH
   export PATH=$HOME/usr/python/bin:$PATH
   export PATH=$HOME/usr/node/bin:$PATH
+
+  #--- add path element to use proper version of postgres
+  export PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
 
   #--- export the goroot directory
   export GOROOT=/usr/local/go
