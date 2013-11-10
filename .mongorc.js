@@ -1,7 +1,7 @@
 EDITOR = 'vim';
 //HOST = db.serverStatus().host;
 prompt = function(){
-  return db + "@mac  -->";
+  return db + "@local  -->";
 }
 
 //f = function(){};
