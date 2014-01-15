@@ -12,6 +12,7 @@ linkFileList = [
                '.mongorc.js',
                '.zshenv',
                '.zshrc',
+               '.ctags',
                'pandasSetup.py',
                ]
 
