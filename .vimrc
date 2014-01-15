@@ -39,7 +39,7 @@ highlight PmenuSel ctermfg=11 ctermbg=18
 highlight Pmenu ctermfg=0 ctermbg=7
 
 "--- This is a shortcut for the NERDTree plugin
-"nmap <C-t> :NERDTreeToggle<cr>
+nnoremap ,e :NERDTreeToggle<cr>
 
 "---These commands make windows-like copy/paste.
 "   To get them to work, you must add the following to your .cshrc or .bashrc
