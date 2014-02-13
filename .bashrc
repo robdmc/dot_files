@@ -6,7 +6,7 @@ stty stop '' >& /dev/null
 stty start '' >& /dev/null
 
 #--- make sure autolist is set
-set autolist
+#set autolist
 
 #--- get the uname type for this machine and define mac type
 unameType=$(uname)
