@@ -14,6 +14,7 @@ linkFileList = [
                '.zshrc',
                '.ctags',
                'pandasSetup.py',
+               'condaSetup.sh',
                ]
 
 #--- link the files to home
