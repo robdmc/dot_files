@@ -96,7 +96,8 @@ def rc(theme='gray'):
     rcd["patch.edgecolor"] = "#E5E5E5"
     rcd["patch.antialiased"] = "True"
     rcd["font.family"] = "sans-serif"
-    rcd["font.size"] = "12.0"
+    rcd["font.size"] = "14.0"
+    rcd["font.weight"] = "300"
     rcd["font.serif"] = ["Times", "Palatino", "New Century Schoolbook",
                                  "Bookman", "Computer Modern Roman",
                                  "Times New Roman"]
@@ -156,6 +157,7 @@ def rc(theme='gray'):
     rcd["figure.edgecolor"] = "0.50"
     rcd["figure.subplot.hspace"] = "0.5"
     rcd['savefig.dpi'] =  72
+    #rcd['savefig.dpi'] =  300
     themeDict['gray'] = rcd
     themeDict['grey'] = rcd
 
