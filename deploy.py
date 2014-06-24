@@ -9,6 +9,7 @@ linkFileList = [
                '.inputrc',
                '.vim',
                '.vimrc',
+               '.ackrc',
                '.mongorc.js',
                '.zshenv',
                '.zshrc',
