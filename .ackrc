@@ -1,1 +1,2 @@
 --type-set=ipynb:ext:ipynb
+--ignore-dir=.ipynb_checkpoints
