@@ -40,9 +40,11 @@ export HISTFILESIZE=200000
 export HISTSIZE=200000
 export HISTIGNORE="clear:ls:pwd:history:hig"
 export HISTTIMEFORMAT='%F %T '
+export HISTCONTROL=ignoredups:erasedups
 set -o vi
 set -o history
 
+#--- save history for each command
 export PROMPT_COMMAND="history -a; history -c; history -r;"
 
 #--- set the appropriate prompt for the system you're on
