@@ -17,7 +17,7 @@ _INITFUNC = function(){
     print(dbList[nr]);
   }
   print("\n");
-  print("\nWhile youre at it, try vim zz\n\n")
+  print("\nWhile youre at it, try pbcopy and pbpaste\n\n")
   print("\nalso... try this in zsh: for f (*.txt) {wc -l $f;  cat $f}\n\n")
 }
 _INITFUNC();

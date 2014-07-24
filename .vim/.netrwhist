@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/srv/sitesmac/campaignProject/static/js'
-let g:netrw_dirhist_2='/Users/rob/rob/rails/onlineTutorial/sample_app'
-let g:netrw_dirhist_3='/srv/sitesmac/campaignProject'
-let g:netrw_dirhist_4='/Users/rob/rob/ggplot/ggplot'
-let g:netrw_dirhist_5='/srv/sitesmac/sunLeadRouter'
-let g:netrw_dirhist_6='/Users/rob/local/ptools/ptools/lib'
-let g:netrw_dirhist_7='/Users/rob/local/pandashells/pandashells'
