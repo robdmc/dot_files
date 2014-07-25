@@ -15,6 +15,9 @@ macType="Darwin"
 #--- add pwd and home bin area to path
 export PATH=$HOME/bin/:./:$PATH
 
+#--- increase ulimit so mongodb doesn't complain
+ulimit -n 2048
+
 #--- example code for testing if this is a mac or not
 #if [ "$unameType" == "$macType" ]; then 
 #   echo this is a mac
@@ -84,11 +87,6 @@ if [ "$unameType" == "$macType" ]; then
   #--- homebrew directories (in case they exist)
   export PATH=/usr/local/bin:$PATH
 
-  #--- add my personal stuff to the path
-  export PATH=$HOME/bin:$HOME/usr/bin:$PATH
-  export PATH=$HOME/usr/python/bin:$PATH
-  export PATH=$HOME/usr/node/bin:$PATH
-
   #--- add path element to use proper version of postgres
   export PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
 
@@ -100,8 +98,14 @@ else
   doNothing=""
 fi
 
+#--- add my personal stuff to the path
+export PATH=$HOME/bin:$HOME/usr/bin:$PATH
+export PATH=$HOME/usr/python/bin:$PATH
+export PATH=$HOME/usr/node/bin:$PATH
+
 #--- clear out .bashrc commands from history
 history -c
+
 #--- if history file doesn't exist, create it
 [ -f $HOME/.bash_history ] || history -w
 
