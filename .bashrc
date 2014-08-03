@@ -77,8 +77,8 @@ alias dirs='dirs -v'
 #--- define mac specific stuff
 if [ "$unameType" == "$macType" ]; then 
   #--- ipython notebook aliases
-  alias ipyw='ipython notebook --pylab'
-  alias ipywi='ipython notebook --pylab=inline'
+  alias ipyw='ipython notebook'
+  alias ipywi='ipython notebook --matplotlib=inline'
 
   #--- macports directories (in case they exists)
   export PATH=/opt/local/libexec/gnubin/:$PATH

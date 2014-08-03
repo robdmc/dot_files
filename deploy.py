@@ -29,6 +29,12 @@ cmd = "cd ~; ln -sf ./setupFiles/gitconfig .gitconfig"
 print cmd
 os.system(cmd)
 
+#--- link the .gitignore file
+cmd = "cd ~; ln -sf ./setupFiles/gitignore_global .gitignore_global"
+print cmd
+os.system(cmd)
+
+
 #--- if a home/bin directory doesnt exist, create it
 binDir = os.path.join(os.environ['HOME'],'bin')
 if not os.path.isdir(binDir):

@@ -13,7 +13,7 @@
 [merge]
    tool = vimdiff
 [core]
-   excludesfile = /home/decarval/.gitignore
+	excludesfile = ~/.gitignore_global
 
 
 
