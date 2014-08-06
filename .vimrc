@@ -31,7 +31,8 @@ set cm=blowfish
 
 "--- This improves highlight colors in vimdiff
 set t_Co=256
-colo ron
+"colo ron
+colo desert256
 highlight DiffText term=standout ctermfg=0 ctermbg=11
 
 "--- This improves colors in autocompletion
