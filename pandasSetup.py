@@ -7,7 +7,10 @@ import matplotlib as mpl
 import statsmodels.formula.api as sm
 import seaborn as sns
 
-sys.path.append('~/helpers')
+home = os.environ['HOME']
+helper_path = os.path.join(home, 'helpers')
+if not helper_path in sys.path:
+    sys.path.append(os.path.join(home, 'helpers'))
 
 sns.set_context('talk')
 CC = mpl.rcParams['axes.color_cycle']
