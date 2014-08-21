@@ -20,7 +20,7 @@ set mouse=a
 set nohls
 set modeline
 set ls=2
-set colorcolumn=80
+set colorcolumn=79,119
 filetype indent on
 filetype plugin on
 set number
@@ -35,6 +35,7 @@ set t_Co=256
 "colo desert256
 colo desert_mod
 highlight DiffText term=standout ctermfg=0 ctermbg=11
+highlight ColorColumn ctermbg=235 guibg=#2c2d27
 
 "--- This improves colors in autocompletion
 highlight PmenuSel ctermfg=11 ctermbg=18
