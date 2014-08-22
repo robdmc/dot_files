@@ -74,6 +74,11 @@ nmap <C-p> :let @" = expand("%:p")<CR>P
 
 "---- This allows tab to switch windows in normal mode
 nmap <CR> <C-w>w
+nmap ,w <C-w>w
+nmap ,wl <C-w>l
+nmap ,wh <C-w>h
+nmap ,wj <C-w>j
+nmap ,wk <C-w>k
 
 "---- This allows switching tabs in normal mode
 nmap <S-Tab> :tabn<CR>
