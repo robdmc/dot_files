@@ -1,6 +1,9 @@
 "--- initialize pathogen
 execute pathogen#infect()
 
+"--- define a custom leader
+let mapleader=","
+
 "--- add entries to run time path
 set rtp+=$GOROOT/misc/vim
 
@@ -78,7 +81,7 @@ nmap <C-p> :let @" = expand("%:p")<CR>P
 "---- This allows tab to switch windows in normal mode
 "nmap <CR> <C-w>w
 nmap \ <C-w>w
-nmap ,ww <C-w>w
+nmap <Leader>ww <C-w>w
 nmap ,wl <C-w>l
 nmap ,wh <C-w>h
 nmap ,wj <C-w>j
