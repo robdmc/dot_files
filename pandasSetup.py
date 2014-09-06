@@ -9,18 +9,20 @@ import seaborn as sns
 
 home = os.environ['HOME']
 helper_path = os.path.join(home, 'helpers')
-if not helper_path in sys.path:
+if helper_path not in sys.path:
     sys.path.append(os.path.join(home, 'helpers'))
 
 sns.set_context('talk')
 CC = mpl.rcParams['axes.color_cycle']
 
-pd.set_option('display.max_rows',600)
-pd.set_option('display.max_columns',300)
-pd.set_option('mode.use_inf_as_null',True)
+pd.set_option('display.max_rows', 600)
+pd.set_option('display.max_columns', 300)
+pd.set_option('mode.use_inf_as_null', True)
 
 from IPython.core.display import HTML
 from IPython.core.display import display
+
+
 def print_html(df):
     if type(df) == str:
         display(HTML(df))

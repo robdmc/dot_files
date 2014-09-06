@@ -1,3 +1,6 @@
+"--- initialize pathogen
+execute pathogen#infect()
+
 "--- add entries to run time path
 set rtp+=$GOROOT/misc/vim
 
@@ -73,8 +76,9 @@ imap <Tab> <C-n>
 nmap <C-p> :let @" = expand("%:p")<CR>P
 
 "---- This allows tab to switch windows in normal mode
-nmap <CR> <C-w>w
-nmap ,w <C-w>w
+"nmap <CR> <C-w>w
+nmap \ <C-w>w
+nmap ,ww <C-w>w
 nmap ,wl <C-w>l
 nmap ,wh <C-w>h
 nmap ,wj <C-w>j
@@ -111,3 +115,7 @@ endif
 "---this sets vim to understand relative tag path
 set tagrelative
 
+"--- set up vim-flake8
+autocmd FileType python map <buffer> ,f :call Flake8()<CR>
+let g:flake8_max_line_length=120
+let g:flake8_max_complexity=10
