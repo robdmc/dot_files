@@ -82,10 +82,10 @@ nmap <C-p> :let @" = expand("%:p")<CR>P
 "nmap <CR> <C-w>w
 nmap \ <C-w>w
 nmap <Leader>ww <C-w>w
-nmap ,wl <C-w>l
-nmap ,wh <C-w>h
-nmap ,wj <C-w>j
-nmap ,wk <C-w>k
+nmap <Leader>wl <C-w>l
+nmap <Leader>wh <C-w>h
+nmap <Leader>wj <C-w>j
+nmap <Leader>wk <C-w>k
 
 "---- This allows switching tabs in normal mode
 nmap <S-Tab> :tabn<CR>
@@ -122,3 +122,10 @@ set tagrelative
 autocmd FileType python map <buffer> ,f :call Flake8()<CR>
 let g:flake8_max_line_length=120
 let g:flake8_max_complexity=10
+
+"---  Set up ctrlp
+nmap <Leader>t :CtrlP<CR>
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
+  \ 'file': '\.exe$\|\.so$\|\.dat$|\.pyc$'
+  \ }
