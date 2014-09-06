@@ -119,7 +119,7 @@ endif
 set tagrelative
 
 "--- set up vim-flake8
-autocmd FileType python map <buffer> ,f :call Flake8()<CR>
+autocmd FileType python map <buffer> <Leader>f :call Flake8()<CR>
 let g:flake8_max_line_length=120
 let g:flake8_max_complexity=10
 
@@ -132,4 +132,9 @@ let g:ctrlp_custom_ignore = {
 
 "--- set up ack
 nmap <Leader>a :Ack!
+
+"--- setup jedi-vim
+let g:jedi#popup_on_dot = 0
+let g:jedi#completions_command = "<C-j>"
+
 
