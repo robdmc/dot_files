@@ -126,7 +126,7 @@ let g:flake8_max_complexity=10
 "---  Set up ctrlp
 nmap <Leader>t :CtrlP<CR>
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$\|\/migrations\/',
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$\|migrations',
   \ 'file': '\.exe$\|\.so$\|\.dat$\|\.pyc$'
   \ }
 
