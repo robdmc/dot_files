@@ -1,0 +1,33 @@
+#! /usr/bin/env python
+import argparse
+import subprocess
+
+# --- set up defaults for  the arg parser
+default_branch = 'upstream/develop'
+msg = (
+    'Provides usefule shortcuts for doing git diffs. When called without a file_name, '
+    'name-status diff will be executed'
+)
+
+# --- set up the argparser
+parser = argparse.ArgumentParser(description=msg)
+parser.add_argument('-b', "--branch", help="branch to diff against", nargs='?', default='upstream/develop')
+parser.add_argument('file', help="file to diff", nargs='?')
+args = parser.parse_args()
+
+# --- get the info on the local branch and file if any
+branch_lines = subprocess.Popen(['bash', '-c', 'git branch'], stdout=subprocess.PIPE).stdout.readlines()
+local_branch = [s.split()[1] for s in branch_lines if s[0] == '*'][0]
+pathed_file = '/{}'.format(args.file) if args.file else ''
+
+# --- define the command to run
+branch_cmd = 'git diff --name-status {} $(git rev-parse --abbrev-ref HEAD)'.format(args.branch)
+file_cmd = 'git diff {b}:$(git rev-parse --show-prefix){f} {f}'.format(b=args.branch, f=args.file)
+cmd = file_cmd if args.file else branch_cmd
+
+# --- print info
+print '\nComparing:  {rb}{f}   {lb}{f}\n'.format(rb=args.branch, lb=local_branch, f=pathed_file)
+
+# --- run the diff
+p = subprocess.Popen(['bash', '-c', cmd])
+p.wait()
