@@ -20,17 +20,17 @@ linkFileList = [
 
 # --- link the files to home
 for linkFile in linkFileList:
-    cmd = "cd ~; ln -sf ./setupFiles/%s ." % linkFile
+    cmd = "cd ~; ln -sf ./dot_files/%s ." % linkFile
     print cmd
     os.system(cmd)
 
 # --- link the .gitconfig file
-cmd = "cd ~; ln -sf ./setupFiles/gitconfig .gitconfig"
+cmd = "cd ~; ln -sf ./dot_files/gitconfig .gitconfig"
 print cmd
 os.system(cmd)
 
 # --- link the .gitignore file
-cmd = "cd ~; ln -sf ./setupFiles/gitignore_global .gitignore_global"
+cmd = "cd ~; ln -sf ./dot_files/gitignore_global .gitignore_global"
 print cmd
 os.system(cmd)
 
@@ -42,11 +42,11 @@ if not os.path.isdir(binDir):
     os.makedirs(binDir)
 
 # --- link executables
-cmd = "cd ~/bin; ln -sf ~/setupFiles/git_diff_wrapper ."
+cmd = "cd ~/bin; ln -sf ~/dot_files/git_diff_wrapper ."
 print cmd
 os.system(cmd)
 
-cmd = "cd ~/bin; ln -sf ~/setupFiles/git_branch_diff ."
+cmd = "cd ~/bin; ln -sf ~/dot_files/git_branch_diff ."
 print cmd
 os.system(cmd)
 
@@ -57,7 +57,7 @@ if not os.path.isdir(binDir):
     os.makedirs(binDir)
 
 # --- link the git flake8 config file
-cmd = "cd ~/.config; ln -sf ~/setupFiles/flake8 ."
+cmd = "cd ~/.config; ln -sf ~/dot_files/flake8 ."
 print cmd
 os.system(cmd)
 
