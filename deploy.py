@@ -41,8 +41,12 @@ if not os.path.isdir(binDir):
     print 'mkdir %s' % binDir
     os.makedirs(binDir)
 
-# --- link the git diff wrapper
+# --- link executables
 cmd = "cd ~/bin; ln -sf ~/setupFiles/git_diff_wrapper ."
+print cmd
+os.system(cmd)
+
+cmd = "cd ~/bin; ln -sf ~/setupFiles/git_branch_diff ."
 print cmd
 os.system(cmd)
 
