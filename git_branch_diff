@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 import argparse
 import subprocess
+import sys
 
 # --- set up defaults for  the arg parser
 default_branch = 'upstream/develop'
@@ -12,11 +13,36 @@ msg = (
 # --- set up the argparser
 parser = argparse.ArgumentParser(description=msg)
 parser.add_argument('-b', "--branch", help="branch to diff against", nargs='?', default='upstream/develop')
+parser.add_argument("--example", help="show examples", action='store_true', default=False)
 parser.add_argument('file', help="file to diff", nargs='?')
 args = parser.parse_args()
 
+# --- show example if requested
+if args.example:
+    msg_lines = [
+        '-' * 80,
+        'Show a list of all files that differ between the current local branch and upstream/develop',
+        '    git_branch_diff',
+        '',
+        '-' * 80,
+        'Show a list of all files that differ between current local branch and current local develop',
+        '    git_branch_diff -b develop',
+        '',
+        '-' * 80,
+        'Run a git diff on local_file.py to see diffs between current local branch and upstream/develop',
+        '    git_branch_diff local_file.py',
+        '',
+        '-' * 80,
+        'Run a git diff on local_file.py to see diffs between current local branch and develop of your fork',
+        '    git_branch_diff local_file.py -b origin/develop',
+    ]
+    print '\n' + '\n'.join(msg_lines) + '\n'
+    sys.exit(0)
+
 # --- get the info on the local branch and file if any
 branch_lines = subprocess.Popen(['bash', '-c', 'git branch'], stdout=subprocess.PIPE).stdout.readlines()
+if not branch_lines:
+    sys.exit(1)
 local_branch = [s.split()[1] for s in branch_lines if s[0] == '*'][0]
 pathed_file = '/{}'.format(args.file) if args.file else ''
 
