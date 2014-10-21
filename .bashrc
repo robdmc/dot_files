@@ -73,6 +73,7 @@ alias higa="history | grep "
 alias hig="history | grep $(date +%F)  | grep "
 alias less='less -R'
 alias dirs='dirs -v'
+alias govagrant='(cd /Users/rob/rob/vagrant_boxes/ambition-vagrant; vagrant ssh)'
 
 # --- define mac specific stuff
 if [ "$unameType" == "$macType" ]; then 
