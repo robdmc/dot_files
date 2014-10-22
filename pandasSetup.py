@@ -1,11 +1,13 @@
 import os
 import sys
-import numpy as np
-import pylab as pl
-import pandas as pd
+
 import matplotlib as mpl
-import statsmodels.formula.api as sm
+import numpy as np
+import pandas as pd
+import pylab as pl
+import pyplot as plt
 import seaborn as sns
+import statsmodels.formula.api as sm
 
 home = os.environ['HOME']
 helper_path = os.path.join(home, 'helpers')
