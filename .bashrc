@@ -116,3 +116,9 @@ history -r
 # --- default to making nose test be less chatty 
 export NOSE_NOLOGCAPTURE=1
 
+# --- print any existing reminders to the console
+if [ -f ~/reminders.txt ]
+then
+    cat ~/reminders.txt
+fi
+
