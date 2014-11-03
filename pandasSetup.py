@@ -5,7 +5,7 @@ import matplotlib as mpl
 import numpy as np
 import pandas as pd
 import pylab as pl
-import pyplot as plt
+import matplotlib.pyplot as plt
 import seaborn as sns
 import statsmodels.formula.api as sm
 
