@@ -80,7 +80,10 @@ nmap <C-p> :let @" = expand("%:p")<CR>P
 
 "---- This allows tab to switch windows in normal mode
 "nmap <CR> <C-w>w
-nmap \ <C-w>w
+"nmap \ <C-w>w
+nmap <Space> <C-w>w
+"nmap <Leader><Space> <C-w>w
+nmap <Leader>ww <C-w>w
 nmap <Leader>ww <C-w>w
 nmap <Leader>wl <C-w>l
 nmap <Leader>wh <C-w>h
