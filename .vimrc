@@ -83,12 +83,12 @@ nmap <C-p> :let @" = expand("%:p")<CR>P
 "nmap \ <C-w>w
 nmap <Space> <C-w>w
 "nmap <Leader><Space> <C-w>w
-nmap <Leader>ww <C-w>w
-nmap <Leader>ww <C-w>w
-nmap <Leader>wl <C-w>l
-nmap <Leader>wh <C-w>h
-nmap <Leader>wj <C-w>j
-nmap <Leader>wk <C-w>k
+"nmap <Leader>ww <C-w>w
+"nmap <Leader>ww <C-w>w
+"nmap <Leader>wl <C-w>l
+"nmap <Leader>wh <C-w>h
+"nmap <Leader>wj <C-w>j
+"nmap <Leader>wk <C-w>k
 
 "---- This allows switching tabs in normal mode
 nmap <S-Tab> :tabn<CR>
