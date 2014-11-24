@@ -19,5 +19,7 @@
 
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    pru = "!f() { git fetch upstream refs/pull/$1/head:pr/$1; } ; f"
+    pro = "!f() { git fetch origin refs/pull/$1/head:pr/$1; } ; f"
 [push]
 	default = current
