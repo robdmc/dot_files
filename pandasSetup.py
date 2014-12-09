@@ -1,3 +1,5 @@
+import contextlib
+import datetime
 import os
 import sys
 
@@ -30,3 +32,20 @@ def print_html(df):
         display(HTML(df))
     else:
         display(HTML(df.to_html()))
+
+@contextlib.contextmanager
+def Timer(name=''):
+    """
+    A context manager for timing sections of code
+
+    Usage:
+
+    with Timer('git er done'):
+        for x in range(10):
+            run_my_func(x)
+    """
+    tstart = datetime.datetime.now()
+    yield
+    if name:
+        print '[%s]' % name,
+    print 'Time: %s' % (datetime.datetime.now() - tstart)
