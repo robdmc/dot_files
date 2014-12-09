@@ -1,5 +1,5 @@
 import contextlib
-import datetime
+import datetime as datetime_module
 import os
 import sys
 
@@ -44,8 +44,8 @@ def Timer(name=''):
         for x in range(10):
             run_my_func(x)
     """
-    tstart = datetime.datetime.now()
+    tstart = datetime_module.datetime.now()
     yield
     if name:
         print '[%s]' % name,
-    print 'Time: %s' % (datetime.datetime.now() - tstart)
+    print 'Time: %s' % (datetime_module.datetime.now() - tstart)
