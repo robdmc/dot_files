@@ -50,6 +50,11 @@ cmd = "cd ~/bin; ln -sf ~/dot_files/git_branch_diff ."
 print cmd
 os.system(cmd)
 
+cmd = "cd ~/bin; ln -sf ~/dot_files/circle_checker ."
+print cmd
+os.system(cmd)
+
+
 # --- if a home/.config directory doesnt exist, create it
 binDir = os.path.join(os.environ['HOME'],'.config')
 if not os.path.isdir(binDir):

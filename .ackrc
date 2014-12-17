@@ -1,3 +1,3 @@
---type-set=ipynb:ext:ipynb
---ignore-dir=.ipynb_checkpoints
+#--type-set=ipynb:ext:ipynb
+#--ignore-dir=.ipynb_checkpoints
 --ignore-dir=migrations

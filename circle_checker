@@ -1,0 +1,2 @@
+#! /usr/bin/env bash
+(flake8 .) && (coverage run run_tests.py) && (coverage report --fail-under=100) && (cd docs && make html)
