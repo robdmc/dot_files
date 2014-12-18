@@ -63,8 +63,14 @@ nmap <C-q> :q<CR>
 imap <C-q> <Esc>:q<CR>
 
 "--- Make some shortcuts for toggling mouse
-nmap <C-b> :set nopaste<CR> :set number<CR> :set mouse=a<CR>  
-nmap <C-n> :set paste<CR> :set nonumber<CR> :set mouse=<CR>
+"nmap <C-b> :set nopaste<CR> :set number<CR> :set mouse=a<CR>  
+"nmap <C-n> :set paste<CR> :set nonumber<CR> :set mouse=<CR>
+
+"nmap <Leader>n :set paste<CR>:set nonumber<CR>:set mouse=<CR>
+"nmap <Leader>b :set nopaste<CR>:set number<CR>:set mouse=a<CR>  
+
+
+
 
 "--- this allows for repeated block indenting in v-mode like komodo
 vmap <Tab> >`[v`]
