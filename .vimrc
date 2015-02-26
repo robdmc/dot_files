@@ -143,5 +143,6 @@ let g:ctrlp_custom_ignore = {
 nmap <Leader>a :Ack! 
 
 "--- setup jedi-vim
-let g:jedi#popup_on_dot = 0
+"let g:jedi#popup_on_dot = 0
 let g:jedi#completions_command = "<C-j>"
+let g:jedi#show_call_signatures = "1"
