@@ -8,6 +8,11 @@ stty start '' >& /dev/null
 # --- make sure autolist is set
 #set autolist
 
+# --- set up utf8 console
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+
 # --- get the uname type for this machine and define mac type
 unameType=$(uname)
 macType="Darwin"
