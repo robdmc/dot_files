@@ -69,10 +69,10 @@ else
 fi
 
 alias ls=' ls --color=tty' 
-alias higa="history | grep "
-alias hig="history | grep $(date +%F)  | grep "
 alias less='less -R'
 alias dirs='dirs -v'
+alias pdb='python -m pdb '
+alias pdbrc='vim .pdbrc'
 alias govagrant='(cd /Users/rob/rob/vagrant_boxes/ambition-vagrant; vagrant ssh)'
 alias upvagrant='(cd /Users/rob/rob/vagrant_boxes/ambition-vagrant && git pull upstream master && vagrant up)'
 alias downvagrant='(cd /Users/rob/rob/vagrant_boxes/ambition-vagrant && vagrant halt)'
