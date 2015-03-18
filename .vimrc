@@ -131,8 +131,7 @@ set tagrelative
 autocmd FileType python map <buffer> <Leader>F :call Flake8()<CR>
 let g:flake8_show_in_file=1
 let g:flake8_quickfix_height=10
-nmap <Leader>f :cprevious<CR>
-nmap <Leader>g :cnext<CR>
+nmap <Leader>f :cnext<CR>
 
 "---  Set up ctrlp
 nmap <Leader>t :CtrlP<CR>
