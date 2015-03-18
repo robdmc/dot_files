@@ -129,8 +129,6 @@ set tagrelative
 
 "--- set up vim-flake8
 autocmd FileType python map <buffer> <Leader>f :call Flake8()<CR>
-let g:flake8_max_line_length=120
-let g:flake8_max_complexity=10
 
 "---  Set up ctrlp
 nmap <Leader>t :CtrlP<CR>
