@@ -96,7 +96,7 @@ if [ "$unameType" == "$macType" ]; then
   export PATH=/usr/local/bin:$PATH
 
   # --- add path element to use proper version of postgres
-  export PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
+  export PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
 
   # --- export the goroot directory
   export GOROOT=/usr/local/go
