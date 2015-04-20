@@ -17,6 +17,7 @@ if helper_path not in sys.path:
     sys.path.append(os.path.join(home, 'helpers'))
 
 sns.set_context('talk')
+sns.set_style('darkgrid')
 CC = mpl.rcParams['axes.color_cycle']
 
 pd.set_option('display.max_rows', 600)
