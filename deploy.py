@@ -11,8 +11,6 @@ linkFileList = [
                '.vimrc',
                '.ackrc',
                '.mongorc.js',
-               '.zshenv',
-               '.zshrc',
                '.ctags',
                'pandasSetup.py',
                'rcconda.sh',
