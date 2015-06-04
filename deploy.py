@@ -14,6 +14,7 @@ linkFileList = [
                '.ctags',
                'pandasSetup.py',
                'rcconda.sh',
+               'rcminiconda.sh',
                ]
 
 # --- link the files to home
