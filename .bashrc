@@ -52,7 +52,7 @@ export HISTCONTROL="ignoredups:erasedups"
 set -o vi
 set -o history
 
-# --- save history for each command
+# --- save history after each command
 export PROMPT_COMMAND="history -a; history -c; history -r;"
 
 # --- set the appropriate prompt for the system you're on
@@ -73,6 +73,14 @@ else
   PS1='<\h \W]\$ '
 fi
 
+# --- initialize boot2docker environment vars if docker is running
+if  type boot2docker> /dev/null; then
+    if [ `boot2docker status` = "running" ]; then
+        eval "$(boot2docker shellinit)"
+    fi
+fi
+
+# --- set up aliases
 alias ls=' ls --color=tty' 
 alias less='less -R'
 alias dirs='dirs -v'
