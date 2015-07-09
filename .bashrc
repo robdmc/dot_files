@@ -74,7 +74,7 @@ else
 fi
 
 # --- initialize boot2docker environment vars if docker is running
-if  type boot2docker> /dev/null; then
+if  type boot2docker >& /dev/null; then
     if [ `boot2docker status` = "running" ]; then
         eval "$(boot2docker shellinit)"
     fi
