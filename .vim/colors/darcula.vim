@@ -32,7 +32,7 @@ hi Folded ctermfg=244 ctermbg=235 cterm=NONE guifg=#8e9292 guibg=#393939 gui=NON
 hi Normal ctermfg=188 ctermbg=Black cterm=NONE guifg=#b8c4d0 guibg=#393939 gui=NONE
 hi Boolean ctermfg=103 ctermbg=NONE cterm=NONE guifg=#d58b48 guibg=NONE gui=bold
 hi Character ctermfg=103 ctermbg=NONE cterm=NONE guifg=#9f8db7 guibg=NONE gui=italic
-hi Comment ctermfg=244 ctermbg=NONE cterm=NONE guifg=#8e9292 guibg=NONE gui=none
+hi Comment ctermfg=238 ctermbg=NONE cterm=NONE guifg=#8e9292 guibg=NONE gui=none
 hi Conditional ctermfg=172 ctermbg=NONE cterm=NONE guifg=#d58b48 guibg=NONE gui=bold
 hi Constant ctermfg=103 ctermbg=NONE cterm=NONE guifg=#9f8db7 guibg=NONE gui=bold
 hi Define ctermfg=172 ctermbg=NONE cterm=NONE guifg=#d58b48 guibg=NONE gui=bold
@@ -47,7 +47,7 @@ hi Function ctermfg=221 ctermbg=NONE cterm=bold guifg=#d58b48 guibg=NONE gui=bol
 hi Identifier ctermfg=222 ctermbg=NONE cterm=NONE guifg=#ffcf85 guibg=NONE gui=NONE
 hi Keyword ctermfg=172 ctermbg=NONE cterm=NONE guifg=#d58b48 guibg=NONE gui=bold
 hi Label ctermfg=103 ctermbg=NONE cterm=NONE guifg=#9f8db7 guibg=NONE gui=NONE
-hi NonText ctermfg=188 ctermbg=235 cterm=NONE guifg=#b8c4d0 guibg=#393939 gui=NONE
+hi NonText ctermfg=188 ctermbg=Black cterm=NONE guifg=#b8c4d0 guibg=#393939 gui=NONE
 hi Number ctermfg=67 ctermbg=NONE cterm=NONE guifg=#7ca8c6 guibg=NONE gui=NONE
 hi Operator ctermfg=250 ctermbg=NONE cterm=NONE guifg=#b8c4d0 guibg=NONE gui=NONE
 hi PreProc ctermfg=172 ctermbg=NONE cterm=NONE guifg=#d58b48 guibg=NONE gui=bold
