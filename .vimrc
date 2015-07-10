@@ -39,7 +39,8 @@ set cm=blowfish
 set t_Co=256
 "colo ron
 "colo desert256
-colo desert_mod
+"colo desert_mod
+colo darcula
 highlight DiffText term=standout ctermfg=0 ctermbg=11
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
 
