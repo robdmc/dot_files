@@ -40,6 +40,7 @@ hi DiffAdd ctermfg=188 ctermbg=64 cterm=bold guifg=#b8c4d0 guibg=#365546 gui=bol
 hi DiffDelete ctermfg=88 ctermbg=NONE cterm=NONE guifg=#8c0909 guibg=NONE gui=NONE
 hi DiffChange ctermfg=188 ctermbg=23 cterm=NONE guifg=#b8c4d0 guibg=#263b59 gui=NONE
 hi DiffText ctermfg=188 ctermbg=24 cterm=bold guifg=#b8c4d0 guibg=#204a87 gui=bold
+hi Error ctermfg=15 ctermbg=88 cterm=NONE guifg=#ffffff guibg=#990000 gui=NONE
 hi ErrorMsg ctermfg=15 ctermbg=88 cterm=NONE guifg=#ffffff guibg=#990000 gui=NONE
 hi WarningMsg ctermfg=15 ctermbg=88 cterm=NONE guifg=#ffffff guibg=#990000 gui=NONE
 hi Float ctermfg=67 ctermbg=NONE cterm=NONE guifg=#7ca8c6 guibg=NONE gui=NONE
