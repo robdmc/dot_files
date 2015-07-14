@@ -97,6 +97,9 @@ nmap <Space> <C-w>w
 "nmap <Leader>wj <C-w>j
 "nmap <Leader>wk <C-w>k
 
+"--- Temporarily highlight contents in parens/brackets/etc
+nmap <Leader>p %v%:sleep 500m<CR>%
+
 "---- This allows switching tabs in normal mode
 nmap <S-Tab> :tabn<CR>
 
