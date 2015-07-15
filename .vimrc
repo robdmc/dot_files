@@ -85,6 +85,7 @@ vmap <S-Tab> <`[v`]
 imap <S-Tab> <C-x><C-f>
 imap <Tab> <C-n>
 
+"inoremap <C-> <C-x><C-o>
 "---- make control-P insert the full path of the current file
 nmap <C-p> :let @" = expand("%:p")<CR>P
 
@@ -142,19 +143,18 @@ autocmd FileType python map <buffer> <Leader>F :call Flake8()<CR>
 let g:flake8_show_in_file=1
 let g:flake8_quickfix_height=10
 nmap <Leader>f :cnext<CR>
+nmap <Leader>t :TagbarToggle<CR>
 
 "--- disable standard python indenter so vim-python-pep8 can take over
 let g:pymode_indent = 0
 
-"---  Set up ctrlp
-nmap <Leader>t :CtrlP<CR>
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$\|migrations',
-  \ 'file': '\.exe$\|\.so$\|\.dat$\|\.pyc$'
-  \ }
+""---  Set up ctrlp
+""nmap <Leader>t :CtrlP<CR>
+"let g:ctrlp_custom_ignore = {
+"  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$\|migrations',
+"  \ 'file': '\.exe$\|\.so$\|\.dat$\|\.pyc$'
+"  \ }
 
-"--- set up ack
-nmap <Leader>a :Ack! 
 
 " PROBABLY WON'T END UP USING THIS, BUT KEEPINT IT IN FOR REFERENCE RIGHT NOW
 ""--- set some working directory magic
