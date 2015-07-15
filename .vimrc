@@ -143,7 +143,7 @@ autocmd FileType python map <buffer> <Leader>F :call Flake8()<CR>
 let g:flake8_show_in_file=1
 let g:flake8_quickfix_height=10
 nmap <Leader>f :cnext<CR>
-nmap <Leader>t :TagbarToggle<CR>
+nmap <Leader>g :TagbarToggle<CR>
 
 "--- disable standard python indenter so vim-python-pep8 can take over
 let g:pymode_indent = 0
