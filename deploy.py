@@ -4,18 +4,19 @@ import os
 
 # --- create a list of files that should just be directly linked to home
 linkFileList = [
-               '.bash_profile',
-               '.bashrc',
-               '.inputrc',
-               '.vim',
-               '.vimrc',
-               '.ackrc',
-               '.mongorc.js',
-               '.ctags',
-               'pandasSetup.py',
-               'rcconda.sh',
-               'rcminiconda.sh',
-               ]
+    '.bash_profile',
+    '.bashrc',
+    '.inputrc',
+    '.vim',
+    '.vimrc',
+    '.ackrc',
+    '.mongorc.js',
+    '.ctags',
+    'pandasSetup.py',
+    'rcconda.sh',
+    'rcdocker.sh',
+    'rcminiconda.sh',
+]
 
 # --- link the files to home
 for linkFile in linkFileList:
