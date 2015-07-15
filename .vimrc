@@ -30,7 +30,7 @@ set colorcolumn=79,119
 filetype indent on
 filetype plugin on
 set number
-set ofu=syntaxcomplete#Complete
+set omnifunc=syntaxcomplete#Complete
 set viminfo='100,f1
 set ww=h,l,b,s,<,>
 set cm=blowfish
