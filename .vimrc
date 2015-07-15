@@ -44,6 +44,9 @@ colo darcula
 highlight DiffText term=standout ctermfg=0 ctermbg=11
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
 
+"--- add git branch to standard statusline
+:set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P\ %{fugitive#statusline()}
+
 "--- This improves colors in autocompletion
 highlight PmenuSel ctermfg=11 ctermbg=18
 highlight Pmenu ctermfg=0 ctermbg=7
