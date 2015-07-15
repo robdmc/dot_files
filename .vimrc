@@ -134,6 +134,9 @@ endif
 "---this sets vim to understand relative tag path
 set tagrelative
 
+"--- this makes pwd always be the dir of the current file
+autocmd BufEnter * silent! lcd %:p:h
+
 "--- set up vim-flake8
 autocmd FileType python map <buffer> <Leader>F :call Flake8()<CR>
 let g:flake8_show_in_file=1
@@ -153,8 +156,20 @@ let g:ctrlp_custom_ignore = {
 "--- set up ack
 nmap <Leader>a :Ack! 
 
-"--- setup jedi-vim
-"let g:jedi#popup_on_dot = 0
-"let g:jedi#completions_command = "<C-j>"
-"let g:jedi#show_call_signatures = "0"
-"autocmd FileType python setlocal completeopt-=preview
+" PROBABLY WON'T END UP USING THIS, BUT KEEPINT IT IN FOR REFERENCE RIGHT NOW
+""--- set some working directory magic
+"" set working directory to git project root
+"" or directory of current file if not git project
+"function! SetProjectRoot()
+"  " default to the current file's directory
+"  lcd %:p:h
+"  let git_dir = system("git rev-parse --show-toplevel")
+"  " See if the command output starts with 'fatal' (if it does, not in a git repo)
+"  let is_not_git_dir = matchstr(git_dir, '^fatal:.*')
+"  " if git project, change local directory to git project root
+"  if empty(is_not_git_dir)
+"    lcd `=git_dir`
+"  endif
+"endfunction
+"autocmd BufEnter *  call SetProjectRoot()
+
