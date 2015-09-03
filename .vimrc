@@ -151,6 +151,9 @@ nmap <Leader>g :TagbarToggle<CR>
 "--- disable standard python indenter so vim-python-pep8 can take over
 let g:pymode_indent = 0
 
+"--- make tagbar open the window on the left
+let g:tagbar_left = 1
+
 ""---  Set up ctrlp
 ""nmap <Leader>t :CtrlP<CR>
 "let g:ctrlp_custom_ignore = {
