@@ -45,7 +45,10 @@ highlight DiffText term=standout ctermfg=0 ctermbg=11
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
 
 "--- add git branch to standard statusline
-:set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P\ %{fugitive#statusline()}
+:set statusline=%<%F\ %h%m%r%=%-14.(%l,%c%V%)\ %P\ %{fugitive#statusline()}
+
+"--- make vertical diffs the default
+set diffopt+=vertical
 
 "--- This improves colors in autocompletion
 highlight PmenuSel ctermfg=11 ctermbg=18
@@ -143,10 +146,13 @@ autocmd FileType python map <buffer> <Leader>F :call Flake8()<CR>
 let g:flake8_show_in_file=1
 let g:flake8_quickfix_height=10
 nmap <Leader>f :cnext<CR>
-nmap <Leader>t :TagbarToggle<CR>
+nmap <Leader>g :TagbarToggle<CR>
 
 "--- disable standard python indenter so vim-python-pep8 can take over
 let g:pymode_indent = 0
+
+"--- make tagbar open the window on the left
+let g:tagbar_left = 1
 
 ""---  Set up ctrlp
 ""nmap <Leader>t :CtrlP<CR>
