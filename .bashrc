@@ -93,8 +93,8 @@ alias downvagrant='(cd /Users/rob/rob/vagrant_boxes/ambition-vagrant && vagrant 
 # --- define mac specific stuff
 if [ "$unameType" == "$macType" ]; then 
   # --- ipython notebook aliases
-  alias ipyw='ipython notebook'
-  alias ipywi='ipython notebook --matplotlib=inline'
+  alias ipyw='jupyter notebook'
+  alias ipywi='jupyter notebook'
 
   # --- macports directories (in case they exists)
   export PATH=/opt/local/libexec/gnubin/:$PATH
