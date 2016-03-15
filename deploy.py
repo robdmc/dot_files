@@ -41,6 +41,12 @@ if not os.path.isdir(binDir):
     print 'mkdir %s' % binDir
     os.makedirs(binDir)
 
+# --- make an undo dir
+undo_dir = os.path.join(os.environ['HOME'],'.undodir')
+if not os.path.isdir(undo_dir):
+    print 'mkdir %s' % undo_dir
+    os.makedirs(undo_dir)
+
 # --- link executables
 cmd = "cd ~/bin; ln -sf ~/dot_files/git_diff_wrapper ."
 print cmd

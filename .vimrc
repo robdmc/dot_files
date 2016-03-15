@@ -154,6 +154,14 @@ let g:pymode_indent = 0
 "--- make tagbar open the window on the left
 let g:tagbar_left = 1
 
+"--- set up undo tree stuff
+if has("persistent_undo")
+    set undodir=~/.undodir/
+    set undofile
+endif
+nmap <Leader>u :UndotreeToggle<CR>
+
+
 ""---  Set up ctrlp
 ""nmap <Leader>t :CtrlP<CR>
 "let g:ctrlp_custom_ignore = {
