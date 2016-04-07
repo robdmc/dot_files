@@ -23,3 +23,5 @@
     pro = "!f() { git fetch origin refs/pull/$1/head:pr/$1; } ; f"
 [push]
 	default = current
+[github]
+	user = robdmc
