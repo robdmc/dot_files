@@ -120,15 +120,6 @@ export PATH=$HOME/bin:$HOME/usr/bin:$PATH
 export PATH=$HOME/usr/python/bin:$PATH
 export PATH=$HOME/usr/node/bin:$PATH
 
-# --- clear out .bashrc commands from history
-history -c
-
-# --- if history file doesn't exist, create it
-[ -f $HOME/.bash_history ] || history -w
-
-# --- reload history file into buffer
-history -r
-
 # --- default to making nose test be less chatty 
 export NOSE_NOLOGCAPTURE=1
 
@@ -144,3 +135,14 @@ if [ "$unameType" == "$macType" ]; then
         . $(brew --prefix)/etc/bash_completion
     fi
 fi
+
+# --- KEEP THESE HISTORY COMMANDS AT END OF FILE
+# --- clear out .bashrc commands from history
+history -c
+
+# --- if history file doesn't exist, create it
+[ -f $HOME/.bash_history ] || history -w
+
+# --- reload history file into buffer
+history -r
+
