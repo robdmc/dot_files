@@ -108,15 +108,6 @@ export PATH=$HOME/bin:$HOME/usr/bin:$PATH
 export PATH=$HOME/usr/python/bin:$PATH
 export PATH=$HOME/usr/node/bin:$PATH
 
-# --- clear out .bashrc commands from history
-history -c
-
-# --- if history file doesn't exist, create it
-[ -f $HOME/.bash_history ] || history -w
-
-# --- reload history file into buffer
-history -r
-
 # --- default to making nose test be less chatty 
 export NOSE_NOLOGCAPTURE=1
 
@@ -133,20 +124,12 @@ if [ "$unameType" == "$macType" ]; then
     fi
 fi
 
-# --- just for fun
-alias weather='curl wttr.in/37363'
+# --- KEEP THESE HISTORY COMMANDS AT END OF FILE
+# --- clear out .bashrc commands from history
+history -c
 
-# --- set up terminal working preferences
-export EDITOR=vim
-export HISTFILE="$HOME/.bash_history"
-export HISTFILESIZE=200000
-export HISTSIZE=200000
-export HISTIGNORE="clear:ls:pwd:history:hig"
-export HISTTIMEFORMAT='%F %T '
-export HISTCONTROL="ignoredups:erasedups"
-set -o vi
-shopt -s histappend
-shopt -s extglob
+# --- if history file doesn't exist, create it
+[ -f $HOME/.bash_history ] || history -w
 
-# --- keep this as the last command in this file
-set -o history
+# --- reload history file into buffer
+history -r
