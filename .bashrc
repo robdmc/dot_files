@@ -39,6 +39,18 @@ ulimit -n 2048
 # umask 007 (read-write by owner and group, no access to others)
 umask 002
 
+# --- set up terminal working preferences
+shopt -s histappend
+shopt -s extglob
+export EDITOR=vim
+export HISTFILE="$HOME/.bash_history"
+export HISTFILESIZE=200000
+export HISTSIZE=200000
+export HISTIGNORE="clear:ls:pwd:history:hig"
+export HISTTIMEFORMAT='%F %T '
+export HISTCONTROL="ignoredups:erasedups"
+set -o vi
+set -o history
 
 # --- save history after each command
 export PROMPT_COMMAND="history -a; history -c; history -r;"
