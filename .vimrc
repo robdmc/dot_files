@@ -56,6 +56,7 @@ highlight Pmenu ctermfg=0 ctermbg=7
 
 "--- This is a shortcut for the NERDTree plugin
 nnoremap ,e :NERDTreeToggle<cr>
+let NERDTreeHijackNetrw=0
 
 "---These commands make windows-like copy/paste.
 "   To get them to work, you must add the following to your .cshrc or .bashrc
