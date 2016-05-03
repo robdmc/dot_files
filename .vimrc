@@ -161,6 +161,11 @@ if has("persistent_undo")
 endif
 nmap <Leader>u :UndotreeToggle<CR>
 
+"--- set incsearch stuff
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
 
 ""---  Set up ctrlp
 ""nmap <Leader>t :CtrlP<CR>
