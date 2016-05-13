@@ -35,6 +35,14 @@ set viminfo='100,f1
 set ww=h,l,b,s,<,>
 set cm=blowfish
 
+"--- Make the mose work on wide-screens
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
+    set ttymouse=xterm2
+end
+
+
 "--- This improves highlight colors in vimdiff
 set t_Co=256
 "colo ron
