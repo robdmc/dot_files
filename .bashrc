@@ -145,3 +145,7 @@ history -c
 
 # --- reload history file into buffer
 history -r
+
+# --- make useful iterm2 commands
+tab_name() { echo -e "\033];${1}\007"; }
+task_done() { echo __task_done__ ${1};}  # Set iterm2 trigger to cath this 
