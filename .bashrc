@@ -1,3 +1,5 @@
+# dont record bashrc in history
+set +o history
 # ---  SEE THE FOLLOWING REFERENCE FOR HOW TO CHANGE BASH PROMPT
 #http://news.softpedia.com/news/How-to-Customize-the-Shell-Prompt-40033.shtml
 
@@ -50,7 +52,6 @@ export HISTIGNORE="clear:ls:pwd:history:hig"
 export HISTTIMEFORMAT='%F %T '
 export HISTCONTROL="ignoredups:erasedups"
 set -o vi
-set -o history
 
 # --- save history after each command
 export PROMPT_COMMAND="history -a; history -c; history -r;"
@@ -136,16 +137,14 @@ if [ "$unameType" == "$macType" ]; then
     fi
 fi
 
-# --- KEEP THESE HISTORY COMMANDS AT END OF FILE
-# --- clear out .bashrc commands from history
-history -c
-
-# --- if history file doesn't exist, create it
-[ -f $HOME/.bash_history ] || history -w
-
-# --- reload history file into buffer
-history -r
-
 # --- make useful iterm2 commands
 tab_name() { echo -e "\033];${1}\007"; }
 task_done() { echo __task_done__ ${1};}  # Set iterm2 trigger to cath this 
+
+
+# --- if history file doesn't exist, create it
+touch .bash_history
+
+# turn on history
+set -o history
+
