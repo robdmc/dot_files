@@ -77,5 +77,7 @@ os.system(cmd)
 
 # --- create a bash_history file if it doesn't exist
 if not os.path.isfile(os.path.join(os.environ['HOME'], '.bash_history')):
-    os.system('cp fake_bash_history {}/.bash_history'.format(os.environ['HOME']))
+    cmd = 'cp fake_bash_history {}/.bash_history'.format(os.environ['HOME'])
+    print cmd
+    os.system(cmd)
 
