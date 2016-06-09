@@ -1,2 +1,3 @@
 --ignore-dir=.ipynb_checkpoints
 --ignore-dir=migrations
+--python
