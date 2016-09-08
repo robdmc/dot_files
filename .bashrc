@@ -89,7 +89,7 @@ alias pdb='python -m pdb '
 alias pdbrc='vim .pdbrc'
 alias govagrant='(cd /Users/rob/rob/vagrant_boxes/ambition-vagrant; vagrant ssh -- -A)'
 alias upvagrant='(cd /Users/rob/rob/vagrant_boxes/ambition-vagrant && git pull upstream master && vagrant up)'
-alias downvagrant='(cd /Users/rob/rob/vagrant_boxes/ambition-vagrant && vagrant halt)'
+alias downvagrant='(cp /Users/rob/rob/vagrant_boxes/ambition-vagrant/shared_ambition_vagrant/.bash_history `date +"/Users/rob/vagrant_history_files/vagrant_bash_history_%FT%H-%M-%S"`);  (cd /Users/rob/rob/vagrant_boxes/ambition-vagrant && vagrant halt)'
 
 # --- define mac specific stuff
 if [ "$unameType" == "$macType" ]; then 
