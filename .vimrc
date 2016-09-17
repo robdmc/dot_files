@@ -203,4 +203,5 @@ function AckWord()
     execute ':Ack  ' . expand("<cword>") . ' ' . FindRootDirectory()
 endfunction
 nnoremap K :call AckWord()<CR>
-
+" SEE THIS LINK FOR HOW TO MAKE A PROJECT ACK AND AG COMMAND
+" http://superuser.com/questions/93492/how-to-add-a-command-in-vim-editor
