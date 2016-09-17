@@ -199,9 +199,17 @@ endif
 "word under cursor in all of project
 let g:rooter_manual_only = 1
 
+"--- search the project for work under cursor
 function AckWord()
     execute ':Ack  ' . expand("<cword>") . ' ' . FindRootDirectory()
 endfunction
+
+"--- search the project for supplied word(s)
+function AckProj(...)
+    execute ':Ack  ' . join(a:000, ' ') . ' ' . FindRootDirectory()
+endfunction
+
+"--- set bindings to defined functions
 nnoremap K :call AckWord()<CR>
-" SEE THIS LINK FOR HOW TO MAKE A PROJECT ACK AND AG COMMAND
-" http://superuser.com/questions/93492/how-to-add-a-command-in-vim-editor
+cnoreabbrev Ag Ack
+command -nargs=* Pag : call AckProj(<f-args>)
