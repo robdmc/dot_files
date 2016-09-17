@@ -182,26 +182,12 @@ map g/ <Plug>(incsearch-stay)
 
 ""---  Set up ctrlp
 ""nmap <Leader>t :CtrlP<CR>
-"let g:ctrlp_custom_ignore = {
-"  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$\|migrations',
-"  \ 'file': '\.exe$\|\.so$\|\.dat$\|\.pyc$'
-"  \ }
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$\|migrations',
+  \ 'file': '\.exe$\|\.so$\|\.dat$\|\.pyc$'
+  \ }
 
-
-" PROBABLY WON'T END UP USING THIS, BUT KEEPINT IT IN FOR REFERENCE RIGHT NOW
-""--- set some working directory magic
-"" set working directory to git project root
-"" or directory of current file if not git project
-"function! SetProjectRoot()
-"  " default to the current file's directory
-"  lcd %:p:h
-"  let git_dir = system("git rev-parse --show-toplevel")
-"  " See if the command output starts with 'fatal' (if it does, not in a git repo)
-"  let is_not_git_dir = matchstr(git_dir, '^fatal:.*')
-"  " if git project, change local directory to git project root
-"  if empty(is_not_git_dir)
-"    lcd `=git_dir`
-"  endif
-"endfunction
-"autocmd BufEnter *  call SetProjectRoot()
-
+"--- set up ack grep to use silver searcher
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
