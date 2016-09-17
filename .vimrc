@@ -191,3 +191,16 @@ let g:ctrlp_custom_ignore = {
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
+
+
+
+"----------
+"Set up a mishmash of Ack Rooter and a custom function to find
+"word under cursor in all of project
+let g:rooter_manual_only = 1
+
+function AckWord()
+    execute ':Ack  ' . expand("<cword>") . ' ' . FindRootDirectory()
+endfunction
+nnoremap K :call AckWord()<CR>
+
