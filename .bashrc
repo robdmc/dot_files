@@ -91,6 +91,11 @@ alias govagrant='(cd /Users/rob/rob/vagrant_boxes/ambition-vagrant; vagrant ssh 
 alias upvagrant='(cd /Users/rob/rob/vagrant_boxes/ambition-vagrant && git pull upstream master && vagrant up)'
 alias downvagrant='(cp /Users/rob/rob/vagrant_boxes/ambition-vagrant/shared_ambition_vagrant/.bash_history `date +"/Users/rob/vagrant_history_files/vagrant_bash_history_%FT%H-%M-%S"`);  (cd /Users/rob/rob/vagrant_boxes/ambition-vagrant && vagrant halt)'
 
+# gad=(go ambition docker)   dad=(down ambition docker)
+alias ga='cd /Users/rob/ambition'
+alias gad='(cd /Users/rob/ambition; docker-compose run --rm shell)'
+alias dad='(cp /Users/rob/ambition/docker_bash_history/.bash_history `date +"/Users/rob/docker_history_files/docker_bash_history_%FT%H-%M-%S"`);  (cd /Users/rob/ambition; docker-compose down)'
+
 # --- define mac specific stuff
 if [ "$unameType" == "$macType" ]; then 
   # --- ipython notebook aliases
