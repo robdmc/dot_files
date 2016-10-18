@@ -178,6 +178,9 @@ map g/ <Plug>(incsearch-stay)
 
 "--- make it easy to find cursor by just hitting ; in normal mode
 :nmap <Leader>; :set cursorline<CR>:set cursorcolumn<CR>:sleep 80m<CR>:set nocursorline<CR>:set nocursorcolumn<CR>
+"
+"--- make a shortcut for pbcopy
+:vmap <Leader>c :'<,'> ! pbcopy<CR>u
 
 
 ""---  Set up ctrlp
