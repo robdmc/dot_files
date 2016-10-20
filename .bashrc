@@ -155,3 +155,5 @@ touch .bash_history
 # turn on history
 set -o history
 
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
