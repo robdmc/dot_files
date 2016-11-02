@@ -105,14 +105,16 @@ nmap <C-p> :let @" = expand("%:p")<CR>P
 "---- This allows tab to switch windows in normal mode
 "nmap <CR> <C-w>w
 "nmap \ <C-w>w
-nmap <Space> <C-w>w
-"nmap <Leader><Space> <C-w>w
-"nmap <Leader>ww <C-w>w
-"nmap <Leader>ww <C-w>w
-"nmap <Leader>wl <C-w>l
-"nmap <Leader>wh <C-w>h
-"nmap <Leader>wj <C-w>j
-"nmap <Leader>wk <C-w>k
+nnoremap <Space> <C-w>w
+nnoremap <Right> <C-w>l
+nnoremap <Left> <C-w>h
+nnoremap <Up> <C-w>k
+nnoremap <Down> <C-w>j
+nnoremap <Leader><Space> <C-w>w
+nnoremap <Leader>l <C-w>l
+nnoremap <Leader>h <C-w>h
+nnoremap <Leader>j <C-w>j
+nnoremap <Leader>k <C-w>k
 
 "--- Temporarily highlight contents in parens/brackets/etc
 nmap <Leader>p %v%:sleep 500m<CR>%
@@ -162,7 +164,7 @@ nmap <Leader>g :TagbarToggle<CR>
 let g:pymode_indent = 0
 
 "--- make tagbar open the window on the left
-let g:tagbar_left = 1
+"let g:tagbar_left = 1
 
 "--- set up undo tree stuff
 if has("persistent_undo")
