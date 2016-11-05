@@ -90,6 +90,7 @@ alias pdbrc='vim .pdbrc'
 alias govagrant='(cd /Users/rob/rob/vagrant_boxes/ambition-vagrant; vagrant ssh -- -A)'
 alias upvagrant='(cd /Users/rob/rob/vagrant_boxes/ambition-vagrant && git pull upstream master && vagrant up)'
 alias downvagrant='(cp /Users/rob/rob/vagrant_boxes/ambition-vagrant/shared_ambition_vagrant/.bash_history `date +"/Users/rob/vagrant_history_files/vagrant_bash_history_%FT%H-%M-%S"`);  (cd /Users/rob/rob/vagrant_boxes/ambition-vagrant && vagrant halt)'
+alias vimf='vim `fzf`'
 
 # gad=(go ambition docker)   dad=(down ambition docker)
 alias ga='cd /Users/rob/ambition'
@@ -113,7 +114,7 @@ if [ "$unameType" == "$macType" ]; then
 
   # --- add path element to use proper version of postgres
   export PGDATA="/Users/rob/Library/Application Support/Postgres/var-9.4/"
-  export PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
+  export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
   # --- export the goroot directory
   export GOROOT=/usr/local/go
