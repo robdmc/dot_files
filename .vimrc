@@ -1,5 +1,6 @@
 "--- initialize pathogen
 execute pathogen#infect()
+Helptags
 
 "--- define a custom leader
 let mapleader=","
@@ -58,6 +59,10 @@ highlight ColorColumn ctermbg=235 guibg=#2c2d27
 "--- make it so vim fugitive opens pick list after Glog
 autocmd QuickFixCmdPost *grep* cwindow
 
+"--- make some shortcust for gitv
+nnoremap <Leader>gv :Gitv!<cr>
+nnoremap <Leader>gV :Gitv<cr>
+
 "--- make vertical diffs the default
 set diffopt+=vertical
 
@@ -66,7 +71,7 @@ highlight PmenuSel ctermfg=11 ctermbg=18
 highlight Pmenu ctermfg=0 ctermbg=7
 
 "--- This is a shortcut for the NERDTree plugin
-nnoremap ,e :NERDTreeToggle<cr>
+nnoremap <Leader>e :NERDTreeToggle<cr>
 
 let NERDTreeIgnore = ['\.pyc$']
 
@@ -109,10 +114,10 @@ nmap <C-p> :let @" = expand("%:p")<CR>P
 "nmap <CR> <C-w>w
 "nmap \ <C-w>w
 nnoremap <Space> <C-w>w
-nnoremap <Right> <C-w>l
-nnoremap <Left> <C-w>h
-nnoremap <Up> <C-w>k
-nnoremap <Down> <C-w>j
+nnoremap <S-Right> <C-w>l
+nnoremap <S-Left> <C-w>h
+nnoremap <S-Up> <C-w>k
+nnoremap <S-Down> <C-w>j
 nnoremap <Leader><Space> <C-w>w
 nnoremap <Leader>l <C-w>l
 nnoremap <Leader>h <C-w>h
