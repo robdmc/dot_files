@@ -153,8 +153,10 @@ task_done() { echo __task_done__ ${1};}  # Set iterm2 trigger to cath this
 # --- if history file doesn't exist, create it
 touch .bash_history
 
+# I don't actually like fuzzyfinder's bash shortcuts, but uncomment this to activate them
+#[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 # turn on history
 set -o history
 
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
