@@ -37,13 +37,13 @@ os.system(cmd)
 
 
 # --- if a home/bin directory doesnt exist, create it
-binDir = os.path.join(os.environ['HOME'],'bin')
+binDir = os.path.join(os.environ['HOME'], 'bin')
 if not os.path.isdir(binDir):
     print('mkdir %s' % binDir)
     os.makedirs(binDir)
 
 # --- make an undo dir
-undo_dir = os.path.join(os.environ['HOME'],'.undodir')
+undo_dir = os.path.join(os.environ['HOME'], '.undodir')
 if not os.path.isdir(undo_dir):
     print('mkdir %s' % undo_dir)
     os.makedirs(undo_dir)
@@ -69,9 +69,12 @@ cmd = "cd ~/bin; ln -sf ~/dot_files/imgcat ."
 print(cmd)
 os.system(cmd)
 
+cmd = "cd ~/bin; ln -sf ~/dot_files/clean_vim_backup.py ."
+print(cmd)
+os.system(cmd)
 
 # --- if a home/.config directory doesnt exist, create it
-binDir = os.path.join(os.environ['HOME'],'.config')
+binDir = os.path.join(os.environ['HOME'], '.config')
 if not os.path.isdir(binDir):
     print('mkdir %s' % binDir)
     os.makedirs(binDir)
@@ -86,4 +89,3 @@ if not os.path.isfile(os.path.join(os.environ['HOME'], '.bash_history')):
     cmd = 'cp fake_bash_history {}/.bash_history'.format(os.environ['HOME'])
     print(cmd)
     os.system(cmd)
-

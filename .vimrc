@@ -226,3 +226,14 @@ endfunction
 nnoremap K :call AckWord()<CR>
 cnoreabbrev Ag Ack
 command -nargs=* Pag : call AckProj(<f-args>)
+
+"--- set backup preferences
+"    This was copied from http://www.gmarks.org/vi_backups.html
+"    It's a good way to keep a backup of all the files you've edited in vim
+set backup
+set writebackup
+au BufWritePre * let &backupext = '%' . substitute(expand("%:p:h"), "/" , "%" , "g") . "%" . strftime("%Y.%m.%d.%H.%M.%S")
+au VimLeave * !cp % ~/.vim_backups/$(echo %:p | sed 's/\(.*\/\)\(.*\)/\2\/\1/g' | sed 's/\//\%/g')$(date +\%Y.\%m.\%d.\%H.\%M.\%S).wq
+set backupdir=~/.vim_backups/
+
+
