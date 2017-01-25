@@ -5,19 +5,18 @@ import os
 import platform
 import sys
 
+def run_command(cmd, msg='failed'):
+    print(cmd)
+    if os.system(cmd):
+        sys.stderr.write('\n\n{}\n\n'.format(msg))
+        sys.exit(1)
+
 
 cmd = "p.crypt -i ngrok_config.tar.crypt -o ngrok_config.tar -d"
-print(cmd)
-if os.system(cmd):
-    print('failed', sys.stderr)
-    sys.exit()
+run_command(cmd)
 
 cmd = "cd ~ && tar -xvf ./dot_files/ngrok_config.tar"
-print(cmd)
-if os.system(cmd):
-    print('failed', sys.stderr)
-    sys.exit()
-
+run_command(cmd)
 
 platform_info = platform.platform().lower()
 if 'darwin' in platform_info:
@@ -25,19 +24,16 @@ if 'darwin' in platform_info:
     cmd += ' && wget \'https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-darwin-amd64.zip\''
     cmd += ' && unzip ngrok-stable-darwin-amd64.zip'
     cmd += ' && rm ngrok-stable-darwin-amd64.zip'
-    if os.system(cmd):
-        print('failed', sys.stderr)
-        sys.exit()
+    run_command(cmd)
 
 elif 'linux' in platform_info:
     cmd = 'cd ~/bin '
     cmd += ' && wget \'https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip\''
     cmd += ' && unzip ngrok-stable-linux-amd64.zip'
     cmd += ' && rm ngrok-stable-linux-amd64.zip'
-    if os.system(cmd):
-        print('failed', sys.stderr)
-        sys.exit()
+    run_command(cmd)
 
 else:
-    print('\n\nArchitechure not recognized', sys.stderr)
+    sys.stderr.write('\n\nArchitechure not recognized')
+    sys.exit(1)
 
