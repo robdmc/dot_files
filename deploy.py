@@ -48,34 +48,22 @@ if not os.path.isdir(undo_dir):
     print('mkdir %s' % undo_dir)
     os.makedirs(undo_dir)
 
-# --- link executables
-cmd = "cd ~/bin; ln -sf ~/dot_files/git_diff_wrapper ."
-print(cmd)
-os.system(cmd)
+# --- create a list of executable files to link
+execFileList = [
+    'git_diff_wrapper',
+    'git_branch_diff',
+    'circle_checker',
+    'serve_dir.py',
+    'imgcat',
+    'clean_vim_backup.py',
+    'diffconflicts',
+]
 
-cmd = "cd ~/bin; ln -sf ~/dot_files/git_branch_diff ."
-print(cmd)
-os.system(cmd)
-
-cmd = "cd ~/bin; ln -sf ~/dot_files/circle_checker ."
-print(cmd)
-os.system(cmd)
-
-cmd = "cd ~/bin; ln -sf ~/dot_files/serve_dir.py ."
-print(cmd)
-os.system(cmd)
-
-cmd = "cd ~/bin; ln -sf ~/dot_files/imgcat ."
-print(cmd)
-os.system(cmd)
-
-cmd = "cd ~/bin; ln -sf ~/dot_files/clean_vim_backup.py ."
-print(cmd)
-os.system(cmd)
-
-cmd = "cd ~/bin; ln -sf ~/dot_files/diffconflicts ."
-print(cmd)
-os.system(cmd)
+# --- link all exec files to $HOME/bin
+for execFile in execFileList:
+    cmd =  "cd ~/bin; ln -sf ~/dot_files/{} .".format(execFile)
+    print(cmd)
+    os.system(cmd)
 
 # --- if a home/.config directory doesnt exist, create it
 binDir = os.path.join(os.environ['HOME'], '.config')
