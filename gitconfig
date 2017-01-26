@@ -11,7 +11,7 @@
 [pager]
      diff =
 [merge]
-   tool = vimdiff
+	tool = diffconflicts
 [core]
 	excludesfile = ~/.gitignore_global
 
@@ -27,3 +27,8 @@
 	default = current
 [github]
 	user = robdmc
+[mergetool "diffconflicts"]
+	cmd = diffconflicts vim $BASE $LOCAL $REMOTE $MERGED
+	trustExitCode = true
+[mergetool]
+	keepBackup = false

@@ -73,6 +73,10 @@ cmd = "cd ~/bin; ln -sf ~/dot_files/clean_vim_backup.py ."
 print(cmd)
 os.system(cmd)
 
+cmd = "cd ~/bin; ln -sf ~/dot_files/diffconflicts ."
+print(cmd)
+os.system(cmd)
+
 # --- if a home/.config directory doesnt exist, create it
 binDir = os.path.join(os.environ['HOME'], '.config')
 if not os.path.isdir(binDir):
