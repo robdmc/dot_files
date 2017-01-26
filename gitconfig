@@ -22,6 +22,7 @@
     llg = log --stat
     pru = "!f() { git fetch upstream refs/pull/$1/head:pr/$1; } ; f"
     pro = "!f() { git fetch origin refs/pull/$1/head:pr/$1; } ; f"
+    track = "!f() { git branch --track $(basename $1)  $1; } ; f"
 [push]
 	default = current
 [github]
