@@ -160,6 +160,9 @@ touch .bash_history
 # I don't actually like fuzzyfinder's bash shortcuts, but uncomment this to activate them
 #[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+# this was automatically added by iterm2 shell integration to .bash_profile.  I'm adding it here.
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
 # turn on history
 set -o history
 
