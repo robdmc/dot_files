@@ -4,9 +4,6 @@ set +o history
 # make sure the vim backup directory exists
 mkdir -p ~/.vim_backups
 
-# this was automatically added by iterm2 shell integration to .bash_profile.  I moved it here.
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-
 # ---  SEE THE FOLLOWING REFERENCE FOR HOW TO CHANGE BASH PROMPT
 #http://news.softpedia.com/news/How-to-Customize-the-Shell-Prompt-40033.shtml
 
