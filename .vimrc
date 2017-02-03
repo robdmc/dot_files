@@ -236,4 +236,6 @@ au BufWritePre * let &backupext = '%' . substitute(expand("%:p:h"), "/" , "%" , 
 au VimLeave * !cp % ~/.vim_backups/$(echo %:p | sed 's/\(.*\/\)\(.*\)/\2\/\1/g' | sed 's/\//\%/g')$(date +\%Y.\%m.\%d.\%H.\%M.\%S).wq
 set backupdir=~/.vim_backups/
 
-
+"---experimental ale plugin settings
+nmap <silent> <leader>k <Plug>(ale_previous_wrap)
+nmap <silent> <leader>j <Plug>(ale_next_wrap)
