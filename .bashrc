@@ -161,7 +161,8 @@ touch .bash_history
 #[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # this was automatically added by iterm2 shell integration to .bash_profile.  I'm adding it here.
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+# shell integration does funny things to vim search mode, so commentint it out
+# test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
 # turn on history
 set -o history
