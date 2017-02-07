@@ -98,13 +98,13 @@ if [ "$unameType" == "$macType" ]; then
 
 
   # current
-  PS1="\n$yellow[$CYAN\t$yellow][${red}mac${yellow}][$GREEN\w$grey$yellow]\$(parse_git_branch)$NC\n${BLUE}λ$NC "
+  PS1="$grey[${green}mac${grey}][$BLUE\t$grey]\$(parse_git_branch)[$cyan\w$grey$grey]$NC\n${PURPLE}λ$NC "
 
   # original
   #PS1='<mac \W]\$ '
 else
   # current
-  PS1="\n$yellow[$CYAN\t$yellow][${red}linux${yellow}][$GREEN\w$grey$yellow]\$(parse_git_branch)$NC\n${BLUE}λ$NC "
+  PS1="$grey[${green}linux${grey}][$BLUE\t$grey]\$(parse_git_branch)[$cyan\w$grey$grey]$NC\n${PURPLE}λ$NC "
 
   # original
   #PS1='<\h \W]\$ '
