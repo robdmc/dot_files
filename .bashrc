@@ -80,7 +80,7 @@ NC='\[\033[0m\]'
 
 # --- this function aides the prompt to show the current git branch
 parse_git_branch () {
-       git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+       git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/( \1 )/'
 }
 
 # --- set the appropriate prompt for the system you're on
@@ -95,20 +95,21 @@ if [ "$unameType" == "$macType" ]; then
   export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
   export MANPATH="/usr/local/opt/gnu-tar/libexec/gnuman:$MANPATH"
   export MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"
-
-
-  # current
-  PS1="$grey[${green}mac${grey}][$BLUE\t$grey]\$(parse_git_branch)[$cyan\w$grey$grey]$NC\n${PURPLE}λ$NC "
+  prompt_host="mac"
 
   # original
   #PS1='<mac \W]\$ '
 else
-  # current
-  PS1="$grey[${green}linux${grey}][$BLUE\t$grey]\$(parse_git_branch)[$cyan\w$grey$grey]$NC\n${PURPLE}λ$NC "
 
   # original
   #PS1='<\h \W]\$ '
+
+  prompt_host="linux"
+
 fi
+
+PS1="$grey[${green}${prompt_host}${grey}][$BLUE\t$grey]\$(parse_git_branch)[$cyan \w $grey$grey]$NC\n${PURPLE}λ$NC "
+
 
 # --- initialize boot2docker environment vars if docker is running
 if  type boot2docker >& /dev/null; then
