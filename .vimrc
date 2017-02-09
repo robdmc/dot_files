@@ -35,6 +35,7 @@ set omnifunc=syntaxcomplete#Complete
 set viminfo='100,f1
 set ww=h,l,b,s,<,>
 set cm=blowfish
+set timeoutlen=500
 
 "--- Make the mose work on wide-screens
 if has("mouse_sgr")
@@ -123,6 +124,8 @@ nnoremap <Leader>l <C-w>l
 nnoremap <Leader>h <C-w>h
 nnoremap <Leader>j <C-w>j
 nnoremap <Leader>k <C-w>k
+nnoremap <Leader>W :vertical resize 130<CR>
+nnoremap <Leader>w <C-w>=
 
 "--- Temporarily highlight contents in parens/brackets/etc
 nmap <Leader>p %v%:sleep 500m<CR>%
