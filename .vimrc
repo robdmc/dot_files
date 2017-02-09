@@ -239,3 +239,8 @@ set backupdir=~/.vim_backups/
 "---experimental ale plugin settings
 nmap <silent> <leader>k <Plug>(ale_previous_wrap)
 nmap <silent> <leader>j <Plug>(ale_next_wrap)
+
+
+"---create shortcuts for managing sessions
+nmap <Leader>ss :mksession ~/mySession.vim<CR>
+nmap <Leader>ls :so ~/mySession.vim<CR>
