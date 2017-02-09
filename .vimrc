@@ -245,5 +245,5 @@ nmap <silent> <leader>j <Plug>(ale_next_wrap)
 
 
 "---create shortcuts for managing sessions
-nmap <Leader>ss :mksession ~/mySession.vim<CR>
+nmap <Leader>ss :mksession! ~/mySession.vim<CR>
 nmap <Leader>ls :so ~/mySession.vim<CR>
