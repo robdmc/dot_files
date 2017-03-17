@@ -254,5 +254,8 @@ nmap <Leader>ls :so ~/mySession.vim<CR>
 "---create ctags shortcut for opening definition in new tab
 :nnoremap <Leader>d <C-w><C-]><C-w>T
 
+"--- command to rebuild tags
+:nnoremap <Leader>m :!make_tags<CR>
+
 "---set the way vim searches for tag files
 :set tags=./tags,tags;
