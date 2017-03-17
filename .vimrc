@@ -251,8 +251,9 @@ nmap <silent> <leader>j <Plug>(ale_next_wrap)
 nmap <Leader>ss :mksession! ~/mySession.vim<CR>
 nmap <Leader>ls :so ~/mySession.vim<CR>
 
-"---create ctags shortcut for opening definition in new tab
+"---create ctags shortcut for opening definition in new tab or window
 :nnoremap <Leader>d <C-w><C-]><C-w>T
+:nnoremap <Leader>D :vsp <CR> <C-w>l :exec("tag ".expand("<cword>"))<CR>
 
 "--- command to rebuild tags
 :nnoremap <Leader>m :!make_tags<CR>
