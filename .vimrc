@@ -165,11 +165,14 @@ set tagrelative
 autocmd BufEnter * silent! lcd %:p:h
 
 "--- set up vim-flake8
-autocmd FileType python map <buffer> <Leader>F :call Flake8()<CR>
-let g:flake8_show_in_file=1
-let g:flake8_quickfix_height=10
-nmap <Leader>f :cnext<CR>
-nmap <Leader>g :TagbarToggle<CR>
+"--- autocmd FileType python map <buffer> <Leader>F :call Flake8()<CR>
+"--- let g:flake8_show_in_file=1
+"--- let g:flake8_quickfix_height=10
+"--- nmap <Leader>f :cnext<CR>
+"--- nmap <Leader>g :TagbarToggle<CR>
+
+"--- show the full path of the current file
+nmap <Leader>f :echo expand('%:p')<CR>
 
 "--- disable standard python indenter so vim-python-pep8 can take over
 let g:pymode_indent = 0
@@ -247,3 +250,9 @@ nmap <silent> <leader>j <Plug>(ale_next_wrap)
 "---create shortcuts for managing sessions
 nmap <Leader>ss :mksession! ~/mySession.vim<CR>
 nmap <Leader>ls :so ~/mySession.vim<CR>
+
+"---create ctags shortcut for opening definition in new tab
+:nnoremap <Leader>d <C-w><C-]><C-w>T
+
+"---set the way vim searches for tag files
+:set tags=./tags,tags;

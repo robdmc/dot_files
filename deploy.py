@@ -55,6 +55,7 @@ execFileList = [
     'circle_checker',
     'serve_dir.py',
     'imgcat',
+    'make_tags',
     'clean_vim_backup.py',
     'diffconflicts',
 ]
