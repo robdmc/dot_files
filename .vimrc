@@ -252,8 +252,13 @@ nmap <Leader>ss :mksession! ~/mySession.vim<CR>
 nmap <Leader>ls :so ~/mySession.vim<CR>
 
 "---create ctags shortcut for opening definition in new tab or window
-:nnoremap <Leader>d <C-w><C-]><C-w>T
-:nnoremap <Leader>D :vsp <CR> <C-w>l :exec("tag ".expand("<cword>"))<CR>
+"---:nnoremap <Leader>d <C-w>g<C-]><C-w>T
+"---:nnoremap <Leader>D <C-w>g<C-]><C-w>v
+"---:nnoremap <Leader>d <C-w><C-v><C-w>T g<C-]>
+:nnoremap <Leader>D <C-w><C-v><C-w>T:exec("tj ".expand("<cword>"))<CR>
+:nnoremap <Leader>d <C-w><C-v><C-w>l:exec("tj ".expand("<cword>"))<CR>
+":nnoremap <Leader>d :vsp <CR> <C-w>T :exec("ts ".expand("<cword>"))<CR>
+":nnoremap <Leader>D :vsp <CR> <C-w>l :exec("ts ".expand("<cword>"))<CR>
 
 "--- command to rebuild tags
 :nnoremap <Leader>m :!make_tags<CR>
