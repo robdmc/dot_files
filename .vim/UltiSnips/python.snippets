@@ -1,0 +1,46 @@
+# insert shebang at top of file
+snippet #!
+#! /usr/bin/env python
+endsnippet
+
+# Wrap selected code in Timer block
+snippet Timer
+with Timer('${1:timer}') as ${2:timer}:
+	${VISUAL}
+endsnippet
+
+
+# Insert a beholder import
+snippet beholder
+###############################################
+from animal.utils.beholder import *
+from dateutil.parser import parse
+from pandashells import Timer
+###############################################
+endsnippet
+
+
+# Insert a beholder debugger
+snippet BB
+###############################################
+bb = Beholder(tag='${1}')
+bb.show(
+	${2:obj},
+	'${3:v1}',
+	'${4:v2}',
+	'${5:v3}',
+	'${6:v4}',
+	'${7:v5}',
+	'${8:v6}',
+)
+###############################################
+endsnippet
+
+
+# Insert datetime
+snippet datetime
+datetime.datetime(20${1:00}, ${2:1}, ${3:1})
+endsnippet
+
+
+

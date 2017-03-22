@@ -265,3 +265,11 @@ nmap <Leader>ls :so ~/mySession.vim<CR>
 
 "---set the way vim searches for tag files
 :set tags=./tags,tags;
+
+"--- set ultisnippet configuration
+:nnoremap <Leader>j :UltiSnipsEdit<CR>
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
