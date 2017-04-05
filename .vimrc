@@ -267,7 +267,7 @@ nmap <Leader>ls :so ~/mySession.vim<CR>
 :set tags=./tags,tags;
 
 "--- set ultisnippet configuration
-:nnoremap <Leader>j :UltiSnipsEdit<CR>
+:nnoremap <Leader>J :UltiSnipsEdit<CR>
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
 let g:UltiSnipsExpandTrigger="<c-j>"
