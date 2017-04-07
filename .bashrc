@@ -129,12 +129,16 @@ alias upvagrant='(cd /Users/rob/rob/vagrant_boxes/ambition-vagrant && git pull u
 alias downvagrant='(cp /Users/rob/rob/vagrant_boxes/ambition-vagrant/shared_ambition_vagrant/.bash_history `date +"/Users/rob/vagrant_history_files/vagrant_bash_history_%FT%H-%M-%S"`);  (cd /Users/rob/rob/vagrant_boxes/ambition-vagrant && vagrant halt)'
 alias vimf='vim `fzf`'
 
-# gad=(go ambition docker)   dad=(down ambition docker)
+# gad=(go ambition docker)   dad=(down ambition docker) ldc=(list docker containers) gdc=(go docker container)
 alias ga='cd /Users/rob/ambition'
 alias gp='cd /Users/rob/packages'
 alias gadp='(cd /Users/rob/ambition; docker-compose run --rm  --service-ports shell)'
 alias gad='(cd /Users/rob/ambition; docker-compose run --rm shell)'
 alias dad='(cp /Users/rob/ambition/docker_bash_history/.bash_history `date +"/Users/rob/docker_history_files/docker_bash_history_%FT%H-%M-%S"`);  (cd /Users/rob/ambition; docker-compose down)'
+alias ldc='docker ps --format "{{.ID}} {{.Names}}"'
+function gdc() { 
+    docker exec -it "$1" /bin/bash 
+}
 
 # --- define mac specific stuff
 if [ "$unameType" == "$macType" ]; then 
