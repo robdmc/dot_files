@@ -37,7 +37,7 @@ set ww=h,l,b,s,<,>
 set cm=blowfish
 set timeoutlen=500
 
-"--- Make the mose work on wide-screens
+"--- Make the mouse work on wide-screens
 if has("mouse_sgr")
     set ttymouse=sgr
 else
@@ -53,6 +53,9 @@ set t_Co=256
 colo darcula
 highlight DiffText term=standout ctermfg=0 ctermbg=11
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
+
+"--- make search wraps more obvious
+hi WarningMsg ctermfg=white ctermbg=red guifg=White guibg=Red gui=None
 
 "--- add git branch to standard statusline
 ":set statusline=%<%F\ %h%m%r%=%-14.(%l,%c%V%)\ %P\ %{fugitive#statusline()}
