@@ -50,8 +50,8 @@ shopt -s histappend
 shopt -s extglob
 export EDITOR=vim
 export HISTFILE="$HOME/.bash_history"
-export HISTFILESIZE=200000
-export HISTSIZE=200000
+export HISTFILESIZE=20000
+export HISTSIZE=20000
 export HISTIGNORE="clear:ls:pwd:history:hig"
 export HISTTIMEFORMAT='%F %T '
 export HISTCONTROL="ignoredups:erasedups"
