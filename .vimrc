@@ -148,6 +148,9 @@ nmap <S-t> <C-w>s<C-w><S-T>
 "             5) .       --> repeat the replacement
 nnoremap <leader>p  "_ciw<C-R>"<Esc>
 
+"--- This is a shortcut for copying a word
+nnoremap <leader>y  viwy
+
 
 "---this remaps the numeric keypad to behave reasonably
 if &term=="xterm" || &term=="xterm-color"
