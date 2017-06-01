@@ -140,6 +140,15 @@ nmap <S-Tab> :tabn<CR>
 nmap <S-t> <C-w>s<C-w><S-T>
 
 
+" --- This allows for multiple replacing of same word.
+"     usage:  1)  viwy  --> select the word you want to use as replacement
+"             2)        --> navigate cursor to word you want replaced
+"             3)        --> <Leader>p to paste replacement
+"             4)        --> navigate to next instance you want replaced
+"             5) .       --> repeat the replacement
+nnoremap <leader>p  "_ciw<C-R>"<Esc>
+
+
 "---this remaps the numeric keypad to behave reasonably
 if &term=="xterm" || &term=="xterm-color"
    set t_Sb=^[4%dm
