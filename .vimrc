@@ -152,7 +152,7 @@ nnoremap <leader>p  "_ciw<C-R>"<Esc>
 nnoremap <leader>y  viwy
 
 "--- Shortcut to copy to mac clipboard
-vnoremap <leader>Y  "+y
+vnoremap Y  "+y
 
 
 "---this remaps the numeric keypad to behave reasonably
