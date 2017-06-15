@@ -127,7 +127,15 @@ alias pdbrc='vim .pdbrc'
 alias govagrant='(cd /Users/rob/rob/vagrant_boxes/ambition-vagrant; vagrant ssh -- -A)'
 alias upvagrant='(cd /Users/rob/rob/vagrant_boxes/ambition-vagrant && git pull upstream master && vagrant up)'
 alias downvagrant='(cp /Users/rob/rob/vagrant_boxes/ambition-vagrant/shared_ambition_vagrant/.bash_history `date +"/Users/rob/vagrant_history_files/vagrant_bash_history_%FT%H-%M-%S"`);  (cd /Users/rob/rob/vagrant_boxes/ambition-vagrant && vagrant halt)'
-alias vimf='vim `fzf`'
+# alias vimf='vim `fzf`'  # this is how I used to do it.
+function vimf() (
+    start_dir=`git rev-parse --show-toplevel 2>/dev/null || pwd`
+    cd $start_dir
+    output=`ag -g '.*' | fzf`
+    if [ -n "$output" ]; then
+        vim "$output"
+    fi
+)
 
 # gad=(go ambition docker)   dad=(down ambition docker) ldc=(list docker containers) gdc=(go docker container)
 alias ga='cd /Users/rob/ambition'
