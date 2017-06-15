@@ -127,13 +127,34 @@ alias pdbrc='vim .pdbrc'
 alias govagrant='(cd /Users/rob/rob/vagrant_boxes/ambition-vagrant; vagrant ssh -- -A)'
 alias upvagrant='(cd /Users/rob/rob/vagrant_boxes/ambition-vagrant && git pull upstream master && vagrant up)'
 alias downvagrant='(cp /Users/rob/rob/vagrant_boxes/ambition-vagrant/shared_ambition_vagrant/.bash_history `date +"/Users/rob/vagrant_history_files/vagrant_bash_history_%FT%H-%M-%S"`);  (cd /Users/rob/rob/vagrant_boxes/ambition-vagrant && vagrant halt)'
-# alias vimf='vim `fzf`'  # this is how I used to do it.
 function vimf() (
+    # declare shortcuts for vimf
+    declare -A lookup
+    lookup[animal]="/packages/django-animal"
+    lookup[entity]="/packages/django-entity"
+
+    # default search directory to current github root or current
     start_dir=`git rev-parse --show-toplevel 2>/dev/null || pwd`
-    cd $start_dir
-    output=`ag -g '.*' | fzf`
-    if [ -n "$output" ]; then
-        vim "$output"
+
+    # override default with shortcut
+    if [ -n "$1" ]; then
+        start_dir=${lookup[${1}]}
+    fi
+
+    # if start directory not null then run vim
+    if [ -n "$start_dir" ]; then
+
+        cd $start_dir
+        output=`ag -g '.*' | fzf`
+        if [ -n "$output" ]; then
+            vim "$output"
+        fi
+    # for unrecognized shortcuts, show options
+    else
+        echo
+        echo Allowed shortcuts
+        echo -----------------------------
+        for key in "${!lookup[@]}"; do echo "$key -> ${lookup[$key]}"; done
     fi
 )
 
