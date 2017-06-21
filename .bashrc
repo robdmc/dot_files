@@ -132,6 +132,8 @@ function vimf() (
     declare -A lookup
     lookup[animal]="/packages/django-animal"
     lookup[entity]="/packages/django-entity"
+    lookup[ambition_score]="/packages/ambition_score"
+    lookup[score]="/packages/ambition_score"
 
     # default search directory to current github root or current
     start_dir=`git rev-parse --show-toplevel 2>/dev/null || pwd`
