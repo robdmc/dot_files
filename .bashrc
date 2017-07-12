@@ -174,8 +174,8 @@ function gdc() {
 # --- define mac specific stuff
 if [ "$unameType" == "$macType" ]; then 
   # --- ipython notebook aliases
-  alias ipyw='jupyter notebook'
-  alias ipywi='jupyter notebook'
+  alias ipyw='BROWSER=open jupyter notebook'
+  alias ipywi='BROWSER=open jupyter notebook'
 
   # --- macports directories (in case they exists)
   export PATH=/opt/local/libexec/gnubin/:$PATH
