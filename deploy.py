@@ -10,6 +10,7 @@ linkFileList = [
     '.inputrc',
     '.vim',
     '.vimrc',
+    '.ideavimrc',
     '.ackrc',
     '.mongorc.js',
     '.ctags',

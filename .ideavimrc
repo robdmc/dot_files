@@ -1,0 +1,9 @@
+vmap <Tab> >`[v`]
+vmap <S-Tab> <`[v`]
+nnoremap <Space> <C-w>w
+nnoremap <S-Right> <C-w>l
+imap <C-s> <Esc>:w<CR>i
+nmap <C-s> :w<CR>
+nmap <C-q> :q<CR>
+imap <C-q> <Esc>:q<CR>
+
