@@ -1,3 +1,4 @@
+set incsearch
 vmap <Tab> >`[v`]
 vmap <S-Tab> <`[v`]
 nnoremap <Space> <C-w>w
