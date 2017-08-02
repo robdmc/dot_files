@@ -7,4 +7,4 @@ imap <C-s> <Esc>:w<CR>i
 nmap <C-s> :w<CR>
 nmap <C-q> :q<CR>
 imap <C-q> <Esc>:q<CR>
-
+set surround
