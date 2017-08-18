@@ -59,6 +59,7 @@ execFileList = [
     'make_tags',
     'clean_vim_backup.py',
     'diffconflicts',
+    'myip',
 ]
 
 # --- link all exec files to $HOME/bin
