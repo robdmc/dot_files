@@ -11,6 +11,11 @@ set rtp+=$GOROOT/misc/vim
 "--- handle special case for golang
 autocmd FileType go setlocal nolist noexpandtab shiftwidth=4 softtabstop=4 tabstop=4
 
+"--- handle setups for golang
+let g:go_auto_type_info = 1
+nnoremap <leader>B :GoBuild<CR>
+nnoremap <leader>R :GoRun<CR>
+
 "--- This is some standard stuff
 syntax on
 filetype plugin indent on
@@ -107,8 +112,10 @@ vmap <S-Tab> <`[v`]
 
 "--- this allows for some nice tab completion in insert mode
 "#   shift-tab for file completion  tab for variable completion
-imap <S-Tab> <C-x><C-f>
 imap <Tab> <C-n>
+
+" Going to try onmicompletion with tabs now
+inoremap `` <C-x><C-o>
 
 "inoremap <C-> <C-x><C-o>
 "---- make control-P insert the full path of the current file
