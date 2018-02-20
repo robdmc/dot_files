@@ -189,6 +189,7 @@ if [ "$unameType" == "$macType" ]; then
 
   # --- export the goroot directory
   export GOROOT=/usr/local/go
+  export GOPATH=$HOME/go
 
 # --- define linux specific stuff
 else
@@ -199,6 +200,7 @@ fi
 export PATH=$HOME/bin:$HOME/usr/bin:$PATH
 export PATH=$HOME/usr/python/bin:$PATH
 export PATH=$HOME/usr/node/bin:$PATH
+export PATH=$HOME/$GOPATH/bin:$PATH
 
 # --- default to making nose test be less chatty 
 export NOSE_NOLOGCAPTURE=1
