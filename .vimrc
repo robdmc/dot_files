@@ -11,8 +11,12 @@ set rtp+=$GOROOT/misc/vim
 "--- handle special case for golang
 autocmd FileType go setlocal nolist noexpandtab shiftwidth=4 softtabstop=4 tabstop=4
 
+"--- make it so omni complete closes when done
+autocmd CompleteDone * pclose
+
 "--- handle setups for golang
 let g:go_auto_type_info = 1
+let g:go_fmt_fail_silently = 1
 nnoremap <leader>B :GoBuild<CR>
 nnoremap <leader>R :GoRun<CR>
 
