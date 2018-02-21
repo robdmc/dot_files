@@ -127,6 +127,11 @@ alias pdbrc='vim .pdbrc'
 alias govagrant='(cd /Users/rob/rob/vagrant_boxes/ambition-vagrant; vagrant ssh -- -A)'
 alias upvagrant='(cd /Users/rob/rob/vagrant_boxes/ambition-vagrant && git pull upstream master && vagrant up)'
 alias downvagrant='(cp /Users/rob/rob/vagrant_boxes/ambition-vagrant/shared_ambition_vagrant/.bash_history `date +"/Users/rob/vagrant_history_files/vagrant_bash_history_%FT%H-%M-%S"`);  (cd /Users/rob/rob/vagrant_boxes/ambition-vagrant && vagrant halt)'
+alias gm1='ssh -p 2221 rob@miner1'
+alias gm2='ssh -p 2222 rob@miner2'
+alias gm1r='ssh -p 2221 rob@minerr'
+alias gm2r='ssh -p 2222 rob@minerr'
+
 function vimf() (
     # declare shortcuts for vimf
     declare -A lookup
