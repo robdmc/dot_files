@@ -185,6 +185,9 @@ if [ "$unameType" == "$macType" ]; then
   export PATH=/opt/local/libexec/gnubin/:$PATH
   export PATH=.:/opt/local/bin:/opt/local/sbin:$PATH
 
+  # --- locally running python env
+  export PATH=/env/base/bin:$PATH
+
   # --- homebrew directories (in case they exist)
   export PATH=/usr/local/bin:$PATH
 
