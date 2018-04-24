@@ -185,11 +185,12 @@ if [ "$unameType" == "$macType" ]; then
   export PATH=/opt/local/libexec/gnubin/:$PATH
   export PATH=.:/opt/local/bin:/opt/local/sbin:$PATH
 
+  # --- homebrew directories (in case they exist)
+  export PATH=/usr/local/bin:$PATH
+
   # --- locally running python env
   export PATH=/env/base/bin:$PATH
 
-  # --- homebrew directories (in case they exist)
-  export PATH=/usr/local/bin:$PATH
 
   # --- add path element to use proper version of postgres
   export PGDATA="/Users/rob/Library/Application Support/Postgres/var-9.4/"
