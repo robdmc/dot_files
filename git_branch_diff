@@ -36,11 +36,12 @@ if args.example:
         'Run a git diff on local_file.py to see diffs between current local branch and develop of your fork',
         '    git_branch_diff local_file.py -b origin/develop',
     ]
-    print '\n' + '\n'.join(msg_lines) + '\n'
+    print('\n' + '\n'.join(msg_lines) + '\n')
     sys.exit(0)
 
 # --- get the info on the local branch and file if any
 branch_lines = subprocess.Popen(['bash', '-c', 'git branch'], stdout=subprocess.PIPE).stdout.readlines()
+branch_lines = [s.decode() for s in branch_lines]
 if not branch_lines:
     sys.exit(1)
 local_branch = [s.split()[1] for s in branch_lines if s[0] == '*'][0]
@@ -52,7 +53,7 @@ file_cmd = 'git diff {b}:$(git rev-parse --show-prefix){f} {f}'.format(b=args.br
 cmd = file_cmd if args.file else branch_cmd
 
 # --- print info
-print '\nComparing:  {rb}{f}   {lb}{f}\n'.format(rb=args.branch, lb=local_branch, f=pathed_file)
+print('\nComparing:  {rb}{f}   {lb}{f}\n'.format(rb=args.branch, lb=local_branch, f=pathed_file))
 
 # --- run the diff
 p = subprocess.Popen(['bash', '-c', cmd])
