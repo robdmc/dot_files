@@ -75,7 +75,7 @@
  set -o vi
  
  # --- save history after each command only if this an interactive shell
- if [ SHELL_IS_INTERACTIVE == 1 ]; then 
+ if [ $SHELL_IS_INTERACTIVE -eq 1 ]; then 
      export PROMPT_COMMAND="history -a; history -c; history -r;"
  fi
  

@@ -119,7 +119,7 @@ vmap <S-Tab> <`[v`]
 imap <Tab> <C-n>
 
 " Going to try onmicompletion with tabs now
-inoremap `` <C-x><C-o>
+" inoremap `` <C-x><C-o>
 
 "inoremap <C-> <C-x><C-o>
 "---- make control-P insert the full path of the current file
