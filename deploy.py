@@ -64,7 +64,7 @@ execFileList = [
 
 # --- link all exec files to $HOME/bin
 for execFile in execFileList:
-    cmd =  "cd ~/bin; ln -sf ~/dot_files/{} .".format(execFile)
+    cmd = "cd ~/bin; ln -sf ~/dot_files/{} .".format(execFile)
     print(cmd)
     os.system(cmd)
 
