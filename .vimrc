@@ -116,6 +116,7 @@ vmap <S-Tab> <`[v`]
 
 "--- this allows for some nice tab completion in insert mode
 "#   shift-tab for file completion  tab for variable completion
+imap <S-Tab> <C-x><C-f>
 imap <Tab> <C-n>
 
 " Going to try onmicompletion with tabs now
