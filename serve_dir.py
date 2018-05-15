@@ -28,13 +28,13 @@ if ngrok_domains:
 
 # start a python simpleserver on pwd
 cmd = 'python -mSimpleHTTPServer {}'.format(args.port)
-print cmd
+print(cmd)
 p1 = subprocess.Popen(['bash', '-c', cmd])
 time.sleep(1)
 
 # start an ngrok server pointed at the simpleserver port
 cmd = 'ngrok http -subdomain {} {}'.format(args.domain, args.port)
-print cmd
+print(cmd)
 p2 = subprocess.Popen(['bash', '-c', cmd])
 
 # will need to hit ctrl-c twice to exit out of this
