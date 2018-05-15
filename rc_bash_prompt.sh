@@ -1,6 +1,9 @@
  # Requires that environment variable OS_TYPE  be set
  # Requires parse_git_branch function be defined
 
+ # ---  SEE THE FOLLOWING REFERENCE FOR HOW TO CHANGE BASH PROMPT
+ #http://news.softpedia.com/news/How-to-Customize-the-Shell-Prompt-40033.shtml
+
  # define some color escape codes
  grey='\[\033[1;30m\]'
  red='\[\033[0;31m\]'
