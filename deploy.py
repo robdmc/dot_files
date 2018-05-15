@@ -8,25 +8,74 @@ FILE_PATH = os.path.dirname(__file__)
 
 
 class Deploy(object):
+    # (source, target)
     FILES_TO_LINK = [
-        '.bash_profile',
-        '.bashrc',
-        '.inputrc',
-        '.vim',
-        '.vimrc',
-        '.ideavimrc',
-        '.ackrc',
-        '.ctags',
-        'rcconda.sh',
+        # Dot files
+        ('~/dot_files/.bash_profile', '~/.bash_profile'),
+        ('~/dot_files/.bashrc', '~/.bashrc'),
+        ('~/dot_files/.inputrc', '~/.inputrc'),
+        ('~/dot_files/.vim', '~/.vim'),
+        ('~/dot_files/.vimrc', '~/.vimrc'),
+        ('~/dot_files/.ideavimrc', '~/.ideavimrc'),
+        ('~/dot_files/.ackrc', '~/.ackrc'),
+        ('~/dot_files/.ctags', '~/.ctags'),
+        ('~/dot_files/rcconda.sh', '~/rcconda.sh'),
+        ('~/dot_files/gitignore_global', '~/.gitignore_global')
+        ('~/dot_files/flake8', '~/.config/flake8')
+
+        # Executables
+        ('~/dot_files/git_diff_wrapper', '~/bin/git_diff_wrapper'),
+        ('~/dot_files/git_branch_diff', '~/bin/git_branch_diff'),
+        ('~/dot_files/circle_checker', '~/bin/circle_checker'),
+        ('~/dot_files/serve_dir.py', '~/bin/serve_dir.py'),
+        ('~/dot_files/imgcat', '~/bin/imgcat'),
+        ('~/dot_files/make_tags', '~/bin/make_tags'),
+        ('~/dot_files/clean_vim_backup.py', '~/bin/clean_vim_backup.py'),
+        ('~/dot_files/diffconflicts', '~/bin/diffconflicts'),
+        ('~/dot_files/myip', '~/bin/myip'),
+
     ]
 
-    def __init__(self, kind, dry_run=False):
+    PATHS_TO_CREATE = [
+        '~/bin',
+        '~/.undodir',
+        '~/.config',
+    ]
+
+    def __init__(self, kind, dry_run=False, use_gnu_tools=True):
         self.kind = kind
         self.dry_run = dry_run
+        self.use_gnu_tools = True
+
+    def run(self):
+        self.create_paths()
+        self.make_file_links()
+        self.make_git_config()
+        self.ensure_bash_history()
+
+    def create_paths(self):
+        for path in self.PATHS_TO_CREATE:
+            path = os.path.expanduser(path)
+            if not os.path.isdir(path):
+                if self.dry_run:
+                    print('mkdir -p {}'.format(path))
+                else:
+                    os.makedirs(path)
 
     def make_file_links(self):
-        for file_name in self.FILES_TO_LINK:
-            cmd = 'cd ~; ln -sf ./dot_files/{} .'.format(file_name)
+        for (source_name, target_name) in self.FILES_TO_LINK:
+            src = os.path.expanduser(source_name)
+            tgt = os.path.expanduser(target_name)
+            cmd = 'ln -sf {src} {tgt}'.format(src=src, tgt=tgt)
+
+            print(cmd)
+            if not self.dry_run:
+                os.system(cmd)
+
+    def ensure_bash_history(self):
+        history_file = os.path.isfile(os.path.expanduser('~/.bash_history'))
+        if not os.path.isfile(history_file):
+            cmd = 'cp ~/dot_files/fake_bash_history {}'.format(history_file)
             print(cmd)
             if not self.dry_run:
                 os.system(cmd)
@@ -53,77 +102,14 @@ class Deploy(object):
         with open(os.path.join(FILE_PATH, 'gitconfig_template')) as f:
             template = f.read()
             contents = template.format(**context)
-        print(contents)
 
+        if self.dry_run:
+            print('=' * 40 + ' .git_config ' + '=' * 40)
+            print(contents)
+            print('=' * 40 + ' end .git_config ' + '=' * 40)
+        else:
+            with open(os.path.expanduser('~/.gitconfig', 'w')) as out:
+                out.write(contents)
 
-
-
-deploy = Deploy('generic', dry_run=True)
-deploy.make_git_config()
-
-
-
-
-
-
-
-
-
-## --- link the .gitconfig file
-#cmd = "cd ~; ln -sf ./dot_files/gitconfig .gitconfig"
-#print(cmd)
-#os.system(cmd)
-#
-## --- link the .gitignore file
-#cmd = "cd ~; ln -sf ./dot_files/gitignore_global .gitignore_global"
-#print(cmd)
-#os.system(cmd)
-#
-#
-## --- if a home/bin directory doesnt exist, create it
-#binDir = os.path.join(os.environ['HOME'], 'bin')
-#if not os.path.isdir(binDir):
-#    print('mkdir %s' % binDir)
-#    os.makedirs(binDir)
-#
-## --- make an undo dir
-#undo_dir = os.path.join(os.environ['HOME'], '.undodir')
-#if not os.path.isdir(undo_dir):
-#    print('mkdir %s' % undo_dir)
-#    os.makedirs(undo_dir)
-#
-## --- create a list of executable files to link
-#execFileList = [
-#    'git_diff_wrapper',
-#    'git_branch_diff',
-#    'circle_checker',
-#    'serve_dir.py',
-#    'imgcat',
-#    'make_tags',
-#    'clean_vim_backup.py',
-#    'diffconflicts',
-#    'myip',
-#]
-#
-## --- link all exec files to $HOME/bin
-#for execFile in execFileList:
-#    cmd = "cd ~/bin; ln -sf ~/dot_files/{} .".format(execFile)
-#    print(cmd)
-#    os.system(cmd)
-#
-## --- if a home/.config directory doesnt exist, create it
-#binDir = os.path.join(os.environ['HOME'], '.config')
-#if not os.path.isdir(binDir):
-#    print('mkdir %s' % binDir)
-#    os.makedirs(binDir)
-#
-## --- link the git flake8 config file
-#cmd = "cd ~/.config; ln -sf ~/dot_files/flake8 ."
-#print(cmd)
-#os.system(cmd)
-#
-## --- create a bash_history file if it doesn't exist
-#if not os.path.isfile(os.path.join(os.environ['HOME'], '.bash_history')):
-#    cmd = 'cp fake_bash_history {}/.bash_history'.format(os.environ['HOME'])
-#    print(cmd)
-#    os.system(cmd)
+deploy = Deploy('generic', dry_run=True, use_gnu_tools=True)
+deploy.run()
