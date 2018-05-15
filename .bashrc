@@ -1,7 +1,7 @@
  export HISTCONTROL="ignoreboth:erasedups"
  # This entire file indented one line so history ignores it
 
- # --- Determine the way this shell is being run
+ # Determine the way this shell is being run
  if [[ -n $PS1 ]]; then
      : # These are executed only for interactive shells
      SHELL_IS_INTERACTIVE=1
@@ -16,6 +16,18 @@
  else
      : # Only when it is NOT a login shell
      SHELL_IS_LOGIN=0
+ fi
+
+
+ # Determine the type of os being run 
+ # uname_type=$(uname)  DELETE DELETE
+ # mac_type="Darwin" DELETE DELETE
+ if [ "$(uname)" == "Darwin"]; then 
+     # This indicates running on a mac
+     export OS_TYPE="mac"
+ else
+     # This indicates running on some type of linux
+     export OS_TYPE="linux"
  fi
  
  
