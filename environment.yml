@@ -19,5 +19,6 @@ dependencies:
         - pdvega
         - pandashells[full]
         - holoviews[all]
+        - easier
 
 

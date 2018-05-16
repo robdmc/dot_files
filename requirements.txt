@@ -9,4 +9,5 @@ pdvega
 altair
 sympy
 astropy
+easier
 
