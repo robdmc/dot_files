@@ -29,9 +29,9 @@
  fi
 
  # --- add pwd and home bin area to path
- export PATH=$HOME/usr/python/bin:$PATH
  export PATH=$HOME/usr/node/bin:$PATH
  export PATH=$HOME/$GOPATH/bin:$PATH
- export PATH=$HOME/bin:$HOME/usr/bin:$PATH
+ export PATH=$HOME/env/bin:$PATH
+ export PATH=$HOME/bin:$PATH
  export PATH=./:$PATH
 
