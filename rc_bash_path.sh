@@ -31,7 +31,7 @@
  # --- add pwd and home bin area to path
  export PATH=$HOME/usr/node/bin:$PATH
  export PATH=$HOME/$GOPATH/bin:$PATH
- export PATH=$HOME/env/bin:$PATH
+ export PATH=$HOME/env/base/bin:$PATH
  export PATH=$HOME/bin:$PATH
  export PATH=./:$PATH
 
