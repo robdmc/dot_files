@@ -49,3 +49,15 @@
         . "$1"
      fi
  }
+
+ # Function to source all files in a directory
+ function source_bash_hooks () { 
+     set +o history
+     if [ -d ~/bash_hooks ]; then
+         for hook in `ls ~/bash_hooks/*.sh`
+         do
+             source_if_exists $hook
+         done
+     fi
+     set -o history
+ }

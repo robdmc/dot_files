@@ -22,7 +22,7 @@
  # Determine the type of os being run 
  # uname_type=$(uname)  DELETE DELETE
  # mac_type="Darwin" DELETE DELETE
- if [ "$(uname)" == "Darwin"]; then 
+ if [ "$(uname)" == "Darwin" ]; then 
      export OS_TYPE="mac"
  else
      # This indicates running on some type of linux
@@ -93,5 +93,8 @@
      fi
  fi
  
- # --- if history file doesn't exist, create it
+ # If history file doesn't exist, create it
  touch .bash_history
+
+ # Source all existig bash hooks defined by ~/bash_hooks/*.sh
+ source_bash_hooks
