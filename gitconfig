@@ -25,10 +25,12 @@
     track = "!f() { git branch --track $(basename $1)  $1; } ; f"
 [push]
 	default = current
-[github]
-	user = robdmc
 [mergetool "diffconflicts"]
 	cmd = diffconflicts vim $BASE $LOCAL $REMOTE $MERGED
 	trustExitCode = true
 [mergetool]
 	keepBackup = false
+
+[github]
+    user = robdmc
+

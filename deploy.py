@@ -20,8 +20,8 @@ class Deploy(object):
         ('~/dot_files/.ackrc', '~/.ackrc'),
         ('~/dot_files/.ctags', '~/.ctags'),
         ('~/dot_files/rcconda.sh', '~/rcconda.sh'),
-        ('~/dot_files/gitignore_global', '~/.gitignore_global')
-        ('~/dot_files/flake8', '~/.config/flake8')
+        ('~/dot_files/gitignore_global', '~/.gitignore_global'),
+        ('~/dot_files/flake8', '~/.config/flake8'),
 
         # Executables
         ('~/dot_files/git_diff_wrapper', '~/bin/git_diff_wrapper'),
@@ -73,7 +73,7 @@ class Deploy(object):
                 os.system(cmd)
 
     def ensure_bash_history(self):
-        history_file = os.path.isfile(os.path.expanduser('~/.bash_history'))
+        history_file = os.path.expanduser('~/.bash_history')
         if not os.path.isfile(history_file):
             cmd = 'cp ~/dot_files/fake_bash_history {}'.format(history_file)
             print(cmd)
@@ -108,8 +108,8 @@ class Deploy(object):
             print(contents)
             print('=' * 40 + ' end .git_config ' + '=' * 40)
         else:
-            with open(os.path.expanduser('~/.gitconfig', 'w')) as out:
+            with open(os.path.expanduser('~/.gitconfig'), 'w') as out:
                 out.write(contents)
 
-deploy = Deploy('generic', dry_run=True, use_gnu_tools=True)
+deploy = Deploy('personal')
 deploy.run()

@@ -3,9 +3,12 @@
  alias dirs='dirs -v'
 
  # Only alias the ls command if it doesn't fail
- ls --color=tty > /dev/null
+ ls --color=tty >&/dev/null
  if [ $? -eq 0 ]; then
      alias ls=' ls --color=tty' 
+ else
+     export CLICOLOR=1
+     export LSCOLORS=GxFxCxDxBxegedabagaced
  fi
 
  # Specific to my day job

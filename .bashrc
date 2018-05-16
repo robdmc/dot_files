@@ -1,4 +1,4 @@
- export HISTCONTROL="ignoreboth:erasedups"
+export HISTCONTROL="ignoreboth:erasedups"
  # This entire file indented one line so history ignores it
 
  # Determine the way this shell is being run
@@ -27,6 +27,13 @@
  else
      # This indicates running on some type of linux
      export OS_TYPE="linux"
+ fi
+
+ # Determine if brew is installd
+ if [ -x "$(command -v brew)" ]; then
+     export HAS_BREW=1
+ else
+     export HAS_BREW=0
  fi
 
  # Source the functions file.
@@ -88,8 +95,10 @@
  
  # Setup bash completion (for git)
  if [ "$OS_TYPE" == "mac" ]; then 
-     if [ -f $(brew --prefix)/etc/bash_completion ]; then
-         . $(brew --prefix)/etc/bash_completion
+     if [ "$HAS_BREW" -eq 1 ]; then 
+         if [ -f $(brew --prefix)/etc/bash_completion ]; then
+             . $(brew --prefix)/etc/bash_completion
+         fi
      fi
  fi
  
