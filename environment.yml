@@ -1,0 +1,23 @@
+# Run this to create: conda env create --force -f environment.yml
+name: viz
+channels:
+    - conda-forge
+dependencies:
+    - python=3.6
+    - datashader
+    - numpy
+    - scipy
+    - scikit-learn
+    - jupyterlab
+    - scipy
+    - statsmodels
+    - sympy
+    - astropy
+
+    - pip:
+        - altair
+        - pdvega
+        - pandashells[full]
+        - holoviews[all]
+
+

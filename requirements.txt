@@ -1,0 +1,12 @@
+pandashells[full]
+holoviews[all]
+scipy
+scikit-learn
+jupyterlab
+scipy
+statsmodels
+pdvega
+altair
+sympy
+astropy
+
