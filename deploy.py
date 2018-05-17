@@ -1,8 +1,9 @@
 #! /usr/bin/env python
 
 from __future__ import print_function
-import textwrap
+import argparse
 import os
+import textwrap
 
 FILE_PATH = os.path.dirname(__file__)
 
@@ -42,10 +43,9 @@ class Deploy(object):
         '~/.config',
     ]
 
-    def __init__(self, kind, dry_run=False, use_gnu_tools=True):
+    def __init__(self, kind, dry_run=False):
         self.kind = kind
         self.dry_run = dry_run
-        self.use_gnu_tools = True
 
     def run(self):
         self.create_paths()
@@ -111,5 +111,31 @@ class Deploy(object):
             with open(os.path.expanduser('~/.gitconfig'), 'w') as out:
                 out.write(contents)
 
-deploy = Deploy('personal')
-deploy.run()
+
+if __name__ == '__main__':
+
+    msg = textwrap.dedent("""Deploy dotfiles""")
+    parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter, description=msg)
+
+    parser.add_argument(
+        '-g', '--generic', dest='generic', action='store_true', default=False,
+        help='Use generic gitconfig when deploying dotfiles')
+
+    parser.add_argument(
+        '-v', '--venv', dest='venv', action='store_true', default=False,
+        help='Don\'t deploy.  Just install default virtualenv at ~/envs/base')
+
+    parser.add_argument(
+        '-c', '--conda', dest='conda', action='store_true', default=False,
+        help='Don\'t deploy.  Just create the "viz" conda environment')
+
+    args = parser.parse_args()
+
+print("""
+i want to see if I can automatically install latest conda
+
+""")
+
+
+#deploy = Deploy('personal')
+#deploy.run()
