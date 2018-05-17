@@ -53,7 +53,7 @@
  # Function to source all files in a directory
  function source_bash_hooks () { 
      set +o history
-     if [ -d ~/bash_hooks ]; then
+     if compgen -G "$HOME/bash_hooks/*.sh" > /dev/null; then
          for hook in `ls ~/bash_hooks/*.sh`
          do
              source_if_exists $hook
