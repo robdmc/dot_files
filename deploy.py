@@ -4,6 +4,7 @@ from __future__ import print_function
 import argparse
 import os
 import textwrap
+import tempfile
 
 FILE_PATH = os.path.dirname(__file__)
 
@@ -56,14 +57,60 @@ class Deploy(object):
     def build_base_env(self):
         raise NotImplementedError('need to write this')
 
+    def install_miniconda(self):
+        command_list = []
+        tmp_dir = '/tmp'
+        if os.environ['OS_TYPE'] == 'mac':
+            script_name = 'Miniconda3-latest-MacOSX-x86_64.sh'
+        elif os.environ['OS_TYPE'] == 'linux':
+            script_name = 'Miniconda3-latest-Linux-x86_64.sh'
+        else:
+            raise ValueError('Unrecognized OS')
+
+        url = os.path.join(
+            'http://repo.continuum.io/miniconda',
+            script_name,
+        )
+        downloaded_file = os.path.join(tmp_dir, 'miniconda.sh')
+
+        cmd = 'wget {} -O {}'.format(url, downloaded_file)
+        command_list.append(cmd)
+
+        cmd = 'bash {} -b -p "$HOME/miniconda"'.format(downloaded_file)
+        command_list.append(cmd)
+
+        cmd = 'rm {}'.format(downloaded_file)
+        command_list.append(cmd)
+
+        for cmd in command_list:
+            print(cmd)
+            if not self.dry_run:
+                os.system(cmd)
+
     def build_conda_env(self):
         rc_file = os.path.expanduser('~/rcconda.sh')
         env_file = os.path.expanduser('~/dot_files/environment.yml')
+
+        command_list = []
         cmd = '. {} && conda env create --force -f {}'.format(
             rc_file,
             env_file
         )
-        os.system(cmd)
+        command_list.append(cmd)
+
+        cmd = 'mkdir -p "$HOME/bash_hooks"'
+        command_list.append(cmd)
+
+        cmd = 'ln -sf ~/dot_files/viz_init.sh  "$HOME/bash_hooks"'
+        command_list.append(cmd)
+
+        cmd = 'jupyter labextension install @pyviz/jupyterlab_holoviews'
+        command_list.append(cmd)
+
+        for cmd in command_list:
+            print(cmd)
+            if not self.dry_run:
+                os.system(cmd)
 
     def create_paths(self):
         for path in self.PATHS_TO_CREATE:
@@ -133,6 +180,10 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter, description=msg)
 
     parser.add_argument(
+        '-d', '--dry-run', dest='dry_run', action='store_true', default=False,
+        help='Use with any other flag to not do anythin, just print commands')
+
+    parser.add_argument(
         '-g', '--generic', dest='generic', action='store_true', default=False,
         help='Use generic gitconfig when deploying dotfiles')
 
@@ -144,17 +195,25 @@ if __name__ == '__main__':
         '-c', '--conda', dest='conda', action='store_true', default=False,
         help='Don\'t deploy.  Just create the "viz" conda environment')
 
+    parser.add_argument(
+        '--miniconda', dest='miniconda', action='store_true', default=False,
+        help='Download and install miniconda')
+
     args = parser.parse_args()
 
     # Determine what type of deployment was requested
     if args.generic:
-        deploy = Deploy('generic')
+        deploy = Deploy('generic', args.dry_run)
     else:
-        deploy = Deploy('personal')
+        deploy = Deploy('personal', args.dry_run)
 
     # Only build the conda env
     if args.conda:
         deploy.build_conda_env()
+
+    # Only install Miniconda
+    elif args.miniconda:
+        deploy.install_miniconda()
 
     # Only build the base env
     elif args.venv:

@@ -20,5 +20,6 @@ dependencies:
         - pandashells[full]
         - holoviews[all]
         - easier
+        - pymc3
 
 
