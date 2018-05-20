@@ -13,24 +13,21 @@
    export MANPATH="/usr/local/opt/gnu-tar/libexec/gnuman:$MANPATH"
    export MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"
 
-   # --- Homebrew directories
+   #  Homebrew directories
    export PATH=/usr/local/bin:$PATH
  
-   # --- Locally running python env
-   export PATH=/env/base/bin:$PATH
- 
-   ## --- add path element to use proper version of postgres
+   ##  add path element to use proper version of postgres
    # export PGDATA="/Users/rob/Library/Application Support/Postgres/var-9.4/"
    # export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
  
-   ## --- export the goroot directory
+   ##  export the goroot directory
    # export GOROOT=/usr/local/go
    # export GOPATH=$HOME/go
  fi
 
- # --- add pwd and home bin area to path
- export PATH=$HOME/usr/node/bin:$PATH
- export PATH=$HOME/$GOPATH/bin:$PATH
+ #  add pwd and home bin area to path
+ # export PATH=$HOME/usr/node/bin:$PATH
+ # export PATH=$HOME/$GOPATH/bin:$PATH
  export PATH=$HOME/envs/base/bin:$PATH
  export PATH=$HOME/bin:$PATH
  export PATH=./:$PATH

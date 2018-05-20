@@ -53,6 +53,18 @@ class Deploy(object):
         self.make_git_config()
         self.ensure_bash_history()
 
+    def build_base_env(self):
+        raise NotImplementedError('need to write this')
+
+    def build_conda_env(self):
+        rc_file = os.path.expanduser('~/rcconda.sh')
+        env_file = os.path.expanduser('~/dot_files/environment.yml')
+        cmd = '. {} && conda env create --force -f {}'.format(
+            rc_file,
+            env_file
+        )
+        os.system(cmd)
+
     def create_paths(self):
         for path in self.PATHS_TO_CREATE:
             path = os.path.expanduser(path)
@@ -92,12 +104,15 @@ class Deploy(object):
                     """
                 )
             )
-        else:
+        elif self.kind == 'generic':
             context = dict(
                 name='Generic User',
                 email='generic@user.net',
                 github_user_spec='',
             )
+
+        else:
+            raise ValueError('"kind" must be in ["personal", "generic"]')
 
         with open(os.path.join(FILE_PATH, 'gitconfig_template')) as f:
             template = f.read()
@@ -131,10 +146,25 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-print("""
-i want to see if I can automatically install latest conda
+    # Determine what type of deployment was requested
+    if args.generic:
+        deploy = Deploy('generic')
+    else:
+        deploy = Deploy('personal')
 
-""")
+    # Only build the conda env
+    if args.conda:
+        deploy.build_conda_env()
+
+    # Only build the base env
+    elif args.venv:
+        deploy.build_base_env()
+
+    # Do a general deployment
+    else:
+        deploy.run()
+
+
 
 
 #deploy = Deploy('personal')
