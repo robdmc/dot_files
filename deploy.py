@@ -83,6 +83,9 @@ class Deploy(object):
         cmd = 'python3 -m venv "$HOME/envs/base"'
         command_list.append(cmd)
 
+        cmd = '{}  && pip install -U pip'.format(act)
+        command_list.append(cmd)
+
         cmd = '{}  && pip install numpy'.format(act)
         command_list.append(cmd)
 
