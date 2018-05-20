@@ -4,7 +4,6 @@ from __future__ import print_function
 import argparse
 import os
 import textwrap
-import tempfile
 
 FILE_PATH = os.path.dirname(__file__)
 
@@ -45,19 +44,60 @@ class Deploy(object):
     ]
 
     def __init__(self, kind, dry_run=False):
+        """
+        kind: either 'generic' or 'personal'
+        dry_run: boolean designating whether or not this is a dry run
+        """
         self.kind = kind
         self.dry_run = dry_run
 
     def run(self):
+        """
+        The main run script for deploying (doesn't include python stuff)
+        """
         self.create_paths()
         self.make_file_links()
         self.make_git_config()
         self.ensure_bash_history()
 
+    def _run_commands(self, command_list):
+        """
+        A utility function for running a list of commands
+        """
+        for cmd in command_list:
+            print(cmd)
+            if not self.dry_run:
+                os.system(cmd)
+
     def build_base_env(self):
-        raise NotImplementedError('need to write this')
+        """
+        Builds a python3 virtualenv at ~/envs/base and installs requirements.
+        """
+        command_list = []
+        act = '. "$HOME/envs/base/bin/activate"'
+        req = '"$HOME/dot_files/requirements.txt"'
+
+        cmd = 'mkdir -p "$HOME/envs"'
+        command_list.append(cmd)
+
+        cmd = 'python3 -m venv "$HOME/envs/base"'
+        command_list.append(cmd)
+
+        cmd = '{}  && pip install numpy'.format(act)
+        command_list.append(cmd)
+
+        cmd = '{} && pip install -r {}'.format(act, req)
+        command_list.append(cmd)
+
+        cmd = 'jupyter labextension install @pyviz/jupyterlab_holoviews'
+        command_list.append(cmd)
+
+        self._run_commands(command_list)
 
     def install_miniconda(self):
+        """
+        Install miniconda into ~/miniconda
+        """
         command_list = []
         tmp_dir = '/tmp'
         if os.environ['OS_TYPE'] == 'mac':
@@ -82,12 +122,12 @@ class Deploy(object):
         cmd = 'rm {}'.format(downloaded_file)
         command_list.append(cmd)
 
-        for cmd in command_list:
-            print(cmd)
-            if not self.dry_run:
-                os.system(cmd)
+        self._run_commands(command_list)
 
     def build_conda_env(self):
+        """
+        Builds a viz conda env with all analysis software
+        """
         rc_file = os.path.expanduser('~/rcconda.sh')
         env_file = os.path.expanduser('~/dot_files/environment.yml')
 
@@ -107,12 +147,12 @@ class Deploy(object):
         cmd = 'jupyter labextension install @pyviz/jupyterlab_holoviews'
         command_list.append(cmd)
 
-        for cmd in command_list:
-            print(cmd)
-            if not self.dry_run:
-                os.system(cmd)
+        self._run_commands(command_list)
 
     def create_paths(self):
+        """
+        Creates all paths for deployment
+        """
         for path in self.PATHS_TO_CREATE:
             path = os.path.expanduser(path)
             if not os.path.isdir(path):
@@ -122,6 +162,9 @@ class Deploy(object):
                     os.makedirs(path)
 
     def make_file_links(self):
+        """
+        Makes all symlinks for a deployment
+        """
         for (source_name, target_name) in self.FILES_TO_LINK:
             src = os.path.expanduser(source_name)
             tgt = os.path.expanduser(target_name)
@@ -132,6 +175,9 @@ class Deploy(object):
                 os.system(cmd)
 
     def ensure_bash_history(self):
+        """
+        Makes sure a .bash_history file exists
+        """
         history_file = os.path.expanduser('~/.bash_history')
         if not os.path.isfile(history_file):
             cmd = 'cp ~/dot_files/fake_bash_history {}'.format(history_file)
@@ -140,6 +186,9 @@ class Deploy(object):
                 os.system(cmd)
 
     def make_git_config(self):
+        """
+        Creates an appropriate gitconfig
+        """
         if self.kind == 'personal':
             context = dict(
                 name='Rob deCarvalho',
@@ -222,9 +271,3 @@ if __name__ == '__main__':
     # Do a general deployment
     else:
         deploy.run()
-
-
-
-
-#deploy = Deploy('personal')
-#deploy.run()

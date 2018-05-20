@@ -4,22 +4,21 @@ channels:
     - conda-forge
 dependencies:
     - python=3.6
+    - astropy
     - datashader
-    - numpy
-    - scipy
-    - scikit-learn
     - jupyterlab
+    - numpy
+    - scikit-learn
     - scipy
     - statsmodels
     - sympy
-    - astropy
 
     - pip:
         - altair
-        - pdvega
-        - pandashells[full]
-        - holoviews[all]
         - easier
+        - holoviews[all]
+        - pandashells[full]
+        - pdvega
         - pymc3
 
 
