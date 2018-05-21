@@ -14,8 +14,7 @@ def run(cmd, fail=True):
     """
     Syntactic sugar around running suprocesses
     """
-    p = subprocess.run(['bash', '-c', cmd])
-    if p.returncode and fail:
+    if os.system(cmd) != 0 and fail:
         sys.exit(1)
 
 
@@ -78,7 +77,6 @@ class Deploy(object):
         for cmd in command_list:
             print(cmd)
             if not self.dry_run:
-                #subprocess.call(cmd.split())
                 run(cmd)
 
     def build_base_env(self):
@@ -162,24 +160,18 @@ class Deploy(object):
         """
         Builds a viz conda env with all analysis software
         """
-        rc_file = os.path.expanduser('~/rcconda.sh')
-        env_file = os.path.expanduser('~/dot_files/environment.yml')
-
         command_list = []
 
         cmd = (
-            '/Users/rob/miniconda/bin/conda-env create --force -f {}'
-            #'PATH="$HOME/miniconda/bin/:$PATH" conda env create --force -f {}'
-        ).format(
-            rc_file,
-            env_file
+            'bash ~/dot_files/install_conda_env.sh'
         )
+
         command_list.append(cmd)
 
-        cmd = 'mkdir -p "$HOME/bash_hooks"'
+        cmd = 'mkdir -p ~/bash_hooks'
         command_list.append(cmd)
 
-        cmd = 'ln -sf ~/dot_files/viz_init.sh  "$HOME/bash_hooks"'
+        cmd = 'ln -sf ~/dot_files/viz_init.sh  ~/bash_hooks'
         command_list.append(cmd)
 
         self._run_commands(command_list)
