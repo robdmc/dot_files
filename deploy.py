@@ -107,11 +107,10 @@ class Deploy(object):
         self._install_jupyter_lab_extension()
 
     def _install_jupyter_lab_extension(self, with_conda=False):
+        #TODO The conda branch of this does not work properly
         if with_conda:
             cmd = (
-                'source $HOME/miniconda/bin/activate &&'
-                'source activate viz && '
-                'jupyter labextension install @pyviz/jupyterlab_holoviews'
+                '~/miniconda/envs/viz/bin/jupyter labextension install @pyviz/jupyterlab_holoviews'
             )
         else:
             cmd = 'jupyter labextension install @pyviz/jupyterlab_holoviews'
@@ -160,23 +159,23 @@ class Deploy(object):
         """
         Builds a viz conda env with all analysis software
         """
-        command_list = []
+        #command_list = []
 
-        cmd = (
-            'bash ~/dot_files/install_conda_env.sh'
-        )
+        #cmd = (
+        #    'bash ~/dot_files/install_conda_env.sh'
+        #)
 
-        command_list.append(cmd)
+        #command_list.append(cmd)
 
-        cmd = 'mkdir -p ~/bash_hooks'
-        command_list.append(cmd)
+        #cmd = 'mkdir -p ~/bash_hooks'
+        #command_list.append(cmd)
 
-        cmd = 'ln -sf ~/dot_files/viz_init.sh  ~/bash_hooks'
-        command_list.append(cmd)
+        #cmd = 'ln -sf ~/dot_files/viz_init.sh  ~/bash_hooks'
+        #command_list.append(cmd)
 
-        self._run_commands(command_list)
+        #self._run_commands(command_list)
 
-        self._install_jupyter_lab_extension()
+        self._install_jupyter_lab_extension(with_conda=True)
 
     def create_paths(self):
         """
