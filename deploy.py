@@ -3,9 +3,9 @@
 from __future__ import print_function
 import argparse
 import os
+import subprocess
 import sys
 import textwrap
-import subprocess
 
 FILE_PATH = os.path.dirname(__file__)
 
