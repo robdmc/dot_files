@@ -10,6 +10,15 @@ import textwrap
 FILE_PATH = os.path.dirname(__file__)
 
 
+def run(cmd, fail=True):
+    """
+    Syntactic sugar around running suprocesses
+    """
+    p = subprocess.run(['bash', '-c', cmd])
+    if p.returncode and fail:
+        sys.exit(1)
+
+
 class Deploy(object):
     # (source, target)
     FILES_TO_LINK = [
@@ -69,7 +78,8 @@ class Deploy(object):
         for cmd in command_list:
             print(cmd)
             if not self.dry_run:
-                os.system(cmd)
+                #subprocess.call(cmd.split())
+                run(cmd)
 
     def build_base_env(self):
         """
@@ -98,8 +108,15 @@ class Deploy(object):
 
         self._install_jupyter_lab_extension()
 
-    def _install_jupyter_lab_extension(self):
-        cmd = 'jupyter labextension install @pyviz/jupyterlab_holoviews'
+    def _install_jupyter_lab_extension(self, with_conda=False):
+        if with_conda:
+            cmd = (
+                'source $HOME/miniconda/bin/activate &&'
+                'source activate viz && '
+                'jupyter labextension install @pyviz/jupyterlab_holoviews'
+            )
+        else:
+            cmd = 'jupyter labextension install @pyviz/jupyterlab_holoviews'
         print(cmd)
         try:
             subprocess.call(cmd.split())
@@ -149,7 +166,11 @@ class Deploy(object):
         env_file = os.path.expanduser('~/dot_files/environment.yml')
 
         command_list = []
-        cmd = '. {} && conda env create --force -f {}'.format(
+
+        cmd = (
+            '/Users/rob/miniconda/bin/conda-env create --force -f {}'
+            #'PATH="$HOME/miniconda/bin/:$PATH" conda env create --force -f {}'
+        ).format(
             rc_file,
             env_file
         )
@@ -184,11 +205,13 @@ class Deploy(object):
         for (source_name, target_name) in self.FILES_TO_LINK:
             src = os.path.expanduser(source_name)
             tgt = os.path.expanduser(target_name)
+            if os.path.isfile(tgt):
+                run('rm {}'.format(tgt))
             cmd = 'ln -sf {src} {tgt}'.format(src=src, tgt=tgt)
 
             print(cmd)
             if not self.dry_run:
-                os.system(cmd)
+                run(cmd)
 
     def ensure_bash_history(self):
         """
@@ -199,7 +222,7 @@ class Deploy(object):
             cmd = 'cp ~/dot_files/fake_bash_history {}'.format(history_file)
             print(cmd)
             if not self.dry_run:
-                os.system(cmd)
+                run(cmd)
 
     def make_git_config(self):
         """
