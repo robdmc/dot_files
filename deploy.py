@@ -3,7 +3,9 @@
 from __future__ import print_function
 import argparse
 import os
+import sys
 import textwrap
+import subprocess
 
 FILE_PATH = os.path.dirname(__file__)
 
@@ -89,10 +91,20 @@ class Deploy(object):
         cmd = '{} && pip install -r {}'.format(act, req)
         command_list.append(cmd)
 
-        cmd = 'jupyter labextension install @pyviz/jupyterlab_holoviews'
-        command_list.append(cmd)
-
         self._run_commands(command_list)
+
+        self._install_jupyter_lab_extension()
+
+    def _install_jupyter_lab_extension(self):
+        cmd = 'jupyter labextension install @pyviz/jupyterlab_holoviews'
+        try:
+            subprocess.call([cmd])
+        except OSError:
+            sys.stderr.write(
+                '\n\nCould not find node or npm. '
+                'Everything except holoviews extension for jupyterlab '
+                'should be okay.\n\n'
+            )
 
     def install_miniconda(self):
         """
@@ -144,10 +156,9 @@ class Deploy(object):
         cmd = 'ln -sf ~/dot_files/viz_init.sh  "$HOME/bash_hooks"'
         command_list.append(cmd)
 
-        cmd = 'jupyter labextension install @pyviz/jupyterlab_holoviews'
-        command_list.append(cmd)
-
         self._run_commands(command_list)
+
+        self._install_jupyter_lab_extension()
 
     def create_paths(self):
         """
