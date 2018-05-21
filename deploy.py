@@ -100,14 +100,16 @@ class Deploy(object):
 
     def _install_jupyter_lab_extension(self):
         cmd = 'jupyter labextension install @pyviz/jupyterlab_holoviews'
+        print(cmd)
         try:
-            subprocess.call([cmd])
+            subprocess.call(cmd.split())
         except OSError:
             sys.stderr.write(
                 '\n\nCould not find node or npm. '
                 'Everything except holoviews extension for jupyterlab '
                 'should be okay.\n\n'
             )
+            raise
 
     def install_miniconda(self):
         """
