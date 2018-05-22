@@ -61,6 +61,27 @@ class Deploy(object):
         self.kind = kind
         self.dry_run = dry_run
 
+    def clean(self):
+        targets = [t[1] for t in self.FILES_TO_LINK]
+        targets.extend([
+            '~/.gitconfig',
+        ])
+        command_list = []
+        for target in targets:
+            target = os.path.expanduser(target)
+            if not os.path.exists(target):
+                continue
+            if os.path.islink(target):
+                cmd = 'rm {}'.format(target)
+            else:
+                cmd = 'rm -rf {}'.format(target)
+
+            command_list.append(cmd)
+
+        self._run_commands(command_list)
+
+
+
     def run(self):
         """
         The main run script for deploying (doesn't include python stuff)
@@ -198,7 +219,7 @@ class Deploy(object):
             tgt = os.path.expanduser(target_name)
             if os.path.isfile(tgt):
                 run('rm {}'.format(tgt))
-            cmd = 'ln -sf {src} {tgt}'.format(src=src, tgt=tgt)
+            cmd = 'cp -r {src} {tgt}'.format(src=src, tgt=tgt)
 
             print(cmd)
             if not self.dry_run:
@@ -278,6 +299,10 @@ if __name__ == '__main__':
         '--miniconda', dest='miniconda', action='store_true', default=False,
         help='Download and install miniconda')
 
+    parser.add_argument(
+        '--clean', dest='clean', action='store_true', default=False,
+        help='Remove all dot files')
+
     args = parser.parse_args()
 
     # Determine what type of deployment was requested
@@ -297,6 +322,9 @@ if __name__ == '__main__':
     # Only build the base env
     elif args.venv:
         deploy.build_base_env()
+
+    elif args.clean:
+        deploy.clean()
 
     # Do a general deployment
     else:

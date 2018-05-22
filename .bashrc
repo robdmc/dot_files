@@ -107,18 +107,3 @@ export HISTCONTROL="ignoreboth:erasedups"
 
  # Source all existig bash hooks defined by ~/bash_hooks/*.sh
  source_bash_hooks
-
- set +o history                                                                               # __lamb_func__
- ############################################################################################ # __lamb_func__
- # THIS BLOCK OF CODE IS PROGRAMATICALLY MAINTAINED BY THE LAMB PACKAGE.  YOU CAN DELETE IT # __lamb_func__
- # IF YOU WISH, BUT OTHER THAN THAT, DON'T MANUALLY CHANGE ANYTHING ABOUT IT.                 # __lamb_func__
-                                                                                              # __lamb_func__
- lamb.init() {                                                                                # __lamb_func__
- . /Users/rob/lamb/env/bin/activate                                                           # __lamb_func__
- }                                                                                            # __lamb_func__
- export AMBITION_HOME=/Users/rob/rob/ambition_projects/projects/ambition                      # __lamb_func__
- export PATH="$PATH:/Users/rob/lamb/env/bin"                                                  # __lamb_func__
- . ~/lamb/secrets/dashboard_secrets.sh || 1                                                   # __lamb_func__
-                                                                                              # __lamb_func__
- ############################################################################################ # __lamb_func__
- set -o history # __lamb_func__                                                               # __lamb_func__
