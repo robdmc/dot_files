@@ -15,6 +15,7 @@ def run(cmd, fail=True):
     Syntactic sugar around running suprocesses
     """
     if os.system(cmd) != 0 and fail:
+        sys.stderr.write('\n\nFailed command:\n{}\n'.format(cmd))
         sys.exit(1)
 
 
