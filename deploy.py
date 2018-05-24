@@ -2,6 +2,7 @@
 
 from __future__ import print_function
 import argparse
+import datetime
 import os
 import subprocess
 import sys
@@ -87,6 +88,7 @@ class Deploy(object):
         """
         The main run script for deploying (doesn't include python stuff)
         """
+        self.archive_bashrc()
         self.create_paths()
         self.make_file_links()
         self.make_git_config()
@@ -100,6 +102,19 @@ class Deploy(object):
             print(cmd)
             if not self.dry_run:
                 run(cmd)
+
+    def archive_bashrc(self):
+        bashrc = os.path.expanduser('~/.bashrc')
+        if os.path.isfile(bashrc):
+            now = datetime.datetime.now()
+            date_str = now.strftime('%Y-%m-%dT%H.%M.%S.%f')
+            archive_base_name = '._bashrc_{}'.format(date_str)
+            archive_name = os.path.expanduser('~/{}'.format(archive_base_name))
+            cmd = 'cp {} {}'.format(bashrc, archive_name)
+            print(cmd)
+            if not self.dry_run:
+                run(cmd)
+
 
     def build_base_env(self):
         """
