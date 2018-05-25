@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 
 from __future__ import print_function
+from tempfile import NamedTemporaryFile
 import argparse
 import datetime
 import os
@@ -11,13 +12,38 @@ import textwrap
 FILE_PATH = os.path.dirname(__file__)
 
 
-def run(cmd, fail=True):
+def run(cmd, fail=True, capture_stdout=False, capture_stderr=False, verbose=False):
     """
-    Syntactic sugar around running suprocesses
+    Provides syntactic sugar around running a bash command as a subprocess
+    :param cmd:  The command to run
+    :param fail: Halt execution if bash command returns an error
+    :param capture_stdout:  Capture standard out
+    :param capture_stderr:  Capture standard error
+    :param verbose:  Print the command before running
+    :return:  A completed process object, p, on which you can execute p.stdout.read().decode(), etc,
     """
-    if os.system(cmd) != 0 and fail:
-        sys.stderr.write('\n\nFailed command:\n{}\n'.format(cmd))
+    stdout, stderr = None, None
+    if capture_stderr:
+        stderr = subprocess.PIPE
+    if capture_stdout:
+        stdout = subprocess.PIPE
+
+    if verbose:
+        print(cmd)
+
+    p = subprocess.run(['bash', '-c', cmd], stderr=stderr, stdout=stdout)
+    if p.returncode and fail:
         sys.exit(1)
+
+    return p
+
+
+def run_script(text, fail=True, capture_stdout=False, capture_stderr=False, verbose=False):
+    with NamedTemporaryFile('w') as buff:
+        buff.write(text)
+        buff.flush()
+        cmd = f'bash {buff.name}'
+        return run(cmd, fail, capture_stdout, capture_stderr, verbose)
 
 
 class Deploy(object):
@@ -143,25 +169,6 @@ class Deploy(object):
 
         self._install_jupyter_lab_extension()
 
-    def _install_jupyter_lab_extension(self, with_conda=False):
-        #TODO The conda branch of this does not work properly
-        if with_conda:
-            cmd = (
-                '~/miniconda/envs/viz/bin/jupyter labextension install @pyviz/jupyterlab_holoviews'
-            )
-        else:
-            cmd = 'jupyter labextension install @pyviz/jupyterlab_holoviews'
-        print(cmd)
-        try:
-            subprocess.call(cmd.split())
-        except OSError:
-            sys.stderr.write(
-                '\n\nCould not find node or npm. '
-                'Everything except holoviews extension for jupyterlab '
-                'should be okay.\n\n'
-            )
-            raise
-
     def install_miniconda(self):
         """
         Install miniconda into ~/miniconda
@@ -196,23 +203,24 @@ class Deploy(object):
         """
         Builds a viz conda env with all analysis software
         """
-        #command_list = []
 
-        #cmd = (
-        #    'bash ~/dot_files/install_conda_env.sh'
-        #)
+        script = textwrap.dedent("""
+            . ~/rcconda.sh
+            conda env create --force -f ~/dot_files/environment.yml
+        """)
+        run_script(script)
 
-        #command_list.append(cmd)
+        command_list = []
+        command_list.append('mkdir -p ~/bash_hooks')
+        command_list.append('cp ~/dot_files/viz_init.sh  ~/bash_hooks')
 
-        #cmd = 'mkdir -p ~/bash_hooks'
-        #command_list.append(cmd)
+        self._run_commands(command_list)
 
-        #cmd = 'ln -sf ~/dot_files/viz_init.sh  ~/bash_hooks'
-        #command_list.append(cmd)
+        script = textwrap.dedent("""
+            . ~/rcconda.sh && jupyter labextension install @pyviz/jupyterlab_holoviews'
+        """)
+        run_script(script)
 
-        #self._run_commands(command_list)
-
-        self._install_jupyter_lab_extension(with_conda=True)
 
     def create_paths(self):
         """
