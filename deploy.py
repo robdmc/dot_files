@@ -31,7 +31,7 @@ def run(cmd, fail=True, capture_stdout=False, capture_stderr=False, verbose=Fals
     if verbose:
         print(cmd)
 
-    p = subprocess.run(['bash', '-c', cmd], stderr=stderr, stdout=stdout)
+    p = subprocess.Popen(['bash', '-c', cmd], stderr=stderr, stdout=stdout)
     if p.returncode and fail:
         sys.exit(1)
 
@@ -150,6 +150,9 @@ class Deploy(object):
         cmd = 'mkdir -p "$HOME/envs"'
         command_list.append(cmd)
 
+        cmd = 'pip3 install certifi'
+        command_list.append(cmd)
+
         cmd = 'python3 -m venv "$HOME/envs/base"'
         command_list.append(cmd)
 
@@ -163,8 +166,6 @@ class Deploy(object):
         command_list.append(cmd)
 
         self._run_commands(command_list)
-
-        self._install_jupyter_lab_extension()
 
     def install_miniconda(self):
         """
