@@ -116,7 +116,7 @@ class Deploy(object):
         """
         self.archive_bashrc()
         self.create_paths()
-        self.make_file_links()
+        self.copy_files()
         self.make_git_config()
         self.ensure_bash_history()
 
@@ -199,32 +199,6 @@ class Deploy(object):
 
         self._run_commands(command_list)
 
-    def build_conda_env(self):
-        """
-        Builds a viz conda env with all analysis software
-        """
-
-        script = textwrap.dedent("""
-            . ~/.bashrc
-            . ~/rcconda.sh
-            conda env create --force -f ~/dot_files/environment.yml
-        """)
-        run_script(script)
-
-        return
-
-        command_list = []
-        command_list.append('mkdir -p ~/bash_hooks')
-        command_list.append('cp ~/dot_files/viz_init.sh  ~/bash_hooks')
-
-        self._run_commands(command_list)
-
-        script = textwrap.dedent("""
-            . ~/rcconda.sh && jupyter labextension install @pyviz/jupyterlab_holoviews'
-        """)
-        run_script(script)
-
-
     def create_paths(self):
         """
         Creates all paths for deployment
@@ -237,7 +211,7 @@ class Deploy(object):
                 else:
                     os.makedirs(path)
 
-    def make_file_links(self):
+    def copy_files(self):
         """
         Makes all symlinks for a deployment
         """
@@ -317,10 +291,6 @@ if __name__ == '__main__':
     parser.add_argument(
         '-v', '--venv', dest='venv', action='store_true', default=False,
         help='Don\'t deploy.  Just install default virtualenv at ~/envs/base')
-
-    parser.add_argument(
-        '-c', '--conda', dest='conda', action='store_true', default=False,
-        help='Don\'t deploy.  Just create the "viz" conda environment')
 
     parser.add_argument(
         '--miniconda', dest='miniconda', action='store_true', default=False,
