@@ -309,7 +309,7 @@ if __name__ == '__main__':
         deploy = Deploy('personal', args.dry_run)
 
     # Only install Miniconda
-    elif args.miniconda:
+    if args.miniconda:
         deploy.install_miniconda()
 
     # Only build the base env
