@@ -308,10 +308,6 @@ if __name__ == '__main__':
     else:
         deploy = Deploy('personal', args.dry_run)
 
-    # Only build the conda env
-    if args.conda:
-        deploy.build_conda_env()
-
     # Only install Miniconda
     elif args.miniconda:
         deploy.install_miniconda()
