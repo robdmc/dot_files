@@ -42,7 +42,7 @@ def run_script(text, fail=True, capture_stdout=False, capture_stderr=False, verb
     with NamedTemporaryFile('w') as buff:
         buff.write(text)
         buff.flush()
-        cmd = f'bash {buff.name}'
+        cmd = 'bash {}'.format(buff.name)
         return run(cmd, fail, capture_stdout, capture_stderr, verbose)
 
 
@@ -205,10 +205,13 @@ class Deploy(object):
         """
 
         script = textwrap.dedent("""
+            . ~/.bashrc
             . ~/rcconda.sh
             conda env create --force -f ~/dot_files/environment.yml
         """)
         run_script(script)
+
+        return
 
         command_list = []
         command_list.append('mkdir -p ~/bash_hooks')
