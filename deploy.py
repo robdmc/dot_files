@@ -108,8 +108,6 @@ class Deploy(object):
 
         self._run_commands(command_list)
 
-
-
     def run(self):
         """
         The main run script for deploying (doesn't include python stuff)
@@ -140,7 +138,6 @@ class Deploy(object):
             print(cmd)
             if not self.dry_run:
                 run(cmd)
-
 
     def build_base_env(self):
         """
