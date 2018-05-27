@@ -20,5 +20,7 @@ dependencies:
         - pandashells[full]
         - pdvega
         - pymc3
+        - flake8
+        - mypy
 
 
