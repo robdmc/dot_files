@@ -111,11 +111,11 @@ class Deploy(object):
     def archive_bash_inits(self):
         bashrc = os.path.expanduser('~/.bashrc')
         bash_profile = os.path.expanduser('~/.bash_profile')
+        now = datetime.datetime.now()
+        date_str = now.strftime('%Y-%m-%dT%H.%M.%S.%f')
         for file_name in [bashrc, bash_profile]:
             base_file_name = os.path.basename(file_name).replace('.', '')
             if os.path.isfile(bashrc):
-                now = datetime.datetime.now()
-                date_str = now.strftime('%Y-%m-%dT%H.%M.%S.%f')
                 archive_base_name = '._{}_{}'.format(base_file_name, date_str)
                 archive_name = os.path.expanduser('~/{}'.format(archive_base_name))
                 cmd = 'cp {} {}'.format(bashrc, archive_name)
@@ -220,10 +220,5 @@ if __name__ == '__main__':
     else:
         deploy = Deploy('generic', args.dry_run)
 
-    # Only build the base env
-    elif args.venv:
-        deploy.build_base_env()
-
     # Do a general deployment
-    else:
-        deploy.run()
+    deploy.run()
