@@ -1,20 +1,32 @@
 " Author: Masahiro H https://github.com/mshr-h
 " Description: clang linter for c files
 
-" Set this option to change the Clang options for warnings for C.
-if !exists('g:ale_c_clang_options')
-    " let g:ale_c_clang_options = '-Wall'
-    " let g:ale_c_clang_options = '-std=c99 -Wall'
-    " c11 compatible
-    let g:ale_c_clang_options = '-std=c11 -Wall'
-endif
+call ale#Set('c_clang_executable', 'clang')
+call ale#Set('c_clang_options', '-std=c11 -Wall')
+
+function! ale_linters#c#clang#GetExecutable(buffer) abort
+    return ale#Var(a:buffer, 'c_clang_executable')
+endfunction
+
+function! ale_linters#c#clang#GetCommand(buffer, output) abort
+    let l:cflags = ale#c#GetCFlags(a:buffer, a:output)
+
+    " -iquote with the directory the file is in makes #include work for
+    "  headers in the same directory.
+    return ale#Escape(ale_linters#c#clang#GetExecutable(a:buffer))
+    \   . ' -S -x c -fsyntax-only '
+    \   . '-iquote ' . ale#Escape(fnamemodify(bufname(a:buffer), ':p:h')) . ' '
+    \   . l:cflags
+    \   . ale#Var(a:buffer, 'c_clang_options') . ' -'
+endfunction
 
 call ale#linter#Define('c', {
 \   'name': 'clang',
 \   'output_stream': 'stderr',
-\   'executable': 'clang',
-\   'command': 'clang -S -x c -fsyntax-only '
-\       . g:ale_c_clang_options
-\       . ' -',
-\   'callback': 'ale#handlers#HandleGCCFormat',
+\   'executable_callback': 'ale_linters#c#clang#GetExecutable',
+\   'command_chain': [
+\       {'callback': 'ale#c#GetMakeCommand', 'output_stream': 'stdout'},
+\       {'callback': 'ale_linters#c#clang#GetCommand'}
+\   ],
+\   'callback': 'ale#handlers#gcc#HandleGCCFormat',
 \})

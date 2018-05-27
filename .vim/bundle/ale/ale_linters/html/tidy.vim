@@ -3,7 +3,9 @@
 
 " CLI options
 let g:ale_html_tidy_executable = get(g:, 'ale_html_tidy_executable', 'tidy')
-let g:ale_html_tidy_args = get(g:, 'ale_html_tidy_args', '-q -e -language en')
+" Look for the old _args variable first.
+let s:default_options = get(g:, 'ale_html_tidy_args', '-q -e -language en')
+let g:ale_html_tidy_options = get(g:, 'ale_html_tidy_options', s:default_options)
 
 function! ale_linters#html#tidy#GetCommand(buffer) abort
     " Specify file encoding in options
@@ -23,11 +25,23 @@ function! ale_linters#html#tidy#GetCommand(buffer) abort
     \   'utf-8':        '-utf8',
     \ }, &fileencoding, '-utf8')
 
+    " On macOS, old tidy (released on 31 Oct 2006) is installed. It does not
+    " consider HTML5 so we should avoid it.
+    let l:executable = ale#Var(a:buffer, 'html_tidy_executable')
+    if has('mac') && l:executable is# 'tidy' && exists('*exepath')
+    \  && exepath(l:executable) is# '/usr/bin/tidy'
+        return ''
+    endif
+
     return printf('%s %s %s -',
-    \   g:ale_html_tidy_executable,
-    \   g:ale_html_tidy_args,
+    \   l:executable,
+    \   ale#Var(a:buffer, 'html_tidy_options'),
     \   l:file_encoding
-    \ )
+    \)
+endfunction
+
+function! ale_linters#html#tidy#GetExecutable(buffer) abort
+    return ale#Var(a:buffer, 'html_tidy_executable')
 endfunction
 
 function! ale_linters#html#tidy#Handle(buffer, lines) abort
@@ -37,27 +51,17 @@ function! ale_linters#html#tidy#Handle(buffer, lines) abort
     let l:pattern = '^line \(\d\+\) column \(\d\+\) - \(Warning\|Error\): \(.\+\)$'
     let l:output = []
 
-    for l:line in a:lines
-        let l:match = matchlist(l:line, l:pattern)
-
-        if len(l:match) == 0
-            continue
-        endif
-
+    for l:match in ale#util#GetMatches(a:lines, l:pattern)
         let l:line = l:match[1] + 0
         let l:col = l:match[2] + 0
-        let l:type = l:match[3] ==# 'Error' ? 'E' : 'W'
+        let l:type = l:match[3] is# 'Error' ? 'E' : 'W'
         let l:text = l:match[4]
 
-        " vcol is Needed to indicate that the column is a character.
         call add(l:output, {
-        \   'bufnr': a:buffer,
         \   'lnum': l:line,
-        \   'vcol': 0,
         \   'col': l:col,
         \   'text': l:text,
         \   'type': l:type,
-        \   'nr': -1,
         \})
     endfor
 
@@ -66,7 +70,7 @@ endfunction
 
 call ale#linter#Define('html', {
 \   'name': 'tidy',
-\   'executable': g:ale_html_tidy_executable,
+\   'executable_callback': 'ale_linters#html#tidy#GetExecutable',
 \   'output_stream': 'stderr',
 \   'command_callback': 'ale_linters#html#tidy#GetCommand',
 \   'callback': 'ale_linters#html#tidy#Handle',

@@ -1,9 +1,9 @@
 " Author: poohzrn https://github.com/poohzrn
-" Description: proselint for markdown files
+" Description: proselint for Markdown files
 
 call ale#linter#Define('markdown', {
 \   'name': 'proselint',
 \   'executable': 'proselint',
-\   'command': g:ale#util#stdin_wrapper . ' .md proselint',
-\   'callback': 'ale#handlers#HandleUnixFormatAsWarning',
+\   'command': 'proselint %t',
+\   'callback': 'ale#handlers#unix#HandleAsWarning',
 \})

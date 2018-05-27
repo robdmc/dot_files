@@ -1,20 +1,38 @@
 Before:
-  let g:success = 0
-  augroup VaderTest
-    autocmd!
-    autocmd User ALELint let g:success = 1
-  augroup end
+  let g:pre_success = 0
+  let g:post_success = 0
+  let g:ale_run_synchronously = 1
+
+  unlet! b:ale_linted
 
 After:
-  augroup! VaderTest
+  let g:ale_run_synchronously = 0
   let g:ale_buffer_info = {}
 
-Given vim (Some vimscript):
-  set nocompatible
+  try
+    augroup! VaderTest
+  catch
+  endtry
 
-Execute (Lint it):
+Execute(Run a lint cycle, and check that a variable is set in the autocmd):
+  augroup VaderTest
+    autocmd!
+    autocmd User ALELintPre let g:pre_success = 1
+    autocmd User ALELintPost let g:post_success = 1
+  augroup end
+
   call ale#Lint()
-  call ale#engine#WaitForJobs(2000)
 
-Then (Autocommands should have run):
-  AssertEqual g:success, 1
+  AssertEqual g:pre_success, 1
+  AssertEqual g:post_success, 1
+
+Execute(b:ale_linted should be increased after each lint cycle):
+  AssertEqual get(b:, 'ale_linted'), 0
+
+  call ale#Lint()
+
+  AssertEqual get(b:, 'ale_linted'), 1
+
+  call ale#Lint()
+
+  AssertEqual get(b:, 'ale_linted'), 2

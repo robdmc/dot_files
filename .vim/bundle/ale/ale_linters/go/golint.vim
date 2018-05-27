@@ -3,7 +3,8 @@
 
 call ale#linter#Define('go', {
 \   'name': 'golint',
+\   'output_stream': 'both',
 \   'executable': 'golint',
-\   'command': g:ale#util#stdin_wrapper . ' .go golint',
-\   'callback': 'ale#handlers#HandleUnixFormatAsWarning',
+\   'command': 'golint %t',
+\   'callback': 'ale#handlers#unix#HandleAsWarning',
 \})
