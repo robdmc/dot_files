@@ -142,64 +142,6 @@ class Deploy(object):
                 if not self.dry_run:
                     run(cmd)
 
-    def build_base_env(self):
-        """
-        Builds a python3 virtualenv at ~/envs/base and installs requirements.
-        """
-        command_list = []
-        act = '. "$HOME/envs/base/bin/activate"'
-        req = '"$HOME/dot_files/requirements.txt"'
-
-        cmd = 'mkdir -p "$HOME/envs"'
-        command_list.append(cmd)
-
-        cmd = 'pip3 install certifi'
-        command_list.append(cmd)
-
-        cmd = 'python3 -m venv "$HOME/envs/base"'
-        command_list.append(cmd)
-
-        cmd = '{}  && pip install -U pip'.format(act)
-        command_list.append(cmd)
-
-        cmd = '{}  && pip install numpy'.format(act)
-        command_list.append(cmd)
-
-        cmd = '{} && pip install -r {}'.format(act, req)
-        command_list.append(cmd)
-
-        self._run_commands(command_list)
-
-    def install_miniconda(self):
-        """
-        Install miniconda into ~/miniconda
-        """
-        command_list = []
-        tmp_dir = '/tmp'
-        if os.environ['OS_TYPE'] == 'mac':
-            script_name = 'Miniconda3-latest-MacOSX-x86_64.sh'
-        elif os.environ['OS_TYPE'] == 'linux':
-            script_name = 'Miniconda3-latest-Linux-x86_64.sh'
-        else:
-            raise ValueError('Unrecognized OS')
-
-        url = os.path.join(
-            'http://repo.continuum.io/miniconda',
-            script_name,
-        )
-        downloaded_file = os.path.join(tmp_dir, 'miniconda.sh')
-
-        cmd = 'wget {} -O {}'.format(url, downloaded_file)
-        command_list.append(cmd)
-
-        cmd = 'bash {} -b -p "$HOME/miniconda"'.format(downloaded_file)
-        command_list.append(cmd)
-
-        cmd = 'rm {}'.format(downloaded_file)
-        command_list.append(cmd)
-
-        self._run_commands(command_list)
-
     def create_paths(self):
         """
         Creates all paths for deployment
@@ -290,14 +232,6 @@ if __name__ == '__main__':
         help='Use generic gitconfig when deploying dotfiles')
 
     parser.add_argument(
-        '-v', '--venv', dest='venv', action='store_true', default=False,
-        help='Don\'t deploy.  Just install default virtualenv at ~/envs/base')
-
-    parser.add_argument(
-        '--miniconda', dest='miniconda', action='store_true', default=False,
-        help='Download and install miniconda')
-
-    parser.add_argument(
         '--clean', dest='clean', action='store_true', default=False,
         help='Remove all dot files')
 
@@ -308,10 +242,6 @@ if __name__ == '__main__':
         deploy = Deploy('generic', args.dry_run)
     else:
         deploy = Deploy('personal', args.dry_run)
-
-    # Only install Miniconda
-    if args.miniconda:
-        deploy.install_miniconda()
 
     # Only build the base env
     elif args.venv:
