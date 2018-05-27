@@ -4,4 +4,4 @@ mkdir -p ~/bash_hooks && \
 hash -r
 conda env create --force -f ~/dot_files/environment.yml &&\
 cp ~/dot_files/viz_init.sh ~/bash_hooks && \
-~/dot_files/conda_condigure_holoviews.sh
+~/dot_files/conda_configure_holoviews.sh
