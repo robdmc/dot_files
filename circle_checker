@@ -1,2 +1,0 @@
-#! /usr/bin/env bash
-(flake8 . --config=./setup.cfg) && (coverage run run_tests.py) && (coverage report --fail-under=100) && (cd docs && make clean && make html)
