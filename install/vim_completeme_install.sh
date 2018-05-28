@@ -1,20 +1,11 @@
 #! /usr/bin/env bash
-rm -rf ~/.ackrc
-rm -rf ~/.bash_profile
-rm -rf ~/.bashrc
-rm -rf ~/.cache
-rm -rf ~/.conda
-rm -rf ~/.config
-rm -rf ~/.ctags
-rm -rf ~/.gitconfig
-rm -rf ~/.gitignore_global
-rm -rf ~/.ideavimrc
-rm -rf ~/.inputrc
-rm -rf ~/.undodir
-rm -rf ~/.vim
-rm -rf ~/.vim_backups
-rm -rf ~/.viminfo
-rm -rf ~/.vimrc
-rm -rf ~/envs
-rm -rf ~/miniconda
-rm -rf ~/rcconda.sh
+
+rm -rf ~/dot_files/.vim/bundle/YouCompleteMe 2>/dev/null || true
+cd ~/dot_files/.vim/bundle && \
+git clone https://github.com/Valloric/YouCompleteMe.git && \
+cd YouCompleteMe
+git submodule update --init --recursive && \
+python install.py
+
+
+
