@@ -65,7 +65,6 @@ class Deploy(object):
         # Executables
         ('~/dot_files/git_diff_wrapper', '~/bin/git_diff_wrapper'),
         ('~/dot_files/git_branch_diff', '~/bin/git_branch_diff'),
-        ('~/dot_files/circle_checker', '~/bin/circle_checker'),
         ('~/dot_files/serve_dir.py', '~/bin/serve_dir.py'),
         ('~/dot_files/imgcat', '~/bin/imgcat'),
         ('~/dot_files/make_tags', '~/bin/make_tags'),
@@ -142,9 +141,7 @@ class Deploy(object):
         for (source_name, target_name) in self.FILES_TO_LINK:
             src = os.path.expanduser(source_name)
             tgt = os.path.expanduser(target_name)
-            if os.path.isfile(tgt):
-                run('rm {}'.format(tgt))
-            cmd = 'cp -r {src} {tgt}'.format(src=src, tgt=tgt)
+            cmd = 'cp -rf {src} {tgt}'.format(src=src, tgt=tgt)
 
             print(cmd)
             if not self.dry_run:
