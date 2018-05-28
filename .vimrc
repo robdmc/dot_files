@@ -5,6 +5,9 @@ Helptags
 "--- define a custom leader
 let mapleader=","
 
+"--- Hide a buffer rather than closing it when changing buffers
+set hidden
+
 "--- add entries to run time path
 set rtp+=$GOROOT/misc/vim
 
