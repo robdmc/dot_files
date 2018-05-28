@@ -303,3 +303,11 @@ let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+" --- stuff for youcompleteme
+:nnoremap <Leader>g :YcmCompleter GoTo<CR>
+:nnoremap <Leader>l :YcmCompleter GetDoc<CR>
+imap <C-l> <Esc>:YcmCompleter GetDoc<CR>i
+let g:ycm_goto_buffer_command = 'new-tab'
+let g:ycm_autoclose_preview_window_after_completion = 0
+
