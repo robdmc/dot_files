@@ -28,3 +28,6 @@
  # Jupyter related stuff
  alias ipywi='BROWSER=open jupyter notebook --NotebookApp.iopub_data_rate_limit=10000000000'
 
+ # Alias for opening macvim
+ alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
+
