@@ -15,6 +15,7 @@ dependencies:
 
     - pip:
         - altair
+        - cython
         - easier
         - holoviews[all]
         - pandashells[full]
