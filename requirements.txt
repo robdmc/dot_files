@@ -1,5 +1,6 @@
 altair
 astropy
+cython
 easier
 holoviews[all]
 jupyterlab
