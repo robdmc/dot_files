@@ -20,6 +20,8 @@
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     llg = log --stat
+    wip = commit -am wip
+    wipp = "!f() {{ git commit -am wip && git push; }} ; f"
     pru = "!f() {{ git fetch upstream refs/pull/$1/head:pr/$1; }} ; f"
     pro = "!f() {{ git fetch origin refs/pull/$1/head:pr/$1; }} ; f"
     track = "!f() {{ git branch --track $(basename $1)  $1; }} ; f"
