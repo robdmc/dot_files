@@ -3,3 +3,4 @@
 .mypy_cache
 *.pyc
 .DS_Store
+.idea
