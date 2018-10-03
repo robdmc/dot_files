@@ -3,3 +3,5 @@
 .mypy_cache
 *.pyc
 .DS_Store
+.idea
+*.egg-info*
