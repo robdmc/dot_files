@@ -3,25 +3,49 @@ name: viz
 channels:
     - conda-forge
 dependencies:
-    - python=3.6
     - astropy
+    - dask
     - datashader
     - jupyterlab
+    - nbconvert
     - numpy
+    - pandoc
+    - python=3.6
     - scikit-learn
     - scipy
     - statsmodels
     - sympy
+    - xarray
 
     - pip:
         - altair
+        - arrow
+        - attrs
+        - click
+        - cookiecutter
+        - cryptography
         - cython
+        - daiquiri
         - easier
-        - holoviews[all]
-        - pandashells[full]
-        - pdvega
-        - pymc3
         - flake8
+        - fleming
+        - gspread
+        - holoviews[all]
+        - joblib
+        - jupyter
+        - lifelines
         - mypy
-
-
+        - networkx
+        - nose
+        - oauth2client
+        - pandashells[full]
+        - patsy
+        - pdvega
+        - psutil
+        - pymc3
+        - pytest
+        - python-dateutil
+        - requests
+        - seaborn
+        - simple-salesforce
+        - tdigest
