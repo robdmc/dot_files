@@ -2,7 +2,7 @@
 
 # Sometimes osx doesn't do the right thing with certificates
 # This fixes it
-pip3 install certifi || true
+# pip3 install certifi || true
 
 # Make sure env dir exists
 mkdir -p ~/envs
