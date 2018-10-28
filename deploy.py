@@ -71,6 +71,8 @@ class Deploy(object):
         ('~/dot_files/clean_vim_backup.py', '~/bin/clean_vim_backup.py'),
         ('~/dot_files/diffconflicts', '~/bin/diffconflicts'),
         ('~/dot_files/myip', '~/bin/myip'),
+        ('~/dot_files/mount_miner1.sh', '~/bin/mount_miner1.sh'),
+        ('~/dot_files/unmount_miner1.sh', '~/bin/unmount_miner1.sh'),
 
     ]
 
