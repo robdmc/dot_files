@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 
+import datetime
 import os
 import sys
 import re
@@ -28,18 +29,18 @@ def exit_if_running():
 
 
 def wifi_down():
-
     try:
-        subprocess.check_call('./bad.py'.split())
+        subprocess.check_call('curl http://www.google.com'.split())
     except subprocess.CalledProcessError:
         return True
     return False
 
 
 def restart_wifi():
-    cmd = 'bash /home/rob/bin/fixwifi.sh'
-    cmd = './restarting.py'
-    subprocess.check_call(cmd.split())
+    with open('/home/rob/var/log/wifi_restart.log', 'w') as out:
+        now = datetime.datetime.now()
+        print(f'Restarting wifi at {now}', file=out)
+    subprocess.check_call('bash /home/rob/bin/fixwifi.sh'.split())
 
 
 def main():
