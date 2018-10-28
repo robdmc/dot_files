@@ -31,7 +31,7 @@
  alias gm2r='ssh -p 2222 rob@minerr'
 
  # Jupyter related stuff
- alias ipywi='BROWSER=open jupyter notebook --NotebookApp.iopub_data_rate_limit=10000000000'
+ alias ipywi='BROWSER=open jupyter notebook --ip=0.0.0.0 --port=8888 --NotebookApp.iopub_data_rate_limit=10000000000'
 
  # Alias for opening macvim
  alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
