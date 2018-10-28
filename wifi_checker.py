@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/python3
 
 import datetime
 import os
@@ -30,23 +30,29 @@ def exit_if_running():
 
 def wifi_down():
     try:
-        subprocess.check_call('curl http://www.google.com'.split())
+        subprocess.check_call(
+            'curl http://www.google.com'.split(),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
     except subprocess.CalledProcessError:
         return True
     return False
 
 
-def restart_wifi():
-    with open('/home/rob/var/log/wifi_restart.log', 'w') as out:
-        now = datetime.datetime.now()
-        print(f'Restarting wifi at {now}', file=out)
+def restart_wifi(out, now):
+    print(f'Restarting wifi at {now}', file=out)
     subprocess.check_call('bash /home/rob/bin/fixwifi.sh'.split())
+    print(f'Restart successful', file=out)
 
 
 def main():
-    exit_if_running()
-    if wifi_down():
-        restart_wifi()
+        now = datetime.datetime.now()
+        with open('/home/rob/var/log/wifi_restart.log', 'w') as out:
+            print(f'Checking wifi at {now}', file=out)
+            exit_if_running()
+            if wifi_down():
+                restart_wifi(out, now)
 
 
 if __name__ == '__main__':
