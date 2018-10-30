@@ -25,10 +25,8 @@
  alias ldc='docker ps --format "{{.ID}} {{.Names}}"'
 
  # Specific to machines I frequent
- alias gm1='ssh -p 2221 rob@miner1'
- alias gm2='ssh -p 2222 rob@miner2'
- alias gm1r='ssh -p 2221 rob@minerr'
- alias gm2r='ssh -p 2222 rob@minerr'
+ alias gm1='ssh -Y rob@miner1'
+ alias gm1l='ssh -Y rob@192.168.1.10'
 
  # Jupyter related stuff
  alias ipywi='BROWSER=open jupyter notebook --port=8888 --NotebookApp.iopub_data_rate_limit=10000000000'
