@@ -6,6 +6,7 @@ import sys
 import re
 import psutil
 import subprocess
+import time
 
 script_name = os.path.basename(__file__)
 
@@ -40,20 +41,22 @@ def wifi_down():
     return False
 
 
-def restart_wifi(out, now):
-    print(f'Restarting wifi at {now}', file=out)
+def restart_wifi(now):
+    print(f'Restarting wifi at {now}')
     subprocess.check_call('bash /home/rob/bin/fixwifi.sh'.split())
-    print(f'Restart successful', file=out)
+    print(f'Restart successful')
 
 
 def main():
         now = datetime.datetime.now()
-        with open('/home/rob/var/log/wifi_restart.log', 'w') as out:
-            print(f'Checking wifi at {now}', file=out)
-            exit_if_running()
-            if wifi_down():
-                restart_wifi(out, now)
+        print(f'Checking wifi at {now}')
+        exit_if_running()
+        if wifi_down():
+            restart_wifi(now)
 
 
 if __name__ == '__main__':
-    main()
+    while True:
+        main()
+        sys.stdout.flush()
+        time.sleep(60)
