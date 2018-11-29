@@ -16,8 +16,10 @@
  # Specific to my day job
  alias ga='cd /Users/rob/ambition'
  alias gp='cd /Users/rob/packages'
- alias gadp='lamb.docker shell -p'
- alias gad='lamb.docker shell'
+ #alias gadp='lamb.docker shell -p'
+ #alias gad='lamb.docker shell'
+ alias gad='docker-compose -f /Users/rob/rob/ambition_projects/projects/ambition/docker-compose.yml run --rm   shell'
+ alias gadp='docker-compose -f /Users/rob/rob/ambition_projects/projects/ambition/docker-compose.yml run --rm  --service-ports shell'
  alias gadpg='(AMBITION_HOME="$GOLD_AMBITION_HOME" lamb.docker shell -p)'
  alias gadg='(AMBITION_HOME="$GOLD_AMBITION_HOME" lamb.docker shell)'
  alias dad='(cp /Users/rob/ambition/docker_bash_history/.bash_history `date +"/Users/rob/docker_history_files/docker_bash_history_%FT%H-%M-%S"`);  AMBITION_HOME="$GOLD_AMBITION_HOME" lamb.docker down'
