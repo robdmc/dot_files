@@ -10,7 +10,7 @@ dependencies:
     - nbconvert
     - numpy
     - pandoc
-    - python=3.7
+    - python=3.6
     - scikit-learn
     - scipy
     - statsmodels
