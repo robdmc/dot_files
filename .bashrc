@@ -75,7 +75,7 @@ export HISTCONTROL="ignoreboth:erasedups"
  export HISTFILE="$HOME/.bash_history"
  export HISTFILESIZE=20000
  export HISTSIZE=20000
- export HISTIGNORE="clear:ls:pwd:history:hig"
+ export HISTIGNORE="clear:ls:pwd:history:hig:say"
  export HISTTIMEFORMAT='%F %T '
  set -o vi
  
