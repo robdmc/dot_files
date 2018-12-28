@@ -34,7 +34,6 @@ dependencies:
         - joblib
         - jupyter
         - lifelines
-        - mypy
         - networkx
         - nose
         - oauth2client
