@@ -27,7 +27,7 @@ if ngrok_domains:
         raise ValueError('\n\nDomains must be one of {}'.format(ngrok_domains))
 
 # start a python simpleserver on pwd
-cmd = 'python -mSimpleHTTPServer {}'.format(args.port)
+cmd = 'python3 -m http.server {}'.format(args.port)
 print(cmd)
 p1 = subprocess.Popen(['bash', '-c', cmd])
 time.sleep(1)
