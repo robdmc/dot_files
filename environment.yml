@@ -1,4 +1,5 @@
 # Run this to create: conda env create --force -f environment.yml
+# To update with any changes:  conda env update -f environment.yml,
 name: viz
 channels:
     - conda-forge
@@ -34,7 +35,6 @@ dependencies:
         - joblib
         - jupyter
         - lifelines
-        - mypy
         - networkx
         - nose
         - oauth2client
