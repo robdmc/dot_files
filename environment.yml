@@ -51,3 +51,4 @@ dependencies:
         - tdigest
         - chartify
         - hvplot
+        - web-pdb
