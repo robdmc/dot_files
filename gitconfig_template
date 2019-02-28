@@ -32,4 +32,8 @@
 	trustExitCode = true
 [mergetool]
 	keepBackup = false
+
+[tig "bind"]
+    generic = D !git difftool --tool=vimdiff --no-prompt --trust-exit-code %(commit)^!  -- %(file)
+
 {github_user_spec}
