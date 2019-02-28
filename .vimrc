@@ -11,6 +11,12 @@ set hidden
 "--- add entries to run time path
 set rtp+=$GOROOT/misc/vim
 
+
+" --- stuff for snakemake
+au BufNewFile,BufRead Snakefile set syntax=snakemake
+au BufNewFile,BufRead *.snake set syntax=snakemake
+
+
 "--- handle special case for golang
 autocmd FileType go setlocal nolist noexpandtab shiftwidth=4 softtabstop=4 tabstop=4
 
