@@ -2,7 +2,7 @@
  function viz.init () { 
      set +o history
      . ~/rcconda.sh
-     . activate viz
+     . activate viz2
      set -o history
  }
 
