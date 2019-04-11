@@ -12,6 +12,7 @@ dependencies:
     - numpy
     - pandoc
     - python=3.6
+    - pip
     - scikit-learn
     - scipy
     - statsmodels
@@ -27,11 +28,13 @@ dependencies:
         - cryptography
         - cython
         - daiquiri
+        - dataset
         - easier
         - flake8
         - fleming
+        - fuzzypicker
         - gspread
-        - holoviews[all]
+        - holoviews[recommended]
         - joblib
         - jupyter
         - lifelines
@@ -48,6 +51,7 @@ dependencies:
         - requests
         - seaborn
         - simple-salesforce
+        - snakemake
         - tables
         - tdigest
         - chartify
