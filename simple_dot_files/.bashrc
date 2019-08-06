@@ -53,7 +53,7 @@ export HISTCONTROL="ignoreboth:erasedups"
  # Set up terminal working preferences
  shopt -s histappend
  shopt -s extglob
- export EDITOR=vim
+ export EDITOR=nano
  export HISTFILE="$HOME/.bash_history"
  export HISTFILESIZE=20000
  export HISTSIZE=20000
