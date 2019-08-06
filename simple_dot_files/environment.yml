@@ -1,0 +1,60 @@
+# Run this to create: conda env create --force -f environment.yml
+# To update with any changes:  conda env update -f environment.yml,
+name: viz
+channels:
+    - conda-forge
+dependencies:
+    - astropy
+    - dask
+    - datashader
+    - jupyterlab
+    - nbconvert
+    - numpy
+    - pandoc
+    - python=3.6
+    - pip
+    - scikit-learn
+    - scipy
+    - statsmodels
+    - sympy
+    - xarray
+
+    - pip:
+        - altair
+        - arrow
+        - attrs
+        - click
+        - cookiecutter
+        - cryptography
+        - cython
+        - daiquiri
+        - dataset
+        - easier
+        - flake8
+        - fleming
+        - fuzzypicker
+        - gspread
+        - holoviews[recommended]
+        - joblib
+        - jupyter
+        - lifelines
+        - networkx
+        - nose
+        - oauth2client
+        - pandashells[full]
+        - patsy
+        - pdvega
+        - psutil
+        - pymc3
+        - pytest
+        - python-dateutil
+        - requests
+        - seaborn
+        - simple-salesforce
+        - snakemake
+        - tables
+        - tdigest
+        - chartify
+        - hvplot
+        - web-pdb
+        - wrapt

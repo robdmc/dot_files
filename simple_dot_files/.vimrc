@@ -43,10 +43,6 @@ end
 
 "--- This improves highlight colors in vimdiff
 set t_Co=256
-"colo ron
-"colo desert256
-"colo desert_mod
-colo darcula
 highlight DiffText term=standout ctermfg=0 ctermbg=11
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
 
@@ -175,32 +171,9 @@ if has("persistent_undo")
 endif
 nmap <Leader>u :UndotreeToggle<CR>
 
-"--- set incsearch stuff
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-
 "--- make it easy to find cursor by just hitting ; in normal mode
 :nmap <Leader>; :set cursorline<CR>:set cursorcolumn<CR>:sleep 80m<CR>:set nocursorline<CR>:set nocursorcolumn<CR>
-"
-"--- make a shortcut for pbcopy
-:vmap <Leader>c :'<,'> ! pbcopy<CR>u
 
-
-
-"--- set backup preferences
-"    This was copied from http://www.gmarks.org/vi_backups.html
-"    It's a good way to keep a backup of all the files you've edited in vim
-set backup
-set writebackup
-au BufWritePre * let &backupext = '%' . substitute(expand("%:p:h"), "/" , "%" , "g") . "%" . strftime("%Y.%m.%d.%H.%M.%S")
-au VimLeave * !cp % ~/.vim_backups/$(echo %:p | sed 's/\(.*\/\)\(.*\)/\2\/\1/g' | sed 's/\//\%/g')$(date +\%Y.\%m.\%d.\%H.\%M.\%S).wq
-set backupdir=~/.vim_backups/
-
-
-"---create shortcuts for managing sessions
-nmap <Leader>ss :mksession! ~/mySession.vim<CR>
-nmap <Leader>ls :so ~/mySession.vim<CR>
 
 "---create ctags shortcut for opening definition in new tab or window
 "---:nnoremap <Leader>d <C-w>g<C-]><C-w>T

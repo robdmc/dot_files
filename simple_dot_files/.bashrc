@@ -1,6 +1,34 @@
 export HISTCONTROL="ignoreboth:erasedups"
  # This entire file indented one line so history ignores it
 
+ # Helper for starting a conda env
+ viz.init () {
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    __conda_setup="$('$HOME/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+    else
+        if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
+            . "$HOME/miniconda3/etc/profile.d/conda.sh"
+        else
+            export PATH="$HOME/miniconda3/bin:$PATH"
+        fi
+    fi
+    unset __conda_setup
+    # <<< conda initialize <<<
+
+
+    echo "Activating viz environment with"
+    echo ""
+    echo "    $ conda activate viz"
+    echo ""
+    echo "To deactivate an active environment, use"
+    echo ""
+    echo "    $ conda deactivate"
+    conda activate viz
+ }
+
  # Helper for putting git branch on bash prompt
  parse_git_branch () {
      export __parse_git_branch__=1
