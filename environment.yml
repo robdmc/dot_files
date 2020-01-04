@@ -38,6 +38,7 @@ dependencies:
         - joblib
         - jupyter
         - lifelines
+        - magic-wormhole
         - networkx
         - nose
         - oauth2client

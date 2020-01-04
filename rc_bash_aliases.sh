@@ -46,4 +46,3 @@
  alias gc='gcalcli agenda --refresh'
  alias gcw='gcalcli calw --refresh'
  alias gcm='gcalcli calm --refresh'
-
