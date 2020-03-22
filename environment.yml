@@ -32,6 +32,7 @@ dependencies:
         - easier
         - flake8
         - fleming
+        - folium
         - fuzzypicker
         - gspread
         - holoviews[recommended]
@@ -43,6 +44,7 @@ dependencies:
         - nose
         - oauth2client
         - pandashells[full]
+        - panel
         - patsy
         - pdvega
         - psutil
@@ -53,6 +55,7 @@ dependencies:
         - seaborn
         - simple-salesforce
         - snakemake
+        - streamz
         - tables
         - tdigest
         - chartify
