@@ -9,6 +9,7 @@ dependencies:
     - dask
     - datashader
     - jupyterlab
+    - mkl-service
     - nbconvert
     - numpy
     - pandoc
