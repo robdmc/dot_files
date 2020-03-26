@@ -22,14 +22,17 @@ dependencies:
     - pip:
         - altair
         - arrow
+        - arviz
         - attrs
         - click
         - cookiecutter
+        - corner
         - cryptography
         - cython
         - daiquiri
         - dataset
         - easier
+        - emcee
         - flake8
         - fleming
         - folium
