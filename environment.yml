@@ -4,6 +4,7 @@ name: viz
 channels:
     - conda-forge
 dependencies:
+    - python=3.6
     - astropy
     - dask
     - datashader
@@ -11,7 +12,6 @@ dependencies:
     - nbconvert
     - numpy
     - pandoc
-    - python=3.6
     - pip
     - scikit-learn
     - scipy
