@@ -21,8 +21,11 @@
  cyan='\[\033[0;36m\]'
  CYAN='\[\033[1;36m\]'
  NC='\[\033[0m\]'
+
+ MACHINE_NAME="${OS_TYPE}"
+ source_if_exists ~/dot_files/rc_machine_name.sh
  
- PS1="$grey[${green}${OS_TYPE}${grey}][$BLUE\t$grey]\$(parse_git_branch)[$cyan \w $grey$grey]$NC\n${PURPLE}λ$NC "
+ PS1="$grey[${green}${MACHINE}${grey}][$BLUE\t$grey]\$(parse_git_branch)[$cyan \w $grey$grey]$NC\n${PURPLE}λ$NC "
  
 
 
