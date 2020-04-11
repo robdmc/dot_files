@@ -29,9 +29,13 @@
 
  # Specific to machines I frequent
  alias gm1='ssh -Y rob@miner1'
- alias gm1l='ssh -Y rob@miner1local'
+ alias gm2='ssh -Y rob@miner2'
  alias gm1p='ssh -L 8888:localhost:8888 rob@miner1'
- alias gm1pl='ssh -L 8888:localhost:8888 rob@miner1local'
+ alias gm2p='ssh -L 8888:localhost:8888 rob@miner2'
+ # alias gm1='ssh -Y rob@miner1'
+ # alias gm1l='ssh -Y rob@miner1local'
+ # alias gm1p='ssh -L 8888:localhost:8888 rob@miner1'
+ # alias gm1pl='ssh -L 8888:localhost:8888 rob@miner1local'
 
  # Jupyter related stuff
  alias ipywi='BROWSER=open jupyter notebook --port=8888 --NotebookApp.iopub_data_rate_limit=10000000000'
