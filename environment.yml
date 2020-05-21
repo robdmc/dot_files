@@ -51,6 +51,7 @@ dependencies:
         - pandashells[full]
         - panel
         - patsy
+        - pdbpp
         - pdvega
         - psutil
         - pymc3
