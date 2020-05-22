@@ -8,6 +8,8 @@ dependencies:
     - astropy
     - dask
     - datashader
+    - folium
+    - geocoder
     - jupyterlab
     - mkl-service
     - nbconvert
@@ -32,6 +34,8 @@ dependencies:
         - cython
         - daiquiri
         - dataset
+        - django
+        - django-extensions
         - easier
         - emcee
         - flake8
@@ -40,6 +44,7 @@ dependencies:
         - fuzzypicker
         - gspread
         - holoviews[recommended]
+        - hvplot
         - inflection
         - joblib
         - jupyter
@@ -64,7 +69,7 @@ dependencies:
         - streamz
         - tables
         - tdigest
-        - chartify
         - hvplot
         - web-pdb
         - wrapt
+        - yfinance
