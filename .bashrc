@@ -103,7 +103,7 @@ export HISTCONTROL="ignoreboth:erasedups"
  fi
  
  # If history file doesn't exist, create it
- touch .bash_history
+ touch "$HISTFILE"
 
  # Source all existig bash hooks defined by ~/bash_hooks/*.sh
  source_bash_hooks
