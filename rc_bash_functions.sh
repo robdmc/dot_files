@@ -61,3 +61,14 @@
      fi
      set -o history
  }
+
+vicd()
+{
+    # No idea what this came from.  might want to delete it.
+    local dst="$(command vifm --choose-dir - "$@")"
+    if [ -z "$dst" ]; then
+        echo 'Directory picking cancelled/failed'
+        return 1
+    fi
+    cd "$dst"
+}

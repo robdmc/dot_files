@@ -1,0 +1,37 @@
+from visidata import vd
+import os
+import datetime
+
+
+def set_log_file():
+    now = datetime.datetime.now()
+    timestamp_str = now.strftime('%Y-%m-%d-%H-%M-%S')
+    pid = str(os.getpid())
+    log_base_name = f'vd_{timestamp_str}_pid_{pid}.vd'
+
+    log_dir = '/tmp/visidata_logs'
+    os.makedirs(log_dir, exist_ok=True)
+    log_file = os.path.join(log_dir, log_base_name)
+
+    vd.options.cmdlog_histfile = log_file
+
+
+class Ezr:
+    def __init__(self):
+        self.ezr = None
+
+    def __getattr__(self, name):
+        if self.ezr is None:
+            import easier as ezr
+            self.ezr = ezr
+        return getattr(self.ezr, name)
+
+
+try:
+    from dateutil.parser import parse
+    import numpy as np
+    ezr = Ezr()
+    set_log_file()
+
+except:  # noqa
+    pass
