@@ -1,6 +1,8 @@
 from visidata import vd
 import os
 import datetime
+from pathlib import Path
+import atexit
 
 
 def set_log_file():
@@ -12,8 +14,26 @@ def set_log_file():
     log_dir = '/tmp/visidata_logs'
     os.makedirs(log_dir, exist_ok=True)
     log_file = os.path.join(log_dir, log_base_name)
+    symlink_file = os.path.join(log_dir, 'latest.vd')
+    previous_symlink_file = os.path.join(log_dir, 'previous.vd')
+    Path(log_file).touch(exist_ok=True)
 
+    if os.path.isfile(symlink_file):
+        previous_real_path = Path(symlink_file).resolve()
+        os.unlink(symlink_file)
+        if os.path.isfile(previous_symlink_file):
+            os.unlink(previous_symlink_file)
+        os.symlink(previous_real_path, previous_symlink_file)
+    os.symlink(log_file, symlink_file)
+
+    os.unlink(log_file)
     vd.options.cmdlog_histfile = log_file
+
+
+
+
+
+
 
 
 class Ezr:
@@ -31,7 +51,8 @@ try:
     from dateutil.parser import parse
     import numpy as np
     ezr = Ezr()
-    set_log_file()
+    #set_log_file()
 
 except:  # noqa
     pass
+set_log_file()
