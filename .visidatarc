@@ -89,6 +89,7 @@ def gui():
     from pandasgui import show
     import datetime
     import multiprocessing
+    import time
     now = datetime.datetime.now()
 
     path_str = f"{now.strftime('__visidata_gui_%Y-%m-%d_%H.%M.%S')}_pid.{os.getpid()}__.csv"
@@ -98,11 +99,25 @@ def gui():
     sheet = vd.sheet
 
     syncSaveSheets(path, sheet)
-    df = pd.read_csv(path_str)
-    try:
-        show(df)
-    finally:
-        os.unlink(path_str)
+    is_done = False
+    for nn in range(10):
+        time.sleep(1)
+        try:
+            df = pd.read_csv(path_str)
+            if len(df) == len(sheet):
+                is_done = True
+                break
+        except:
+            pass
+    if is_done:
+        try:
+            show(df)
+        finally:
+            os.unlink(path_str)
+            status('Returned from Pandasgui')
+    else:
+        status('Pandasgui timed out')
 
 
-BaseSheet.addCommand('gG', 'hello-world', 'gui()')
+
+BaseSheet.addCommand('gG', 'pandasgui', 'gui()')
