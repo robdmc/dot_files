@@ -1,10 +1,10 @@
 # Run this to create: conda env create --force -f environment.yml
-# To update with any changes:  conda env update -f environment.yml,
+# To update with any changes:  conda env update -f environment.yml
 name: viz
 channels:
     - conda-forge
 dependencies:
-    - python=3.6
+    - python=3.8
     - astropy
     - dask
     - datashader
@@ -23,6 +23,7 @@ dependencies:
     - statsmodels
     - sympy
     - xarray
+    - xeus-python
 
     - pip:
         - altair
@@ -48,6 +49,8 @@ dependencies:
         - holoviews[recommended]
         - hvplot
         - inflection
+        - jax
+        - jaxlib
         - joblib
         - jupyter
         - lifelines
@@ -72,6 +75,7 @@ dependencies:
         - tables
         - tdigest
         - hvplot
+        - visidata
         - web-pdb
         - wrapt
         - yfinance
