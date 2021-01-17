@@ -51,73 +51,51 @@ except:  # noqa
     pass
 set_log_file()
 
-def syncSaveSheets(givenpath, *vsheets, confirm_overwrite=False):
-    """
-    Copy of saveSheets function, but without async stuff
-    """
-    filetype = givenpath.ext or options.save_filetype
-
-    savefunc = getattr(vd, 'save_' + filetype, None) or vd.fail('no function to save as type %s' % filetype)
-
-    if givenpath.exists() and confirm_overwrite:
-        confirm("%s already exists. overwrite? " % givenpath.given)
-
-    if not givenpath.given.endswith('/'):  # forcibly specify save individual files into directory by ending path with /
-        return vd.execAsync(savefunc, givenpath, *vsheets)
-
-    # more than one sheet; either no specific multisave for save filetype, or path ends with /
-
-    # save as individual files in the givenpath directory
-    try:
-        os.makedirs(givenpath, exist_ok=True)
-    except FileExistsError:
-        pass
-
-    if not givenpath.is_dir():
-        vd.fail(f'cannot save multiple {filetype} sheets to non-dir')
-
-    # get save function to call
-    for vs in vsheets:
-        p = Path((givenpath / vs.name).with_suffix('.'+filetype))
-        savefunc(p, vs)
-        #vd.execAsync(savefunc, p, vs)
-    return
-
 
 def gui():
+
     import pandas as pd
     from pandasgui import show
-    import datetime
-    import multiprocessing
-    import time
-    now = datetime.datetime.now()
-
-    path_str = f"/tmp/{now.strftime('__visidata_gui_%Y-%m-%d_%H.%M.%S')}_pid.{os.getpid()}__.csv"
-
-    path = visidata.path.Path(path_str)
-
     sheet = vd.sheet
 
-    syncSaveSheets(path, sheet)
-    is_done = False
-    for nn in range(10):
-        time.sleep(1)
-        try:
-            df = pd.read_csv(path_str)
-            if len(df) == len(sheet):
-                is_done = True
-                break
-        except:
-            pass
-    if is_done:
-        try:
-            show(df)
-        finally:
-            os.unlink(path_str)
-            status('Returned from Pandasgui')
-    else:
-        status('Pandasgui timed out')
 
+    dtype = []
+    col_names = [c.name for c in sheet.visibleCols]
+
+    for col in Progress(sheet.visibleCols):
+        if col.type in (int, vlen):
+            dt = 'i8'
+        elif col.type in (float, currency):
+            dt = 'f8'
+        elif col.type is date:
+            dt = 'datetime64[s]'
+
+        else: #  if col.type in (str, anytype):
+            width = col.getMaxWidth(sheet.rows)
+            dt = 'U'+str(width)
+        dtype.append((col.name, dt))
+
+    data = []
+    for typedvals in sheet.iterdispvals(format=False):
+        nprow = []
+        for col, val in typedvals.items():
+            if isinstance(val, TypedWrapper):
+                if col.type is anytype:
+                    val = ''
+                else:
+                    val = options.safe_error
+            elif col.type is date:
+                val = np.datetime64(val.isoformat())
+            nprow.append(val)
+        data.append(tuple(nprow))
+
+    arr = np.array(data, dtype=dtype)
+
+    df = pd.DataFrame(arr)
+
+    show(df)
 
 
 BaseSheet.addCommand('gG', 'pandasgui', 'gui()')
+
+
