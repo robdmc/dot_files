@@ -1,4 +1,4 @@
-from visidata import vd, BaseSheet
+from visidata import vd, BaseSheet, asyncthread
 import visidata
 import os
 import datetime
@@ -52,10 +52,9 @@ except:  # noqa
 set_log_file()
 
 
-def gui():
+def get_frame():
 
     import pandas as pd
-    from pandasgui import show
     sheet = vd.sheet
 
 
@@ -92,10 +91,30 @@ def gui():
     arr = np.array(data, dtype=dtype)
 
     df = pd.DataFrame(arr)
+    return df
 
+
+def gui_async():
+    """
+    Requires pandashells with gui tool be installed
+    """
+    import subprocess
+    df = get_frame()
+    p = subprocess.Popen(['p.gui'], stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+    df.to_csv(p.stdin, index=False)
+    p.stdin.close()
+
+
+def gui_sync():
+    """
+    Does not require pandashells, but will block visidata ui
+    """
+    from pandasgui import show
+    df = get_frame()
     show(df)
 
 
-BaseSheet.addCommand('gG', 'pandasgui', 'gui()')
+BaseSheet.addCommand('gG', 'pandasgui', 'gui_async()')
+BaseSheet.addCommand('zG', 'pandasguisync', 'gui_sync()')
 
 
