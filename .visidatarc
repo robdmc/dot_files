@@ -55,42 +55,40 @@ set_log_file()
 def get_frame():
 
     import pandas as pd
+    import numpy as np
     sheet = vd.sheet
 
 
-    dtype = []
+    # dtype = []
     col_names = [c.name for c in sheet.visibleCols]
 
-    for col in Progress(sheet.visibleCols):
-        if col.type in (int, vlen):
-            dt = 'i8'
-        elif col.type in (float, currency):
-            dt = 'f8'
-        elif col.type is date:
-            dt = 'datetime64[s]'
+    # for col in Progress(sheet.visibleCols):
+    #     if col.type in (int, vlen):
+    #         dt = 'i8'
+    #     elif col.type in (float, currency):
+    #         dt = 'f8'
+    #     elif col.type is date:
+    #         dt = 'datetime64[s]'
 
-        else: #  if col.type in (str, anytype):
-            width = col.getMaxWidth(sheet.rows)
-            dt = 'U'+str(width)
-        dtype.append((col.name, dt))
+    #     else: #  if col.type in (str, anytype):
+    #         width = col.getMaxWidth(sheet.rows)
+    #         dt = 'U'+str(width)
+    #     dtype.append((col.name, dt))
 
     data = []
     for typedvals in sheet.iterdispvals(format=False):
         nprow = []
         for col, val in typedvals.items():
             if isinstance(val, TypedWrapper):
-                if col.type is anytype:
-                    val = ''
-                else:
-                    val = options.safe_error
+                val = pd.NA
             elif col.type is date:
                 val = np.datetime64(val.isoformat())
             nprow.append(val)
         data.append(tuple(nprow))
 
-    arr = np.array(data, dtype=dtype)
+    # arr = np.array(data, dtype=dtype)
 
-    df = pd.DataFrame(arr)
+    df = pd.DataFrame(data, columns=col_names)
     return df
 
 
