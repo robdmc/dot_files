@@ -1,8 +1,6 @@
-from visidata import vd, BaseSheet, asyncthread
-import visidata
-import os
-import datetime
-from pathlib import Path
+from collections import Counter
+from string import ascii_lowercase
+from visidata import vd, BaseSheet, asyncthread, Sheet, Progress
 
 
 vd.options.cmdlog_histfile = '/tmp/visidata_history.vd'
@@ -12,7 +10,6 @@ vd.options.quitguard = True
 vd.options.save_filetype = 'csv'
 vd.options.histogram_bins = 30
 vd.options.numeric_binning = True
-
 
 
 class Ezr:
@@ -26,27 +23,56 @@ class Ezr:
         return getattr(self.ezr, name)
 
 
+def gen_normalize_names(names):
+    seen = Counter()
+    for name in ezr.slugify(names):
+        seen.update({name: 1})
+        num = seen[name]
+        if num > 1:
+            tag = ascii_lowercase[num - 2]
+            name = f'{name}_{tag}'
+        yield name
+
+
+@Sheet.api
+@asyncthread
+def normalize_column_names(sheet):
+    """
+    Normalize the names of all non-hidden columns on the active sheet.
+    """
+
+    init_names = []
+    gen = gen_normalize_names(c.name for c in sheet.visibleCols)
+    prog = Progress(gen, gerund="normalizing", total=sheet.nVisibleCols)
+
+    for i, norm_name in enumerate(prog):
+        col = sheet.visibleCols[i]
+        init_names.append(col.name)  # Store for undo
+        col.name = norm_name
+
+    @asyncthread
+    def undo():
+        for i, c in enumerate(init_names):
+            sheet.visibleCols[i].name = c
+
+    vd.addUndo(undo)
+
+
 try:
     from dateutil.parser import parse
     import numpy as np
     ezr = Ezr()
-    #set_log_file()
 
 except:  # noqa
     pass
-set_log_file()
 
 
 def get_frame():
 
     import pandas as pd
-    import numpy as np
     sheet = vd.sheet
 
-
-    # dtype = []
     col_names = [c.name for c in sheet.visibleCols]
-
 
     data = []
     for typedvals in sheet.iterdispvals(format=False):
@@ -58,8 +84,6 @@ def get_frame():
                 val = np.datetime64(val.isoformat())
             nprow.append(val)
         data.append(tuple(nprow))
-
-    # arr = np.array(data, dtype=dtype)
 
     df = pd.DataFrame(data, columns=col_names)
     return df
@@ -87,5 +111,4 @@ def gui_sync():
 
 BaseSheet.addCommand('gG', 'pandasgui', 'gui_async()')
 BaseSheet.addCommand('zG', 'pandasguisync', 'gui_sync()')
-
-
+Sheet.addCommand(None, "slugify", "vd.sheet.normalize_column_names()")
