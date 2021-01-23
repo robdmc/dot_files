@@ -4,8 +4,8 @@ from visidata import vd, BaseSheet, asyncthread, Sheet, Progress
 
 
 vd.options.cmdlog_histfile = '/tmp/visidata_history.vd'
-vd.options.disp_float_fmt = '{:04f}'
-vd.options.disp_float_fmt = '%Y-%m-%dT%H:%M:%S'
+vd.options.disp_float_fmt = '{:0.16g}'
+vd.options.disp_date_fmt = '%Y-%m-%dT%H:%M:%S'
 vd.options.quitguard = True
 vd.options.save_filetype = 'csv'
 vd.options.histogram_bins = 30
@@ -81,7 +81,10 @@ def get_frame():
             if isinstance(val, TypedWrapper):
                 val = pd.NA
             elif col.type is date:
-                val = np.datetime64(val.isoformat())
+                try:
+                    val = np.datetime64(val.isoformat())
+                except: # noqa
+                    val = pd.NA
             nprow.append(val)
         data.append(tuple(nprow))
 
@@ -100,15 +103,41 @@ def gui_async():
     p.stdin.close()
 
 
-def gui_sync():
+def notebook_sync():
     """
-    Does not require pandashells, but will block visidata ui
+    Running this sync because otherwise leaves nasty zombies.
     """
-    from pandasgui import show
+    import subprocess
+    import shutil
+    import os
+
+    NOTEBOOK_NAME = 'visidata_template.ipynb'
+
+    FILE_DIR = os.path.expanduser('~/dot_files')
+    TEMPLATE_SOURCE = os.path.join(FILE_DIR, NOTEBOOK_NAME)
+
+    NOTEBOOK_DIR = '/tmp/visidata_notebooks'
+    NOTEBOOK_FILE = os.path.join(NOTEBOOK_DIR, NOTEBOOK_NAME)
+    DATA_FILE = os.path.join(NOTEBOOK_DIR, 'data.csv')
+
+    if os.path.isdir(NOTEBOOK_DIR):
+        shutil.rmtree(NOTEBOOK_DIR)
+
+    os.makedirs(NOTEBOOK_DIR)
+    shutil.copy(TEMPLATE_SOURCE, NOTEBOOK_FILE)
+
     df = get_frame()
-    show(df)
+    df.to_csv(DATA_FILE, index=False)
+    p = subprocess.Popen(
+        f'jupyter notebook --port=8888 '
+        f'--NotebookApp.iopub_data_rate_limit=10000000000 --notebook-dir={NOTEBOOK_DIR}'.split(),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    p.wait()
 
 
-BaseSheet.addCommand('gG', 'pandasgui', 'gui_async()')
-BaseSheet.addCommand('zG', 'pandasguisync', 'gui_sync()')
+# BaseSheet.addCommand(None, 'gui sync', 'gui_sync()')
+BaseSheet.addCommand(None, 'gui', 'gui_async()')
 Sheet.addCommand(None, "slugify", "vd.sheet.normalize_column_names()")
+Sheet.addCommand(None, "notebook", "notebook_sync()")
