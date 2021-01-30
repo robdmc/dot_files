@@ -137,6 +137,7 @@ def notebook_sync():
     p.wait()
 
 
+
 # BaseSheet.addCommand(None, 'gui sync', 'gui_sync()')
 BaseSheet.addCommand(None, 'gui', 'gui_async()')
 Sheet.addCommand(None, "slugify", "vd.sheet.normalize_column_names()")
