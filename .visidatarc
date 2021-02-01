@@ -5,7 +5,6 @@ from visidata import vd, BaseSheet, asyncthread, Sheet, Progress
 
 vd.options.cmdlog_histfile = '/tmp/visidata_history.vd'
 vd.options.disp_float_fmt = '{:0.16g}'
-vd.options.disp_date_fmt = '%Y-%m-%dT%H:%M:%S'
 vd.options.quitguard = True
 vd.options.save_filetype = 'csv'
 vd.options.histogram_bins = 30
@@ -137,8 +136,17 @@ def notebook_sync():
     p.wait()
 
 
+def set_to_datetime():
+    vd.options.disp_date_fmt = '%Y-%m-%dT%H:%M:%S'
+
+
+def set_to_date():
+    vd.options.disp_date_fmt = '%Y-%m-%d'
+
 
 # BaseSheet.addCommand(None, 'gui sync', 'gui_sync()')
 BaseSheet.addCommand(None, 'gui', 'gui_async()')
 Sheet.addCommand(None, "slugify", "vd.sheet.normalize_column_names()")
 Sheet.addCommand(None, "notebook", "notebook_sync()")
+Sheet.addCommand(None, "datetime", "set_to_datetime()")
+Sheet.addCommand(None, "date", "set_to_date()")
