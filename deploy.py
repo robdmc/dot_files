@@ -59,6 +59,7 @@ class Deploy(object):
         ('~/dot_files/.ideavimrc', '~/.ideavimrc'),
         ('~/dot_files/.ackrc', '~/.ackrc'),
         ('~/dot_files/.ctags', '~/.ctags'),
+        ('~/dot_files/.visidatarc', '~/.visidatarc'),
         ('~/dot_files/rcconda.sh', '~/rcconda.sh'),
         ('~/dot_files/gitignore_global', '~/.gitignore_global'),
         ('~/dot_files/flake8', '~/.config/flake8'),
