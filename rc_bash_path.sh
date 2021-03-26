@@ -17,6 +17,8 @@
    #  Homebrew directories
    export PATH=/usr/local/bin:$PATH
  
+   ## The next couple of lines are for google cli
+   ## The google tools should be expanded to the following path on osx /Users/rob/bin/google-cloud-sdk 
    # The next line updates PATH for the Google Cloud SDK.
    if [ -f '/Users/rob/bin/google-cloud-sdk/path.bash.inc' ]; then . '/Users/rob/bin/google-cloud-sdk/path.bash.inc'; fi
    # The next line enables shell command completion for gcloud.
