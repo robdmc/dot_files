@@ -72,3 +72,11 @@ vicd()
     fi
     cd "$dst"
 }
+
+# This is copied from https://github.com/aykamko/tag
+if hash rg 2>/dev/null; then
+  export TAG_SEARCH_PROG=rg  # replace with rg for ripgrep
+  tag() { command tag "$@"; source ${TAG_ALIAS_FILE:-/tmp/tag_aliases} 2>/dev/null; }
+  # alias rg=tag  # replace with rg for ripgrep
+fi
+
