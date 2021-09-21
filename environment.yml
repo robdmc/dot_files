@@ -52,6 +52,7 @@ dependencies:
         - inflection
         - jax
         - jaxlib
+        - jinjasql
         - joblib
         - jupyter
         - lifelines
