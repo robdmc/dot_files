@@ -4,7 +4,7 @@ name: viz
 channels:
     - conda-forge
 dependencies:
-    - python=3.8
+    - python=3.9
     - astropy
     - dask
     - datashader
@@ -30,6 +30,7 @@ dependencies:
         - arrow
         - arviz
         - attrs
+        - channels
         - click
         - cookiecutter
         - corner
@@ -72,7 +73,6 @@ dependencies:
         - simple-salesforce
         - snakemake
         - streamz
-        - tables
         - tdigest
         - hvplot
         - visidata
