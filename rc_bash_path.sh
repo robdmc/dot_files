@@ -2,20 +2,21 @@
 
  # If on mac, update paths with mac-specific locations
  if [ "$OS_TYPE" == "mac" ]; then 
+   # Add homebrew to the path
+   eval "$(/opt/homebrew/bin/brew shellenv)"
+
    # Update paths to installed brew tools
-   binpaths=$(gls -d /usr/local/opt/*/libexec/gnubin/)
+   binpaths=$(ls -d /opt/homebrew/opt/*/libexec/gnubin/)
    for binpath in $binpaths; do
       export PATH="$binpath:$PATH"
    done
 
    # Update man paths to brew tools
-   manpaths=$(gls -d /usr/local/opt/*/libexec/gnuman/)
+   binpaths=$(ls -d /opt/homebrew/opt/*/libexec/gnuman/)
    for manpath in $manpaths; do
       export MANPATH="$manpath:$MANPATH"
    done
  
-   #  Homebrew directories
-   export PATH=/usr/local/bin:$PATH
  
    ## The next couple of lines are for google cli
    ## The google tools should be expanded to the following path on osx /Users/rob/bin/google-cloud-sdk 
