@@ -1,0 +1,13 @@
+#! /usr/bin/env bash
+
+cd ~/rob/repos/references_logseq
+git add .
+git commit -am auto
+git push origin
+
+
+cd ~/rob/repos/ambition_logseq
+git add .
+git commit -am auto
+git push origin
+
