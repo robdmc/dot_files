@@ -1,0 +1,20 @@
+#! /usr/bin/env bash
+
+echo "=========================== references_logseq ==================="
+cd ~/rob/repos/references_logseq
+git add .
+git commit -am auto
+git push origin
+
+
+echo "=========================== ambition_logseq ==================="
+cd ~/rob/repos/ambition_logseq
+git add .
+git commit -am auto
+git push origin
+
+echo "=========================== renovation_logseq ==================="
+cd ~/rob/repos/renovation_logseq
+git add .
+git commit -am auto
+git push origin
