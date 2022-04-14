@@ -3,6 +3,12 @@
 import os
 import shutil
 import glob
+import datetime
+
+print('\n\n')
+print('=' * 80)
+print(str(datetime.datetime.now()))
+print('=' * 80)
 
 target_logseq_dir = '/Users/rob/Library/Mobile Documents/iCloud~com~logseq~logseq/Documents'
 
