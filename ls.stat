@@ -1,16 +1,36 @@
 #! /usr/bin/env bash
 
-echo "=========================== references_logseq ==================="
-cd ~/rob/repos/references_logseq
-git add .
-git status -uno
+#! /usr/bin/env bash
 
-echo "=========================== ambition_logseq ==================="
-cd ~/rob/repos/ambition_logseq
-git add .
-git status -uno
+DIRS=(
+"$HOME/rob/repos/references_logseq/"
+"$HOME/rob/repos/ambition_logseq"
+"$HOME/rob/repos/renovation_logseq"
+"$HOME/rob/repos/personal_logseq"
+"$HOME/rob/repos/code_logseq"
+)
 
-echo "=========================== renovation_logseq ==================="
-cd ~/rob/repos/renovation_logseq
-git add .
-git status -uno
+for mydir in "${DIRS[@]}"
+do
+    echo "=========================== $(basename $mydir)  ==================="
+    cd "$mydir"
+    git add .
+    git status -uno
+    echo
+    echo
+done
+
+# echo "=========================== references_logseq ==================="
+# cd ~/rob/repos/references_logseq
+# git add .
+# git status -uno
+
+# echo "=========================== ambition_logseq ==================="
+# cd ~/rob/repos/ambition_logseq
+# git add .
+# git status -uno
+
+# echo "=========================== renovation_logseq ==================="
+# cd ~/rob/repos/renovation_logseq
+# git add .
+# git status -uno

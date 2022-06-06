@@ -1,17 +1,35 @@
 #! /usr/bin/env bash
 
-echo "=========================== references_logseq ==================="
-cd ~/rob/repos/references_logseq
-git commit -am auto
-git pull origin main
+DIRS=(
+"$HOME/rob/repos/references_logseq/"
+"$HOME/rob/repos/ambition_logseq"
+"$HOME/rob/repos/renovation_logseq"
+"$HOME/rob/repos/personal_logseq"
+"$HOME/rob/repos/code_logseq"
+)
+
+for mydir in "${DIRS[@]}"
+do
+    echo "=========================== $(basename $mydir)  ==================="
+    cd "$mydir"
+    git commit -am auto
+    git pull origin main
+    echo
+    echo
+done
+
+# echo "=========================== references_logseq ==================="
+# cd ~/rob/repos/references_logseq
+# git commit -am auto
+# git pull origin main
 
 
-echo "=========================== ambition_logseq ==================="
-cd ~/rob/repos/ambition_logseq
-git commit -am auto
-git pull origin main
+# echo "=========================== ambition_logseq ==================="
+# cd ~/rob/repos/ambition_logseq
+# git commit -am auto
+# git pull origin main
 
-echo "=========================== renovation_logseq ==================="
-cd ~/rob/repos/renovation_logseq
-git commit -am auto
-git pull origin main
+# echo "=========================== renovation_logseq ==================="
+# cd ~/rob/repos/renovation_logseq
+# git commit -am auto
+# git pull origin main
