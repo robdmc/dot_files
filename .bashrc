@@ -29,13 +29,6 @@ export HISTCONTROL="ignoreboth:erasedups"
      export OS_TYPE="linux"
  fi
 
- # Determine if brew is installd
- if [ -x "$(command -v brew)" ]; then
-     export HAS_BREW=1
- else
-     export HAS_BREW=0
- fi
-
  # Source the functions file.
  # If you see a command in below that you don't recognize, look in
  # the function definition file.
@@ -49,6 +42,14 @@ export HISTCONTROL="ignoreboth:erasedups"
 
  # Set up prompt
  source_if_exists ~/dot_files/rc_bash_prompt.sh
+
+ # Determine if brew is installd
+ if [ -x "$(command -v brew)" ]; then
+     export HAS_BREW=1
+ else
+     export HAS_BREW=0
+ fi
+
  
  # Make sure the vim backup directory exists
  mkdir -p ~/.vim_backups
