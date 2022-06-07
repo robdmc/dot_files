@@ -6,6 +6,7 @@ channels:
 dependencies:
     - python=3.9
     - astropy
+    - cvxpy
     - jupyterlab
     - numpy
     - pip
@@ -20,16 +21,20 @@ dependencies:
         - click
         - cookiecutter
         - daiquiri
+        - dataset
         - duckdb
         - easier
         - flake8
         - fleming
         - fuzzypicker
+        - gspread
         - holoviews[recommended]
         - hvplot
         - jinjasql
         - lifelines
         - networkx
+        - nose
+        - oauth2client
         - pandashells[full]
         - patsy
         - pdbpp
@@ -38,5 +43,11 @@ dependencies:
         - python-dateutil
         - requests
         - seaborn
+        - simple-salesforce
+        - snakemake
+        - streamz
+        - tdigest
+        - tqdm
+        - hvplot
         - visidata
         - wrapt
