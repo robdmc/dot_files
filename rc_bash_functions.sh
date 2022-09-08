@@ -80,3 +80,26 @@ if hash rg 2>/dev/null; then
   # alias rg=tag  # replace with rg for ripgrep
 fi
 
+
+function compute_took ()
+{
+    # HISTTIMEFORMATORIG=$HISTTIMEFORMAT
+    # export HISTTIMEFORMAT='%s '; 
+    # export HISTFILE="$HOME/.bash_history"
+
+    # HISTTIMEFORMAT='%s ';
+    # export LAST_COMM="$(history 1)";
+    LASTCOMM="$(HISTTIMEFORMAT='%s ' history 1)"
+    END=$(date '+%s');
+    START=$(awk '{print $2}' <<<"$LASTCOMM");
+    START_TIME=$(date -d"@$START" '+%T %D');
+    #export TOOK="$((END - START))";
+    # printf "$((END - START))";
+    printf "$START | $END";
+    # export HISTTIMEFORMAT=$HISTTIMEFORMATORIG
+
+
+}
+
+
+

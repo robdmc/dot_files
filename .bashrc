@@ -29,6 +29,18 @@ export HISTCONTROL="ignoreboth:erasedups"
      export OS_TYPE="linux"
  fi
 
+ # Set up terminal working preferences
+ shopt -s histappend
+ shopt -s extglob
+ export EDITOR=vim
+ export HISTFILE="$HOME/.bash_history"
+ export HISTFILESIZE=20000
+ export HISTSIZE=20000
+ export HISTIGNORE="clear:ls:pwd:history:hig:say"
+ export HISTTIMEFORMAT='%F %T '
+ set -o vi
+
+
  # Source the functions file.
  # If you see a command in below that you don't recognize, look in
  # the function definition file.
@@ -69,16 +81,16 @@ export HISTCONTROL="ignoreboth:erasedups"
  # umask 007 (read-write by owner and group, no access to others)
  umask 002
  
- # Set up terminal working preferences
- shopt -s histappend
- shopt -s extglob
- export EDITOR=vim
- export HISTFILE="$HOME/.bash_history"
- export HISTFILESIZE=20000
- export HISTSIZE=20000
- export HISTIGNORE="clear:ls:pwd:history:hig:say"
- export HISTTIMEFORMAT='%F %T '
- set -o vi
+ # # Set up terminal working preferences
+ # shopt -s histappend
+ # shopt -s extglob
+ # export EDITOR=vim
+ # export HISTFILE="$HOME/.bash_history"
+ # export HISTFILESIZE=20000
+ # export HISTSIZE=20000
+ # export HISTIGNORE="clear:ls:pwd:history:hig:say"
+ # export HISTTIMEFORMAT='%F %T '
+ # set -o vi
  
  # Save history after each command, but only if this an interactive shell
  if [ $SHELL_IS_INTERACTIVE -eq 1 ]; then 

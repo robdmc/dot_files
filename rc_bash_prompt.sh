@@ -25,7 +25,8 @@
  MACHINE_NAME="${OS_TYPE}"
  source_if_exists ~/dot_files/rc_machine_name.sh
  
- PS1="$grey[${green}${MACHINE_NAME}${grey}][$BLUE\t$grey]\$(parse_git_branch)[$cyan \w $grey$grey]$NC\n${PURPLE}λ$NC "
+ PS1="$grey[${green}${MACHINE_NAME}|\$(compute_took)|${grey}][$BLUE\t$grey]\$(parse_git_branch)[$cyan \w $grey$grey]$NC\n${PURPLE}λ$NC "
+ # PS1="$grey[${green}${MACHINE_NAME}${grey}][$BLUE\t$grey]\$(parse_git_branch)[$cyan \w $grey$grey]$NC\n${PURPLE}λ$NC "
  
 
 
