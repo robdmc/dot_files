@@ -8,6 +8,7 @@ DIRS=(
 "$HOME/rob/repos/renovation_logseq"
 "$HOME/rob/repos/personal_logseq"
 "$HOME/rob/repos/code_logseq"
+"$HOME/rob/repos/consulting_logseq"
 )
 
 for mydir in "${DIRS[@]}"
