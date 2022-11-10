@@ -63,6 +63,7 @@ class Deploy(object):
         ('~/dot_files/rcconda.sh', '~/rcconda.sh'),
         ('~/dot_files/gitignore_global', '~/.gitignore_global'),
         ('~/dot_files/flake8', '~/.config/flake8'),
+        ('~/dot_files/.holoviews.rc', '~/.holoviews.rc'),
 
         # Executables
         ('~/dot_files/git_diff_wrapper', '~/bin/git_diff_wrapper'),

@@ -1,0 +1,21 @@
+def _configure_holoviews():
+    import holoviews as hv
+    from holoviews import opts
+    hv.extension('bokeh')
+    width = 800
+    height = 400
+    callables = [
+        opts.Curve,
+        opts.Scatter,
+        opts.Histogram,
+        opts.Area,
+    ]
+
+    for f in callables:
+        opts.defaults(
+            f(height=height, width=width, show_grid=True, tools=['hover']))
+
+    opts.defaults(opts.Overlay(legend_position='top'))
+
+
+_configure_holoviews()
