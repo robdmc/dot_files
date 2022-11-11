@@ -11,6 +11,7 @@ dependencies:
     - duckdb
     - folium
     - geocoder
+    - ibis-framework[duckdb]
     - jupyterlab
     - mkl-service
     - nbconvert
