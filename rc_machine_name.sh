@@ -5,5 +5,5 @@
 
 # To undo this, type:
 # git update-index --no-skip-worktree rc_machine_name.sh
-export MACHINE_NAME="${OS_TYPE}"
+export MACHINE_NAME="miner2-wsl"
 
