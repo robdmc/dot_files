@@ -64,6 +64,7 @@ class Deploy(object):
         ('~/dot_files/gitignore_global', '~/.gitignore_global'),
         ('~/dot_files/flake8', '~/.config/flake8'),
         ('~/dot_files/.holoviews.rc', '~/.holoviews.rc'),
+        ('~/dot_files/.tmux.conf', '~/.tmux.conf'),
 
         # Executables
         ('~/dot_files/git_diff_wrapper', '~/bin/git_diff_wrapper'),

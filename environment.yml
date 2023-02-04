@@ -4,33 +4,18 @@ name: viz
 channels:
     - conda-forge
 dependencies:
-    - python=3.9
-    - astropy
+    - python=3.10
     - dask
     - datashader
-    - duckdb
-    - folium
-    - geocoder
-    - ibis-framework[duckdb]
-    - jupyterlab
-    - mkl-service
     - nbconvert
-    - numpy
-    - pandoc
-    - pgcli
     - pip
     - psycopg2
-    - scikit-learn
-    - scipy
-    - statsmodels
-    - sympy
-    - xarray
-    - xeus-python
 
     - pip:
         - altair
         - arrow
         - arviz
+        - astropy
         - attrs
         - channels
         - click
@@ -42,43 +27,58 @@ dependencies:
         - dataset
         - django
         - django-extensions
+        - duckdb
         - easier
         - emcee
         - flake8
         - fleming
         - folium
+        - folium
         - fuzzypicker
+        - geocoder
         - gspread
         - holoviews[recommended]
         - hvplot
+        - hvplot
+        - ibis-framework[duckdb]
         - inflection
         - jax
         - jaxlib
         - jinjasql
         - joblib
         - jupyter
+        - jupyterlab
         - lifelines
         - magic-wormhole
         - networkx
         - nose
+        - numpy
         - oauth2client
         - pandashells[full]
+        - pandoc
         - panel
         - patsy
         - pdbpp
         - pdvega
+        - pgcli
+        - pip
         - psutil
         - pymc3
         - pytest
         - python-dateutil
         - requests
+        - scikit-learn
+        - scipy
         - seaborn
         - simple-salesforce
         - snakemake
+        - statsmodels
         - streamz
+        - sympy
         - tdigest
-        - hvplot
         - visidata
         - web-pdb
         - wrapt
+        - xarray
+        - xeus-python
         - yfinance
