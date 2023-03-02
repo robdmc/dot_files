@@ -50,6 +50,7 @@ dependencies:
         - jupyterlab
         - lifelines
         - magic-wormhole
+        - more-itertools
         - networkx
         - nose
         - numpy
