@@ -62,6 +62,7 @@ dependencies:
         - pdvega
         - pgcli
         - pip
+        - polars
         - psutil
         - pymc3
         - pytest
