@@ -7,12 +7,15 @@ dependencies:
     - python=3.10
     - dask
     - datashader
+    - lightgbm
     - nbconvert
     - pip
     - psycopg2
 
     - pip:
         - altair
+        - tensorflow-macos
+        - tensorflow-metal
         - arrow
         - arviz
         - astropy
@@ -24,6 +27,7 @@ dependencies:
         - cryptography
         - cython
         - daiquiri
+        - darts
         - dataset
         - django
         - django-extensions
