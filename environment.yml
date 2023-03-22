@@ -14,8 +14,6 @@ dependencies:
 
     - pip:
         - altair
-        - tensorflow-macos
-        - tensorflow-metal
         - arrow
         - arviz
         - astropy
@@ -46,6 +44,7 @@ dependencies:
         - hvplot
         - ibis-framework[duckdb]
         - inflection
+        - ipympl
         - jax
         - jaxlib
         - jinjasql
@@ -82,6 +81,8 @@ dependencies:
         - streamz
         - sympy
         - tdigest
+        - tensorflow-macos
+        - tensorflow-metal
         - visidata
         - web-pdb
         - wrapt
