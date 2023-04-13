@@ -33,4 +33,7 @@
  export PATH=$HOME/bin:$PATH
  export PATH=./:$PATH
 
+ # Add the brew version of psql client tools
+ export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
 
