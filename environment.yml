@@ -1,5 +1,5 @@
-# Run this to create: conda env create --force -f environment.yml
-# To update with any changes:  conda env update -f environment.yml
+# Run this to create: mamba env create --force -f environment.yml
+# To update with any changes:  mamba env update -f environment.yml
 name: viz
 channels:
     - conda-forge
@@ -25,7 +25,7 @@ dependencies:
         - cryptography
         - cython
         - daiquiri
-        - darts
+        #- u8darts
         - dataset
         - django
         - django-extensions
