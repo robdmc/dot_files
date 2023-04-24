@@ -5,20 +5,21 @@ channels:
     - conda-forge
 dependencies:
     - python=3.10
-    - dask
+    # - dask
     - datashader
-    - lightgbm
-    - nbconvert
+    # - lightgbm
+    # - nbconvert
     - pip
-    - psycopg2
+    - nb_black
+
 
     - pip:
-        - altair
-        - arrow
+        # - altair
+        - pyarrow
         - arviz
         - astropy
         - attrs
-        - channels
+        # - channels
         - click
         - cookiecutter
         - corner
@@ -26,66 +27,67 @@ dependencies:
         - cython
         - daiquiri
         #- u8darts
-        - dataset
-        - django
-        - django-extensions
+        # - dataset
+        # - django
+        # - django-extensions
         - duckdb
         - easier
-        - emcee
+        # - emcee
         - flake8
         - fleming
-        - folium
-        - folium
+        # - folium
         - fuzzypicker
-        - geocoder
+        # - geocoder
         - gspread
         - holoviews[recommended]
         - hvplot
-        - hvplot
         - ibis-framework[duckdb]
-        - inflection
-        - ipympl
-        - jax
-        - jaxlib
+        - ibis-framework[postgres]
+        # - inflection
+        # - ipympl
+        # - jax
+        # - jaxlib
         - jinjasql
-        - joblib
-        - jupyter
+        # - joblib
+        # - jupyter
         - jupyterlab
         - lifelines
-        - magic-wormhole
+        # - magic-wormhole
         - more-itertools
-        - networkx
-        - nose
+        # - networkx
+        # - nose
         - numpy
         - oauth2client
         - pandashells[full]
-        - pandoc
-        - panel
+        # - pandoc
+        # - panel
         - patsy
         - pdbpp
-        - pdvega
+        # - pdvega
         - pgcli
         - pip
         - polars
         - psutil
-        - pymc3
+        - psycopg2
+        # - pymc3
         - pytest
         - python-dateutil
         - requests
         - scikit-learn
         - scipy
         - seaborn
-        - simple-salesforce
-        - snakemake
+        - simpy
+        # - simple-salesforce
+        # - snakemake
         - statsmodels
-        - streamz
+        # - streamz
         - sympy
-        - tdigest
-        - tensorflow-macos
-        - tensorflow-metal
+        # - tdigest
+        # - tensorflow-macos
+        # - tensorflow-metal
         - visidata
-        - web-pdb
+        # - web-pdb
         - wrapt
-        - xarray
-        - xeus-python
-        - yfinance
+        # - xarray
+        # - xeus-python
+        # - yfinance
