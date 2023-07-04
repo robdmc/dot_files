@@ -1,6 +1,6 @@
 # Run this to create: mamba env create --force -f environment.yml
 # To update with any changes:  mamba env update -f environment.yml
-name: viz
+name: viz2
 channels:
     - conda-forge
 dependencies:
@@ -44,7 +44,7 @@ dependencies:
         - ibis-framework[duckdb]
         - ibis-framework[postgres]
         # - inflection
-        # - ipympl
+        - ipympl
         # - jax
         # - jaxlib
         - jinjasql
@@ -59,6 +59,7 @@ dependencies:
         - numpy
         - oauth2client
         - pandashells[full]
+        - pandera
         # - pandoc
         # - panel
         - patsy
