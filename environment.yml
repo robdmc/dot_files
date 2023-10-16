@@ -10,7 +10,6 @@ dependencies:
     # - lightgbm
     # - nbconvert
     - pip
-    - nb_black
 
 
     - pip:
@@ -51,6 +50,7 @@ dependencies:
         # - joblib
         # - jupyter
         - jupyterlab
+        - jupyterlab-code-formatter
         - lifelines
         # - magic-wormhole
         - more-itertools
