@@ -13,6 +13,10 @@
 
  # Add a tmux alias
  alias robmux='tmux new-session -A -s robmux'
+ alias richmux='tmux new-session -A -s richmux'
+ alias vandamux='tmux new-session -A -s vandamux'
+ alias lilymux='tmux new-session -A -s lilymux'
+ alias alecmux='tmux new-session -A -s alecmux'
 
  # export GOLD_AMBITION_HOME="/Users/rob/rob/gold_repos/ambition" 
  # export GOLD_HISTORY_DIR="$GOLD_AMBITION_HOME/docker_bash_history"
