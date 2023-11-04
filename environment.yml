@@ -1,6 +1,6 @@
 # Run this to create: mamba env create --force -f environment.yml
 # To update with any changes:  mamba env update -f environment.yml
-name: viz2
+name: viz
 channels:
     - conda-forge
 dependencies:
