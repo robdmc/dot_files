@@ -31,7 +31,7 @@ if not os.path.isfile(os.path.expanduser('~/bin/ngrok')):
         sys.stderr.write('\n\nArchitechure not recognized')
         sys.exit(1)
 
-cmd = "p.crypt -i ngrok_config.tar.crypt -o ngrok_config.tar -d"
+cmd = "p.crypt -i ngrok_config_password_manager.tar.crypt -o ngrok_config.tar -d"
 run_command(cmd)
 
 cmd = "cd ~ && tar -xvf ./dot_files/ngrok_config.tar"
