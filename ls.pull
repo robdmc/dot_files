@@ -1,15 +1,15 @@
 #! /usr/bin/env bash
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source "$DIR/logseq_dirs.sh"
-
-for mydir in "${DIRS[@]}"
-do
-    echo "=========================== $(basename $mydir)  ==================="
-    cd "$mydir"
-    git commit -am auto
-    git pull origin main
-    echo
-    echo
-done
+ DIR="$HOME/dot_files"
+ source "$DIR/logseq_dirs.sh"
+ 
+ for mydir in "${DIRS[@]}"
+ do
+     echo "=========================== $(basename $mydir)  ==================="
+     cd "$mydir"
+     git commit -am auto
+     git pull origin main
+     echo
+     echo
+ done
 
