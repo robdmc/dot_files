@@ -1,16 +1,8 @@
 #! /usr/bin/env bash
 
-#! /usr/bin/env bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "$DIR/logseq_dirs.sh"
 
-DIRS=(
-"$HOME/rob/repos/blueberry_logseq/"
-"$HOME/rob/repos/references_logseq/"
-"$HOME/rob/repos/ambition_logseq"
-"$HOME/rob/repos/renovation_logseq"
-"$HOME/rob/repos/personal_logseq"
-# "$HOME/rob/repos/code_logseq"
-"$HOME/rob/repos/consulting_logseq"
-)
 
 for mydir in "${DIRS[@]}"
 do
@@ -23,21 +15,3 @@ do
     echo
 done
 
-# echo "=========================== references_logseq ==================="
-# cd ~/rob/repos/references_logseq
-# git add .
-# git commit -am auto
-# git push origin
-
-
-# echo "=========================== ambition_logseq ==================="
-# cd ~/rob/repos/ambition_logseq
-# git add .
-# git commit -am auto
-# git push origin
-
-# echo "=========================== renovation_logseq ==================="
-# cd ~/rob/repos/renovation_logseq
-# git add .
-# git commit -am auto
-# git push origin
