@@ -13,7 +13,7 @@ def run_command(cmd, msg='failed'):
 
 if not os.path.isfile(os.path.expanduser('~/bin/ngrok')):
     platform_info = platform.platform().lower()
-    if 'darwin' in platform_info:
+    if ('darwin' in platform_info) or ('macos' in platform_info):
         cmd = 'cd ~/bin '
         cmd += ' && wget \'https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-darwin-amd64.zip\''
         cmd += ' && unzip ngrok-stable-darwin-amd64.zip'

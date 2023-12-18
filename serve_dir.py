@@ -33,7 +33,7 @@ p1 = subprocess.Popen(['bash', '-c', cmd])
 time.sleep(1)
 
 # start an ngrok server pointed at the simpleserver port
-cmd = 'ngrok http -subdomain {} {}'.format(args.domain, args.port)
+cmd = 'ngrok http --domain {} {}'.format(args.domain, args.port)
 print(cmd)
 p2 = subprocess.Popen(['bash', '-c', cmd])
 
