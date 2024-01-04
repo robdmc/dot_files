@@ -1,0 +1,16 @@
+#! /usr/bin/make 
+
+
+
+.PHONY: help
+help:  ## Print the help documentation
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+.PHONY: experiment
+experiment: ## Make the viz base profile point to the experiment env
+	sed -i 's/conda activate viz/conda activate experiment/g' profiles.json
+
+.PHONY: viz
+viz: ## Make the viz base profile point to the viz env
+	sed -i 's/conda activate experiment/conda activate viz/g' profiles.json
+
