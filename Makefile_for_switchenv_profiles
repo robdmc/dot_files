@@ -6,15 +6,19 @@
 help:  ## Print the help documentation
 	@grep -E '^[a-zA-Z_-]+.*?:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
+.PHONY: ai
+ai: ## Default to env
+	sed -i 's/conda activate [a-zA-Z_]\+/conda activate ai_2024_01_25a/g' profiles.json
+
 .PHONY: experiment
-experiment: ## Make the viz base profile point to the experiment env
-	sed -i 's/conda activate viz/conda activate experiment/g' profiles.json
+experiment: ## Default to env
+	sed -i 's/conda activate [a-zA-Z_]\+/conda activate experiment/g' profiles.json
 
 .PHONY: viz
-viz: ## Make the viz base profile point to the viz env
-	sed -i 's/conda activate experiment/conda activate viz/g' profiles.json
+viz: ## Default to env
+	sed -i 's/conda activate [a-zA-Z_]\+/conda activate viz/g' profiles.json
 
 .PHONY: show
-show: ## Show which env the base profile currently points to
-	@grep -oP 'conda activate \K(experiment|viz)\b' profiles.json
+show: ## Default to env
+	@grep -oP 'conda activate \K(viz|conda|ai_2024_01_25a)\b' profiles.json
 

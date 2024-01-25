@@ -22,7 +22,8 @@
  # export GOLD_HISTORY_DIR="$GOLD_AMBITION_HOME/docker_bash_history"
  ## Specific to my day job
  alias gbbetl='cd ~/rob/repos/blueberry_etl/code/airflow/dags/bbetl'
- #alias ga='cd /Users/rob/ambition'
+ alias ga='cd /Users/rob/rob/repos/blueberry_analysis'
+ alias gw='cd /Users/rob/rob/repos/workbench'
  #alias gp='cd /Users/rob/packages'
  ##alias gadp='lamb.docker shell -p'
  ##alias gad='lamb.docker shell'
