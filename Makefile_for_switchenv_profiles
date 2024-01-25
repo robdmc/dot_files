@@ -8,17 +8,17 @@ help:  ## Print the help documentation
 
 .PHONY: ai
 ai: ## Default to env
-	sed -i 's/conda activate [a-zA-Z_]\+/conda activate ai_2024_01_25a/g' profiles.json
+	sed -i 's/conda activate [a-z_0-9]*[a-z_0-9]/conda activate ai_2024_01_25a/g' profiles.json
 
 .PHONY: experiment
 experiment: ## Default to env
-	sed -i 's/conda activate [a-zA-Z_]\+/conda activate experiment/g' profiles.json
+	sed -i 's/conda activate [a-z_0-9]*[a-z_0-9]/conda activate experiment/g' profiles.json
 
 .PHONY: viz
 viz: ## Default to env
-	sed -i 's/conda activate [a-zA-Z_]\+/conda activate viz/g' profiles.json
+	sed -i 's/conda activate [a-z_0-9]*[a-z_0-9]/conda activate viz/g' profiles.json
 
 .PHONY: show
 show: ## Default to env
-	@grep -oP 'conda activate \K(viz|conda|ai_2024_01_25a)\b' profiles.json
+	@grep -oP 'conda activate \K[^ \\]+' profiles.json
 
