@@ -43,6 +43,9 @@ export HISTCONTROL="ignoreboth:erasedups"
  # Set up prompt
  source_if_exists ~/dot_files/rc_bash_prompt.sh
 
+ # Set up default conda env
+ source_if_exists ~/dot_files/rc_conda_default.sh
+
  # Determine if brew is installd
  if [ -x "$(command -v brew)" ]; then
      export HAS_BREW=1
