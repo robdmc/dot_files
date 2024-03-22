@@ -8,11 +8,12 @@ help:  ## Print the help documentation
 
 .PHONY: ai
 ai: ## Default to env
-	sed -i 's/conda activate [a-z_0-9]*[a-z_0-9]/conda activate ai_2024_01_25a/g' profiles.json
+	sed -i 's/conda activate [a-z_0-9]*[a-z_0-9]/conda activate ai_2024_02_29/g' profiles.json
+	# sed -i 's/conda activate [a-z_0-9]*[a-z_0-9]/conda activate ai_2024_03_18/g' profiles.json
 
 .PHONY: experiment
 experiment: ## Default to env
-	sed -i 's/conda activate [a-z_0-9]*[a-z_0-9]/conda activate experiment/g' profiles.json
+	sed -i 's/conda activate [a-z_0-9]*[a-z_0-9]/conda activate viz_2024_02_06/g' profiles.json
 
 .PHONY: viz
 viz: ## Default to env
