@@ -111,3 +111,6 @@ export HISTCONTROL="ignoreboth:erasedups"
 
  # Source all existig bash hooks defined by ~/bash_hooks/*.sh
  source_bash_hooks
+
+ # This is needed to run jax on mac gpu
+ export ENABLE_PJRT_COMPATIBILITY=1
