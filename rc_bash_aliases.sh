@@ -51,7 +51,9 @@
  # alias ipywi='BROWSER=open jupyter notebook --port=8888 --NotebookApp.iopub_data_rate_limit=10000000000'
  # alias jup='BROWSER=open jupyter notebook --ip=0.0.0.0 --port=8888 --NotebookApp.iopub_data_rate_limit=10000000000'
  # alias jupl='BROWSER=open jupyter notebook --port=8888 --NotebookApp.iopub_data_rate_limit=10000000000'
- alias jl='BROWSER=open jupyter-lab --NotebookApp.iopub_data_rate_limit=10000000000'
+ alias jl='(touch .) && ((touch .. >& /dev/null) || true ) && BROWSER=open jupyter-lab --NotebookApp.iopub_data_rate_limit=10000000000'
+
+ alias mo='(touch .) && ((touch .. >& /dev/null) || true ) && marimo edit'
 
  # Alias for opening macvim
  # alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
