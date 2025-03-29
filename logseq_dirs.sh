@@ -6,5 +6,6 @@
  "$HOME/rob/repos/personal_logseq"
  "$HOME/rob/repos/ham_radio_publications"
  "$HOME/rob/repos/consulting_logseq"
+ "$HOME/rob/repos/book_stat_mech_notes"
  )
 

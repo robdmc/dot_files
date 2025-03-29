@@ -1,6 +1,7 @@
  # set up aliases
  alias less='less -R'
  alias dirs='dirs -v'
+ alias ltr='ls -ltr'
 
  # Only alias the ls command if it doesn't fail
  ls --color=tty >&/dev/null
@@ -53,7 +54,7 @@
  # alias jupl='BROWSER=open jupyter notebook --port=8888 --NotebookApp.iopub_data_rate_limit=10000000000'
  alias jl='(touch .) && ((touch .. >& /dev/null) || true ) && BROWSER=open jupyter-lab --NotebookApp.iopub_data_rate_limit=10000000000'
 
- alias mo='(touch .) && ((touch .. >& /dev/null) || true ) && marimo edit'
+ alias mo='(touch .) && ((touch .. >& /dev/null) || true ) && marimo edit --watch'
 
  # Alias for opening macvim
  # alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
