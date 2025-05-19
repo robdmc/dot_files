@@ -53,6 +53,7 @@ class Deploy(object):
         ('~/dot_files/.bash_profile', '~/.bash_profile'),
         ('~/dot_files/.bashrc', '~/.bashrc'),
         ('~/dot_files/.inputrc', '~/.inputrc'),
+        ('~/dot_files/.pdbrc', '~/.pdbrc'),
         ('~/dot_files/.tigrc', '~/.tigrc'),
         ('~/dot_files/.vim', '~/.vim'),
         ('~/dot_files/.vimrc', '~/.vimrc'),

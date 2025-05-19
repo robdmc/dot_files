@@ -15,7 +15,8 @@
   # I am hijacking this conda file to also specify uv environments.
   # export UV_ENV_DEFAULT="/Users/rob/rob/repos/uv_management/ai_2025-01-27"
   #export UV_ENV_DEFAULT="/Users/rob/rob/repos/uv_management/ai_2025-01-28"
-  export UV_ENV_DEFAULT="/Users/rob/rob/repos/uv_management/ai_2025-02-26"
+  # export UV_ENV_DEFAULT="/Users/rob/rob/repos/uv_management/ai_2025-02-26"
+  export UV_ENV_DEFAULT="/Users/rob/rob/repos/uv_management/ai_2025-03-31"
 
 
   # IGNORE ME
