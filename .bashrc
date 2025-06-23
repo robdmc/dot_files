@@ -114,3 +114,9 @@ export HISTCONTROL="ignoreboth:erasedups"
 
  # This is needed to run jax on mac gpu
  export ENABLE_PJRT_COMPATIBILITY=1
+
+ # Make compiling default to the homebrew compiler
+ # If you get weird compile errors maybe unset these
+ export CC=/opt/homebrew/opt/gcc/bin/gcc-15
+ export CXX=/opt/homebrew/opt/gcc/bin/g++-15
+ 

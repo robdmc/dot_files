@@ -56,6 +56,12 @@
 
  alias mo='(touch .) && ((touch .. >& /dev/null) || true ) && marimo edit --watch'
 
+
+ # Adding aliases to see if I can get python packages to compile
+ # If you get weird compile errors maybe comment these out
+ alias gcc=gcc-15
+ alias g++=g++-15
+
  # Alias for opening macvim
  # alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
 
