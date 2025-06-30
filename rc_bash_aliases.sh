@@ -55,6 +55,7 @@
  alias jl='(touch .) && ((touch .. >& /dev/null) || true ) && BROWSER=open jupyter-lab --NotebookApp.iopub_data_rate_limit=10000000000'
 
  alias mo='(touch .) && ((touch .. >& /dev/null) || true ) && marimo edit --watch'
+ alias mox='(touch .) && ((touch .. >& /dev/null) || true ) && uvx marimo edit --sandbox --watch'
 
 
  # Adding aliases to see if I can get python packages to compile
