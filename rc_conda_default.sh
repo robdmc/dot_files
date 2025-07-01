@@ -17,7 +17,8 @@
   #export UV_ENV_DEFAULT="/Users/rob/rob/repos/uv_management/ai_2025-01-28"
   # export UV_ENV_DEFAULT="/Users/rob/rob/repos/uv_management/ai_2025-02-26"
   # export UV_ENV_DEFAULT="/Users/rob/rob/repos/uv_management/ai_2025-03-31"
-  export UV_ENV_DEFAULT="/Users/rob/rob/repos/uv_management/ai_2025-06-22"
+  # export UV_ENV_DEFAULT="/Users/rob/rob/repos/uv_management/ai_2025-06-22"
+  export UV_ENV_DEFAULT="/Users/rob/rob/repos/uv_management/ai_2025-07-01"
 
 
   # IGNORE ME
