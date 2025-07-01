@@ -2,6 +2,7 @@
  alias less='less -R'
  alias dirs='dirs -v'
  alias ltr='ls -ltr'
+ alias ltd='d=$(ls -ltrd -- */ 2>/dev/null | tail -n 1 | awk "{print \$9}"); cd "$d" && ls -ltr'
 
  # Only alias the ls command if it doesn't fail
  ls --color=tty >&/dev/null
