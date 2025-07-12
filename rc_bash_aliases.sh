@@ -58,6 +58,10 @@
  alias mo='(touch .) && ((touch .. >& /dev/null) || true ) && marimo edit --watch'
  alias mox='(touch .) && ((touch .. >& /dev/null) || true ) && uvx marimo edit --sandbox --watch'
 
+ alias uvi='uv init --managed-python --python 3.13'
+ alias uve='uv venv'
+ alias uva='source ./.venv/bin/activate'
+
 
  # Adding aliases to see if I can get python packages to compile
  # If you get weird compile errors maybe comment these out
