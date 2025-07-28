@@ -1,0 +1,37 @@
+# Git flow instructions
+
+### 4. User Control Requirements
+- **No automatic git operations** - All git commands require explicit user approval
+- **Present proposed commits clearly** - Show the full commit message before asking for approval
+- **Allow user modifications** - User can request changes to commit messages
+- **Respect user decisions** - If user rejects a commit, ask how they'd like to proceed
+
+## Example Interaction Pattern
+
+```
+Agent: "Task completed successfully. I've modified the following:
+
+- assemble_intake_question_counts.nb.py: Updated SYSTEM_PROMPT in cell 302 to improve clinical reasoning
+- assemble_intake_question_counts.nb.py: Modified Result class to include confidence scores
+- guideline_individual_questions.ddb: Updated with new question analysis results
+
+I propose this git commit:
+
+'Update clinical question analysis with confidence scoring
+
+Detailed description:
+- Enhanced SYSTEM_PROMPT in cell 302 to include confidence assessment criteria
+- Added confidence_score field to Result class for better decision tracking
+- Modified agent reasoning to include uncertainty quantification
+- Updated database schema to store confidence metrics
+
+Files changed:
+- assemble_intake_question_counts.nb.py: SYSTEM_PROMPT update, Result class enhancement
+
+Should I proceed with this git commit?"
+
+User: "Yes, proceed"
+
+Agent: [Executes git add and git commit commands]
+```
+
