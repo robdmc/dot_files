@@ -75,3 +75,4 @@
  # alias gc='gcalcli agenda --refresh'
  # alias gcw='gcalcli calw --refresh'
  # alias gcm='gcalcli calm --refresh'
+ alias claude_merge=' git fetch origin main && git checkout main && git merge claude_work && git push origin main && git checkout claude_work'
