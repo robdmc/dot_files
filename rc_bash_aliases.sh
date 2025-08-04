@@ -26,6 +26,8 @@
  alias gbb='cd /Users/rob/rob/repos/blueberry-monorepo'
  alias gbbetl='cd ~/rob/repos/blueberry_etl/code/airflow/dags/bbetl'
  alias ga='cd /Users/rob/rob/repos/blueberry_analysis'
+ alias gr='cd /Users/rob/rob/repos'
+ alias guv='cd /Users/rob/rob/repos/uv_management'
  alias gw='cd /Users/rob/rob/repos/workbench'
  #alias gp='cd /Users/rob/packages'
  ##alias gadp='lamb.docker shell -p'
