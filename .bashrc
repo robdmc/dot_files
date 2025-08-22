@@ -121,9 +121,9 @@ export HISTCONTROL="ignoreboth:erasedups"
  export CXX=/opt/homebrew/opt/gcc/bin/g++-15
 
 
- # Override default terminal behavior for working with ugrep
- stty dsusp undef
- stty status undef
+ # # Override default terminal behavior for working with ugrep
+ # stty dsusp undef
+ # stty status undef
 
  
  
