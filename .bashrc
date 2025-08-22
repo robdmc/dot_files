@@ -119,4 +119,11 @@ export HISTCONTROL="ignoreboth:erasedups"
  # If you get weird compile errors maybe unset these
  export CC=/opt/homebrew/opt/gcc/bin/gcc-15
  export CXX=/opt/homebrew/opt/gcc/bin/g++-15
+
+
+ # Override default terminal behavior for working with ugrep
+ stty dsusp undef
+ stty status undef
+
+ 
  
