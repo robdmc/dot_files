@@ -64,6 +64,8 @@
  alias uve='uv venv'
  alias uva='source ./.venv/bin/activate'
 
+ alias ugpy='ugrep -Q -r --include="*.py"'
+ alias ugpy_fuzz='ugrep -Q -Z -r --include="*.py"'
 
  # Adding aliases to see if I can get python packages to compile
  # If you get weird compile errors maybe comment these out
