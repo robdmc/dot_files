@@ -11,8 +11,11 @@
  }
 
  function ltd() {
-     local dir
-     dir=$(ltr.py | fzf | awk '{print $3}') && cd "$dir"
+     cd  "$(ltr.py | sed 's%/Users/rob%~%' | fzf --tac | awk '{print $3}'| sed 's%~%/Users/rob%')"
+ }
+
+ function ltr() {
+     ltr.py | sed 's%/Users/rob%~%' | fzf --tac 
  }
 
  # Function to fuzzyfind files to open with vim
