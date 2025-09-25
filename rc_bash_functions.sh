@@ -4,6 +4,12 @@
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/( \1 )/'
  }
 
+ # Function to start marimo touching directory
+ mo() {
+    dir_logger.py "$PWD"
+    command marimo edit --watch "$@"  # 'command' bypasses functions/aliases
+ }
+
  # Function to fuzzyfind files to open with vim
  function vimf() (
      # declare shortcuts for vimf

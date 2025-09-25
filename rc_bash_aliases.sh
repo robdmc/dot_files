@@ -1,8 +1,10 @@
  # set up aliases
  alias less='less -R'
  alias dirs='dirs -v'
- alias ltr='ls -ltr'
- alias ltd='d=$(ls -ltrd -- */ 2>/dev/null | tail -n 1 | awk "{print \$9}"); cd "$d" && ls -ltr'
+ alias ltr='ltr.py'
+ alias ltd='ltr.py --latest'
+ # alias ltr='ls -ltr'
+ # alias ltd='d=$(ls -ltrd -- */ 2>/dev/null | tail -n 1 | awk "{print \$9}"); cd "$d" && ls -ltr'
 
  # Only alias the ls command if it doesn't fail
  ls --color=tty >&/dev/null
@@ -57,8 +59,8 @@
  # alias jupl='BROWSER=open jupyter notebook --port=8888 --NotebookApp.iopub_data_rate_limit=10000000000'
  alias jl='(touch .) && ((touch .. >& /dev/null) || true ) && BROWSER=open jupyter-lab --NotebookApp.iopub_data_rate_limit=10000000000'
 
- alias mo='(touch .) && ((touch .. >& /dev/null) || true ) && marimo edit --watch'
- alias mox='(touch .) && ((touch .. >& /dev/null) || true ) && uvx marimo edit --sandbox --watch'
+ # alias mo='(touch .) && ( (touch .. >& /dev/null) || true ) && marimo edit --watch'
+ # alias mox='(touch .) && ((touch .. >& /dev/null) || true ) && uvx marimo edit --sandbox --watch'
 
  alias uvi='uv init --managed-python --python 3.13'
  alias uve='uv venv'
