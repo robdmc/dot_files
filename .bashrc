@@ -79,7 +79,7 @@ export HISTCONTROL="ignoreboth:erasedups"
  export HISTFILE="$HOME/.bash_history"
  export HISTFILESIZE=20000
  export HISTSIZE=20000
- export HISTIGNORE="clear:ls:pwd:history:hig:say:alias:sw"
+ HISTIGNORE="clear:ls:pwd:history:hig:say:set -*:shopt -*:alias --*:if ! command -v*:export *:# *"
  export HISTTIMEFORMAT='%F %T '
  set -o vi
  
@@ -120,10 +120,6 @@ export HISTCONTROL="ignoreboth:erasedups"
  export CC=/opt/homebrew/opt/gcc/bin/gcc-15
  export CXX=/opt/homebrew/opt/gcc/bin/g++-15
 
-
- # # Override default terminal behavior for working with ugrep
- # stty dsusp undef
- # stty status undef
-
- 
+ # Trying out the zoxide command
+ eval "$(zoxide init --cmd cd bash)"
  

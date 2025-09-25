@@ -5,9 +5,14 @@
  }
 
  # Function to start marimo touching directory
- mo() {
+ function mo() {
     dir_logger.py "$PWD"
     command marimo edit --watch "$@"  # 'command' bypasses functions/aliases
+ }
+
+ function ltd() {
+     local dir
+     dir=$(ltr.py | fzf | awk '{print $3}') && cd "$dir"
  }
 
  # Function to fuzzyfind files to open with vim

@@ -1,8 +1,7 @@
  # set up aliases
  alias less='less -R'
  alias dirs='dirs -v'
- alias ltr='ltr.py'
- alias ltd='ltr.py --latest'
+ alias ltr='ltr.py | fzf'
  # alias ltr='ls -ltr'
  # alias ltd='d=$(ls -ltrd -- */ 2>/dev/null | tail -n 1 | awk "{print \$9}"); cd "$d" && ls -ltr'
 
