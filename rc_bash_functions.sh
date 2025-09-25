@@ -18,6 +18,10 @@
      ltr.py | sed 's%/Users/rob%~%' | fzf --tac 
  }
 
+ function lta() {
+     dir_logger.py "$PWD"
+ }
+
  # Function to fuzzyfind files to open with vim
  function vimf() (
      # declare shortcuts for vimf
