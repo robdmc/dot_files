@@ -14,9 +14,9 @@
      cd  "$(ltr.py | sed 's%/Users/rob%~%' | fzf --tac | awk '{print $3}'| sed 's%~%/Users/rob%')"
  }
 
- function ltr() {
-     ltr.py | sed 's%/Users/rob%~%' | fzf --tac 
- }
+ # function ltr() {
+ #     ltr.py | sed 's%/Users/rob%~%' | fzf --tac 
+ # }
 
  function lta() {
      dir_logger.py "$PWD"

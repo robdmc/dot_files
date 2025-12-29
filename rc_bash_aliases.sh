@@ -1,7 +1,8 @@
  # set up aliases
  alias less='less -R'
  alias dirs='dirs -v'
- # alias ltr='ls -ltr'
+ alias ltr='ls -ltr'
+ alias rr='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
  # alias ltd='d=$(ls -ltrd -- */ 2>/dev/null | tail -n 1 | awk "{print \$9}"); cd "$d" && ls -ltr'
 
  # Only alias the ls command if it doesn't fail
