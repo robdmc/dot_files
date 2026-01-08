@@ -6,10 +6,16 @@
    status = auto
    branch = auto
 
-[diff]
-     external = git_diff_wrapper
-[pager]
-     diff =
+# [diff]
+#      external = git_diff_wrapper
+# [pager]
+#      diff =
+
+[difftool "vimdiff"]
+	cmd = vimdiff "$LOCAL" "$REMOTE"
+[difftool]
+	prompt = false
+
 [merge]
 	tool = diffconflicts
 [core]
@@ -28,6 +34,8 @@
     pro = "!f() {{ git fetch origin refs/pull/$1/head:pr/$1; }} ; f"
     track = "!f() {{ git branch --track $(basename $1)  $1; }} ; f"
     recent = "git for-each-ref --sort=-committerdate refs/heads/ --format='%(authordate:short) %(color:red)%(objectname:short) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))'"
+    vd = difftool --tool=vimdiff
+    vdd = difftool --dir-diff --tool=vimdiff
 [push]
 	default = current
 [mergetool "diffconflicts"]
