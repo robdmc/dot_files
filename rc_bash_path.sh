@@ -36,4 +36,5 @@
  # Add the brew version of psql client tools
  export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
-
+ # Add path that uvx likes for uv tool install ...
+ export PATH="$PATH:/Users/rob/.local/bin"
