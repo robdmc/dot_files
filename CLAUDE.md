@@ -1,18 +1,36 @@
-## Database Connections
+# Database Connections
 
-When connecting to PostgreSQL databases, check for the `PGURL` environment variable:
+When writing database connection code, **always check for PostgreSQL environment variables first**.
+
+**Preferred:** Use `PGURL` for connection strings:
 
 ```python
 import os
 from sqlalchemy import create_engine
 
+# Prefer PGURL if available
 engine = create_engine(os.environ['PGURL'])
 ```
 
-Individual PG* variables are also available: `PGHOST`, `PGPORT`, `PGUSER`, `PGPASSWORD`, `PGDATABASE`.
+**Alternative:** Individual variables are available: `PGHOST`, `PGPORT`, `PGUSER`, `PGPASSWORD`, `PGDATABASE`
 
+For other languages:
+- Node.js: `process.env.PGURL`
+- Go: `os.Getenv("PGURL")`
 
-# Claude plans
-The user will frequently edit claude plans and ask you to incorporate changes.
-Assume that content between like the following are directives for you to change the plan 
-<c>this will be instructions on how i want you to modify plan</c>
+---
+
+# Plan Modifications
+
+When I provide implementation plans, I may include inline modification requests wrapped in a special marker.
+
+**Format:** `<c>modification request</c>`
+
+**Example:**
+```
+1. Set up authentication middleware
+   <c>use JWT tokens instead of sessions</c>
+2. Create user routes
+```
+
+**Action:** When you see `<c>` tags, treat the content as an instruction to modify the surrounding plan step, then remove the tags after incorporating the changes.
