@@ -81,12 +81,14 @@ class Deploy(object):
         ("~/dot_files/myip", "~/bin/myip"),
         ("~/dot_files/mount_miner1.sh", "~/bin/mount_miner1.sh"),
         ("~/dot_files/unmount_miner1.sh", "~/bin/unmount_miner1.sh"),
+        ("~/dot_files/CLAUDE.md", "~/.claude/CLAUDE.md"),
     ]
 
     PATHS_TO_CREATE = [
         "~/bin",
         "~/.undodir",
         "~/.config",
+        "~/.claude",
     ]
 
     def __init__(self, kind, dry_run=False):
