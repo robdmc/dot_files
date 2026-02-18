@@ -71,6 +71,7 @@ class Deploy(object):
         # Executables
         ("~/dot_files/dir_logger.py", "~/bin/dir_logger.py"),
         ("~/dot_files/ltr.py", "~/bin/ltr.py"),
+        ("~/dot_files/ccost.py", "~/bin/ccost.py"),
         ("~/dot_files/git_diff_wrapper", "~/bin/git_diff_wrapper"),
         ("~/dot_files/git_branch_diff", "~/bin/git_branch_diff"),
         ("~/dot_files/serve_dir.py", "~/bin/serve_dir.py"),
