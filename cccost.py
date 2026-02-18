@@ -32,6 +32,9 @@ def parse_date_arg(s):
         "this month": lambda: datetime.datetime.combine(today.replace(day=1), datetime.time.min),
         "last month": lambda: datetime.datetime.combine((today.replace(day=1) - datetime.timedelta(days=1)).replace(day=1), datetime.time.min),
     }
+    # Underscore aliases for two-word intervals
+    aliases = {k.replace(" ", "_"): v for k, v in intervals.items() if " " in k}
+    intervals.update(aliases)
 
     if s_lower in intervals:
         return intervals[s_lower]()
@@ -313,7 +316,7 @@ def build_summary(sessions):
 
     for session in sessions:
         for r in session["ranges"]:
-            skills = r["skills"] if r["skills"] else frozenset(["[No Skills]"])
+            skills = r["skills"] if r["skills"] else frozenset(["none"])
             n_skills = len(skills)
             fraction = 1.0 / n_skills
 
@@ -331,10 +334,10 @@ def build_summary(sessions):
 
 
 def fmt_cost(cost):
-    """Format a cost value as a dollar string."""
+    """Format a cost value as a numeric string."""
     if cost < 0.01:
-        return f"${cost:.4f}"
-    return f"${cost:.2f}"
+        return f"{cost:.4f}"
+    return f"{cost:.2f}"
 
 
 def cost_breakdown(tokens):
@@ -348,10 +351,10 @@ def cost_breakdown(tokens):
 
 
 def fmt_num(n):
-    """Format a number with comma separators."""
+    """Format a number."""
     if isinstance(n, float):
-        return f"{n:,.0f}"
-    return f"{n:,}"
+        return f"{n:.0f}"
+    return str(n)
 
 
 def format_text(sessions, summary, args):
@@ -369,32 +372,31 @@ def format_text(sessions, summary, args):
     # Per-session detail
     if not args.summary_only:
         lines.append("SESSION DETAILS")
-        lines.append("-" * 160)
+        lines.append("-" * 173)
         lines.append(
-            f"{'Session ID':<20} {'Time':<17} {'Msgs':>5} {'Skills':<30} "
+            f"{'kind':<12} {'Session ID':<20} {'Time':<17} {'Msgs':>5} {'Skills':<30} "
             f"{'In':>9} {'Out':>9} {'C.Read':>9} {'C.Create':>9} "
-            f"{'$In':>8} {'$Out':>8} {'$C.Rd':>8} {'$C.Cr':>8} {'Cost':>9}"
+            f"{'$in':>8} {'$out':>8} {'$crd':>8} {'$ccr':>8} {'$cost':>9}"
         )
-        lines.append("-" * 160)
+        lines.append("-" * 173)
 
         for s in sessions:
             ts_str = s["timestamp"].strftime("%Y-%m-%d %H:%M") if s["timestamp"] else "unknown"
 
-            for idx, r in enumerate(s["ranges"]):
-                skill_label = ", ".join(sorted(r["skills"])) if r["skills"] else "[No Skills]"
+            for r in s["ranges"]:
+                skill_label = ", ".join(sorted(r["skills"])) if r["skills"] else "none"
                 if len(skill_label) > 30:
                     skill_label = skill_label[:27] + "..."
 
                 t = r["tokens"]
                 cb = cost_breakdown(t)
 
-                # Show session ID only on first range
-                session_col = s['session_id'][:18] if idx == 0 else ""
-                time_col = ts_str if idx == 0 else ""
-                msg_col = f"{s['total_messages']}" if idx == 0 else ""
+                session_col = s['session_id'][:18]
+                time_col = ts_str
+                msg_col = f"{s['total_messages']}"
 
                 lines.append(
-                    f"{session_col:<20} {time_col:<17} {msg_col:>5} {skill_label:<30} "
+                    f"{'sess_stats':<12} {session_col:<20} {time_col:<17} {msg_col:>5} {skill_label:<30} "
                     f"{fmt_num(t['input']):>9} {fmt_num(t['output']):>9} "
                     f"{fmt_num(t['cache_read']):>9} {fmt_num(t['cache_creation']):>9} "
                     f"{fmt_cost(cb['input']):>8} {fmt_cost(cb['output']):>8} "
@@ -415,7 +417,7 @@ def format_text(sessions, summary, args):
     lines.append(
         f"{'Skill':<35} {'Sess':>5} {'Msgs':>8} "
         f"{'Input':>11} {'Output':>11} {'C.Read':>11} {'C.Create':>11} "
-        f"{'$Input':>9} {'$Output':>9} {'$C.Read':>9} {'$C.Cre':>9} {'Cost':>10}"
+        f"{'$input':>9} {'$output':>9} {'$cread':>9} {'$ccre':>9} {'$cost':>10}"
     )
     lines.append("-" * 155)
 
@@ -543,7 +545,7 @@ def format_csv(sessions, summary, args):
             for r in s["ranges"]:
                 t = r["tokens"]
                 cb = cost_breakdown(t)
-                skills_str = ", ".join(sorted(r["skills"])) if r["skills"] else "[No Skills]"
+                skills_str = ", ".join(sorted(r["skills"])) if r["skills"] else "none"
 
                 writer.writerow([
                     "session_range",
@@ -641,7 +643,7 @@ examples:
   %(prog)s --format csv > sessions.csv
 """,
     )
-    parser.add_argument("--since", default="today", help="Show sessions from this date (default: today). Options: 'today', 'yesterday', 'this week', 'last week', 'this month', 'last month', 'last N days', or YYYY-MM-DD")
+    parser.add_argument("--since", default="this month", help="Show sessions from this date (default: this month). Options: 'today', 'yesterday', 'this week' (or 'this_week'), 'last week' (or 'last_week'), 'this month' (or 'this_month'), 'last month' (or 'last_month'), 'last N days', or YYYY-MM-DD")
     parser.add_argument("--until", help="Show sessions up to this date")
     parser.add_argument("--skill", help="Filter to sessions that use this skill (substring match)")
     parser.add_argument("--min-cost", type=float, help="Minimum session cost to include")
