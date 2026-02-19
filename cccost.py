@@ -11,11 +11,56 @@ import re
 import csv
 
 
-# Claude Sonnet 4.5 pricing (per token)
-INPUT_COST = 3.00 / 1_000_000
-OUTPUT_COST = 15.00 / 1_000_000
-CACHE_READ_COST = 0.30 / 1_000_000
-CACHE_CREATION_COST = 3.75 / 1_000_000
+"""
+CLAUDE MAINTENANCE PROMPT
+=========================
+If you are a Claude session reading this file and the user asks you to check or update
+model pricing, do the following:
+
+1. Fetch the current Anthropic pricing page. Try this URL first:
+       https://platform.claude.com/docs/en/docs/about-claude/pricing
+   If it fails or redirects to an unexpected host, fall back to a web search:
+       "Anthropic Claude API pricing per million tokens site:docs.anthropic.com OR site:platform.claude.com"
+   then fetch the most relevant result.
+
+2. Compare the prices in MODEL_PRICING below against the table on that page.
+   The tuple format is:
+       (input, output, cache_read, cache_write_5m, cache_write_1h)
+   All values are in USD per million tokens.
+
+3. The dict keys are substring-matched against model IDs (e.g. "claude-opus-4" matches
+   "claude-opus-4-5-20251101" and "claude-opus-4-6"). Add new keys for model families
+   that don't match any existing key, using the shortest unique prefix of the model ID.
+
+4. Update _FALLBACK_PRICING to match the most common/current mid-tier model (Sonnet).
+
+5. Also check what model IDs appear in the user's session files by running:
+       python3 cccost.py --format json --since "last month" | python3 -c "
+       import sys, json, collections
+       data = json.load(sys.stdin)
+       models = collections.Counter(
+           r.get('model','') for s in data['sessions'] for r in s['ranges']
+       )
+       [print(c, m) for m, c in models.most_common()]"
+   This shows which models are actually in use so you know which to prioritize.
+"""
+
+# Model pricing per million tokens: (input, output, cache_read, cache_write_5m, cache_write_1h)
+MODEL_PRICING = {
+    "claude-opus-4":    (5.00, 25.00, 0.50,  6.25, 10.00),
+    "claude-sonnet-4":  (3.00, 15.00, 0.30,  3.75,  6.00),
+    "claude-haiku-4-5": (1.00,  5.00, 0.10,  1.25,  2.00),
+}
+_FALLBACK_PRICING = (3.00, 15.00, 0.30, 3.75, 6.00)  # Sonnet 4 rates
+
+
+def get_pricing(model):
+    """Return per-token rates (input, output, cache_read, cache_write_5m, cache_write_1h)."""
+    if model:
+        for key, rates in MODEL_PRICING.items():
+            if key in model:
+                return tuple(r / 1_000_000 for r in rates)
+    return tuple(r / 1_000_000 for r in _FALLBACK_PRICING)
 
 
 def parse_date_arg(s):
@@ -84,21 +129,31 @@ def extract_usage(message):
     """Extract token usage dict from an assistant message."""
     msg = message.get("message", {})
     usage = msg.get("usage", {})
+    cc = usage.get("cache_creation", {})
+    if cc:
+        cc_5m = cc.get("ephemeral_5m_input_tokens") or 0
+        cc_1h = cc.get("ephemeral_1h_input_tokens") or 0
+    else:
+        cc_5m = usage.get("cache_creation_input_tokens", 0) or 0
+        cc_1h = 0
     return {
         "input": usage.get("input_tokens", 0) or 0,
         "output": usage.get("output_tokens", 0) or 0,
         "cache_read": usage.get("cache_read_input_tokens", 0) or 0,
-        "cache_creation": usage.get("cache_creation_input_tokens", 0) or 0,
+        "cache_creation_5m": cc_5m,
+        "cache_creation_1h": cc_1h,
     }
 
 
-def calculate_cost(tokens):
-    """Calculate cost from a token breakdown dict."""
+def calculate_cost(tokens, model=""):
+    """Calculate cost from a token breakdown dict using model-specific rates."""
+    p = get_pricing(model)
     return (
-        tokens.get("input", 0) * INPUT_COST
-        + tokens.get("output", 0) * OUTPUT_COST
-        + tokens.get("cache_read", 0) * CACHE_READ_COST
-        + tokens.get("cache_creation", 0) * CACHE_CREATION_COST
+        tokens.get("input", 0) * p[0]
+        + tokens.get("output", 0) * p[1]
+        + tokens.get("cache_read", 0) * p[2]
+        + tokens.get("cache_creation_5m", 0) * p[3]
+        + tokens.get("cache_creation_1h", 0) * p[4]
     )
 
 
@@ -107,7 +162,8 @@ def tokens_total(tokens):
         tokens.get("input", 0)
         + tokens.get("output", 0)
         + tokens.get("cache_read", 0)
-        + tokens.get("cache_creation", 0)
+        + tokens.get("cache_creation_5m", 0)
+        + tokens.get("cache_creation_1h", 0)
     )
 
 
@@ -117,12 +173,13 @@ def add_tokens(a, b):
         "input": a.get("input", 0) + b.get("input", 0),
         "output": a.get("output", 0) + b.get("output", 0),
         "cache_read": a.get("cache_read", 0) + b.get("cache_read", 0),
-        "cache_creation": a.get("cache_creation", 0) + b.get("cache_creation", 0),
+        "cache_creation_5m": a.get("cache_creation_5m", 0) + b.get("cache_creation_5m", 0),
+        "cache_creation_1h": a.get("cache_creation_1h", 0) + b.get("cache_creation_1h", 0),
     }
 
 
 def zero_tokens():
-    return {"input": 0, "output": 0, "cache_read": 0, "cache_creation": 0}
+    return {"input": 0, "output": 0, "cache_read": 0, "cache_creation_5m": 0, "cache_creation_1h": 0}
 
 
 def discover_sessions():
@@ -173,6 +230,7 @@ def parse_session(filepath):
                     "type": msg_type,
                     "timestamp": ts,
                     "usage": extract_usage(obj) if msg_type == "assistant" else zero_tokens(),
+                    "model": obj.get("message", {}).get("model", "") if msg_type == "assistant" else "",
                     "content": obj.get("message", {}).get("content", []),
                     "raw_type": msg_type,
                 }
@@ -218,6 +276,8 @@ def build_skill_ranges(session):
             "end": start_idx,
             "skills": skills_frozen,
             "tokens": zero_tokens(),
+            "cost": 0.0,
+            "model": "",
             "message_count": 0,
         }
 
@@ -236,6 +296,9 @@ def build_skill_ranges(session):
 
         current_range["end"] = msg["index"]
         current_range["tokens"] = add_tokens(current_range["tokens"], msg["usage"])
+        current_range["cost"] += calculate_cost(msg["usage"], msg.get("model", ""))
+        if not current_range["model"] and msg.get("model"):
+            current_range["model"] = msg["model"]
         current_range["message_count"] += 1
 
     if current_range and current_range["message_count"] > 0:
@@ -255,10 +318,12 @@ def process_sessions(session_files):
 
         # Compute session totals
         total_tokens = zero_tokens()
+        total_cost = 0.0
         for r in session["ranges"]:
             total_tokens = add_tokens(total_tokens, r["tokens"])
+            total_cost += r["cost"]
         session["total_tokens"] = total_tokens
-        session["total_cost"] = calculate_cost(total_tokens)
+        session["total_cost"] = total_cost
         session["total_messages"] = len(session["messages"])
 
         # Collect all skills used in session
@@ -328,7 +393,7 @@ def build_summary(sessions):
                     k: v * fraction for k, v in r["tokens"].items()
                 }
                 entry["tokens"] = add_tokens(entry["tokens"], fractional_tokens)
-                entry["total_cost"] += calculate_cost(r["tokens"]) * fraction
+                entry["total_cost"] += r["cost"] * fraction
 
     return dict(summary)
 
@@ -340,13 +405,15 @@ def fmt_cost(cost):
     return f"{cost:.2f}"
 
 
-def cost_breakdown(tokens):
+def cost_breakdown(tokens, model=""):
     """Return per-type cost dict for a token breakdown dict."""
+    p = get_pricing(model)
     return {
-        "input": tokens.get("input", 0) * INPUT_COST,
-        "output": tokens.get("output", 0) * OUTPUT_COST,
-        "cache_read": tokens.get("cache_read", 0) * CACHE_READ_COST,
-        "cache_creation": tokens.get("cache_creation", 0) * CACHE_CREATION_COST,
+        "input": tokens.get("input", 0) * p[0],
+        "output": tokens.get("output", 0) * p[1],
+        "cache_read": tokens.get("cache_read", 0) * p[2],
+        "cache_creation": (tokens.get("cache_creation_5m", 0) * p[3]
+                           + tokens.get("cache_creation_1h", 0) * p[4]),
     }
 
 
@@ -369,6 +436,36 @@ def format_text(sessions, summary, args):
     lines.append(f"Found {len(sessions)} session(s), total cost: {fmt_cost(total_cost_all)}")
     lines.append("")
 
+    # Column guide
+    lines.append("COLUMN GUIDE")
+    lines.append("-" * 60)
+    lines.append("Session Details columns:")
+    lines.append("  kind       Row type (sess_stats = one skill-range within a session)")
+    lines.append("  Session ID Truncated session file identifier")
+    lines.append("  Time       Session start time (YYYY-MM-DD HH:MM)")
+    lines.append("  Msgs       Total messages in the session")
+    lines.append("  Skills     Skill(s) active during this token range")
+    lines.append("  In         Input tokens consumed")
+    lines.append("  Out        Output tokens generated")
+    lines.append("  C.Read     Cache-read tokens (cheap: 10% of input rate)")
+    lines.append("  C.Create   Cache-write tokens (5-min + 1-hour buckets combined)")
+    lines.append("  $in        Cost of input tokens")
+    lines.append("  $out       Cost of output tokens")
+    lines.append("  $crd       Cost of cache-read tokens")
+    lines.append("  $ccr       Cost of cache-write tokens")
+    lines.append("  $cost      Total cost for this skill range")
+    lines.append("")
+    lines.append("Skill Summary columns:")
+    lines.append("  Skill      Skill name (or 'none' for ranges with no active skill)")
+    lines.append("  Sess       Number of distinct sessions that used this skill")
+    lines.append("  Msgs       Total messages attributed to this skill")
+    lines.append("  Input/Output/C.Read/C.Create  Tokens (fractionally split when")
+    lines.append("             multiple skills were active in the same range)")
+    lines.append("  $input/$output/$cread/$ccre  Per-type costs")
+    lines.append("  $cost      Total cost attributed to this skill")
+    lines.append("-" * 60)
+    lines.append("")
+
     # Per-session detail
     if not args.summary_only:
         lines.append("SESSION DETAILS")
@@ -389,7 +486,7 @@ def format_text(sessions, summary, args):
                     skill_label = skill_label[:27] + "..."
 
                 t = r["tokens"]
-                cb = cost_breakdown(t)
+                cb = cost_breakdown(t, r.get("model", ""))
 
                 session_col = s['session_id'][:18]
                 time_col = ts_str
@@ -398,10 +495,10 @@ def format_text(sessions, summary, args):
                 lines.append(
                     f"{'sess_stats':<12} {session_col:<20} {time_col:<17} {msg_col:>5} {skill_label:<30} "
                     f"{fmt_num(t['input']):>9} {fmt_num(t['output']):>9} "
-                    f"{fmt_num(t['cache_read']):>9} {fmt_num(t['cache_creation']):>9} "
+                    f"{fmt_num(t['cache_read']):>9} {fmt_num(t['cache_creation_5m'] + t['cache_creation_1h']):>9} "
                     f"{fmt_cost(cb['input']):>8} {fmt_cost(cb['output']):>8} "
                     f"{fmt_cost(cb['cache_read']):>8} {fmt_cost(cb['cache_creation']):>8} "
-                    f"{fmt_cost(calculate_cost(t)):>9}"
+                    f"{fmt_cost(r['cost']):>9}"
                 )
 
         lines.append("")
@@ -428,7 +525,7 @@ def format_text(sessions, summary, args):
         lines.append(
             f"{skill_display:<35} {len(data['session_ids']):>5} {data['message_count']:>8} "
             f"{fmt_num(t['input']):>11} {fmt_num(t['output']):>11} "
-            f"{fmt_num(t['cache_read']):>11} {fmt_num(t['cache_creation']):>11} "
+            f"{fmt_num(t['cache_read']):>11} {fmt_num(t['cache_creation_5m'] + t['cache_creation_1h']):>11} "
             f"{fmt_cost(cb['input']):>9} {fmt_cost(cb['output']):>9} "
             f"{fmt_cost(cb['cache_read']):>9} {fmt_cost(cb['cache_creation']):>9} "
             f"{fmt_cost(data['total_cost']):>10}"
@@ -450,7 +547,7 @@ def format_text(sessions, summary, args):
     lines.append(
         f"{'TOTAL':<35} {len(total_sess):>5} {total_msgs:>8} "
         f"{fmt_num(t['input']):>11} {fmt_num(t['output']):>11} "
-        f"{fmt_num(t['cache_read']):>11} {fmt_num(t['cache_creation']):>11} "
+        f"{fmt_num(t['cache_read']):>11} {fmt_num(t['cache_creation_5m'] + t['cache_creation_1h']):>11} "
         f"{fmt_cost(cb['input']):>9} {fmt_cost(cb['output']):>9} "
         f"{fmt_cost(cb['cache_read']):>9} {fmt_cost(cb['cache_creation']):>9} "
         f"{fmt_cost(total_cost_all):>10}"
@@ -485,13 +582,14 @@ def format_json(sessions, summary, args):
             "ranges": [],
         }
         for r in s["ranges"]:
-            cb = cost_breakdown(r["tokens"])
+            cb = cost_breakdown(r["tokens"], r.get("model", ""))
             session_out["ranges"].append({
                 "start": r["start"],
                 "end": r["end"],
                 "skills": sorted(r["skills"]),
+                "model": r.get("model", ""),
                 "tokens": r["tokens"],
-                "cost": round(calculate_cost(r["tokens"]), 6),
+                "cost": round(r["cost"], 6),
                 "cost_breakdown": {k: round(v, 6) for k, v in cb.items()},
                 "message_count": r["message_count"],
             })
@@ -544,7 +642,7 @@ def format_csv(sessions, summary, args):
 
             for r in s["ranges"]:
                 t = r["tokens"]
-                cb = cost_breakdown(t)
+                cb = cost_breakdown(t, r.get("model", ""))
                 skills_str = ", ".join(sorted(r["skills"])) if r["skills"] else "none"
 
                 writer.writerow([
@@ -558,13 +656,13 @@ def format_csv(sessions, summary, args):
                     t["input"],
                     t["output"],
                     t["cache_read"],
-                    t["cache_creation"],
+                    t["cache_creation_5m"] + t["cache_creation_1h"],
                     tokens_total(t),
                     round(cb["input"], 6),
                     round(cb["output"], 6),
                     round(cb["cache_read"], 6),
                     round(cb["cache_creation"], 6),
-                    round(calculate_cost(t), 6),
+                    round(r["cost"], 6),
                 ])
 
     # Summary rows
@@ -584,7 +682,7 @@ def format_csv(sessions, summary, args):
             round(t["input"], 2),
             round(t["output"], 2),
             round(t["cache_read"], 2),
-            round(t["cache_creation"], 2),
+            round(t["cache_creation_5m"] + t["cache_creation_1h"], 2),
             round(tokens_total(t), 2),
             round(cb["input"], 6),
             round(cb["output"], 6),
@@ -615,7 +713,7 @@ def format_csv(sessions, summary, args):
         round(t["input"], 2),
         round(t["output"], 2),
         round(t["cache_read"], 2),
-        round(t["cache_creation"], 2),
+        round(t["cache_creation_5m"] + t["cache_creation_1h"], 2),
         round(tokens_total(t), 2),
         round(cb["input"], 6),
         round(cb["output"], 6),
