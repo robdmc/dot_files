@@ -1,3 +1,11 @@
+## Research Guidelines
+- Before making changes, read ONLY the directly relevant files (max 3-5 files)
+- Do NOT explore transitive dependencies unless explicitly asked
+- State your plan before reading additional files
+- If you need to understand more than 2 levels of dependency, ask me first
+- After reading each file, check: can I now complete the task 
+  with what I have? If yes, stop reading and start working.
+
 # Database Connections
 
 When writing database connection code, **always check for PostgreSQL environment variables first**.
