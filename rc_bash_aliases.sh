@@ -84,4 +84,5 @@
  alias dev_merge_master=' git fetch origin master && git checkout master && git merge dev && git push origin master && git checkout dev'
 
 
- alias cc=" claude --verbose"
+ alias cl=" claude"
+ alias cly=" claude-yolo-fenced"
