@@ -1,3 +1,7 @@
+## Data Manipulation
+When working with data files  (csv, parquet or otherwise) you should leverage your data skill instead of writing your own python scripts.
+
+
 ## Research Guidelines
 - Before making changes, read ONLY the directly relevant files (max 3-5 files)
 - Do NOT explore transitive dependencies unless explicitly asked
@@ -42,3 +46,9 @@ When I provide implementation plans, I may include inline modification requests 
 ```
 
 **Action:** When you see `<c>` tags, treat the content as an instruction to modify the surrounding plan step, then remove the tags after incorporating the changes.
+
+---
+
+# Environment Notes
+
+- **GNU sed** is installed via Homebrew and is the default `sed` in PATH. Use GNU syntax: `sed -i 's/pat/rep/'` — do NOT use BSD syntax `sed -i '' 's/pat/rep/'`.
