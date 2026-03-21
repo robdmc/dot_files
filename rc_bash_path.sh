@@ -12,7 +12,7 @@
    done
 
    # Update man paths to brew tools
-   binpaths=$(ls -d /opt/homebrew/opt/*/libexec/gnuman/)
+   manpaths=$(ls -d /opt/homebrew/opt/*/libexec/gnuman/)
    for manpath in $manpaths; do
       export MANPATH="$manpath:$MANPATH"
    done
@@ -37,4 +37,4 @@
  export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
  # Add path that uvx likes for uv tool install ...
- export PATH="$PATH:/Users/rob/.local/bin"
+ export PATH="$HOME/.local/bin:$PATH"
