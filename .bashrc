@@ -1,125 +1,119 @@
-export HISTCONTROL="ignoreboth:erasedups"
- # This entire file indented one line so history ignores it
+# ============================================================
+# ENVIRONMENT — runs for ALL shells (interactive and non-interactive)
+# ============================================================
 
- # Determine the way this shell is being run
- if [[ -n $PS1 ]]; then
-     : # These are executed only for interactive shells
-     SHELL_IS_INTERACTIVE=1
- else
-     : # Only for NON-interactive shells
-     SHELL_IS_INTERACTIVE=0
- fi
- 
- if shopt -q login_shell ; then
-     : # These are executed only when it is a login shell
-     SHELL_IS_LOGIN=1
- else
-     : # Only when it is NOT a login shell
-     SHELL_IS_LOGIN=0
- fi
+# Determine the type of OS
+if [ "$(uname)" == "Darwin" ]; then
+    export OS_TYPE="mac"
+else
+    export OS_TYPE="linux"
+fi
 
+# Source the functions file (needed by source_if_exists below)
+source ~/dot_files/rc_bash_functions.sh
 
- # Determine the type of os being run 
- # uname_type=$(uname)  DELETE DELETE
- # mac_type="Darwin" DELETE DELETE
- if [ "$(uname)" == "Darwin" ]; then 
-     export OS_TYPE="mac"
- else
-     # This indicates running on some type of linux
-     export OS_TYPE="linux"
- fi
+# Set up the path
+source_if_exists ~/dot_files/rc_bash_path.sh
 
- # Source the functions file.
- # If you see a command in below that you don't recognize, look in
- # the function definition file.
- source ~/dot_files/rc_bash_functions.sh
+# Set up default conda/uv env variables
+source_if_exists ~/dot_files/rc_conda_default.sh
 
- # Set up the path
- source_if_exists ~/dot_files/rc_bash_path.sh
+# UTF-8
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
 
- # Set up aliases
- source_if_exists ~/dot_files/rc_bash_aliases.sh
+# Umask: read-write by owner and group, read/execute by world
+umask 002
 
- # Set up prompt
- source_if_exists ~/dot_files/rc_bash_prompt.sh
+# Editor
+export EDITOR=vim
 
- # Set up default conda env
- source_if_exists ~/dot_files/rc_conda_default.sh
+# Compiler defaults (homebrew gcc)
+# If you get weird compile errors, unset these
+export CC=/opt/homebrew/opt/gcc/bin/gcc-15
+export CXX=/opt/homebrew/opt/gcc/bin/g++-15
 
- # Determine if brew is installd
- if [ -x "$(command -v brew)" ]; then
-     export HAS_BREW=1
- else
-     export HAS_BREW=0
- fi
+# JAX on mac GPU
+export ENABLE_PJRT_COMPATIBILITY=1
 
- 
- # Make sure the vim backup directory exists
- mkdir -p ~/.vim_backups
- 
- # Disable shell meanings of ctrl-s and ctrl-q
- stty stop '' >& /dev/null
- stty start '' >& /dev/null
- 
- # Set up utf8 console
- export LC_ALL=en_US.UTF-8
- export LANG=en_US.UTF-8
- export LANGUAGE=en_US.UTF-8
- 
- # Make sure the umask is set properly
- # umask 027 (writable only by owner, readable/executable only by group)
- # umask 002 (read-write by owner and group, read/execute by world)
- # umask 007 (read-write by owner and group, no access to others)
- umask 002
- 
- # Set up terminal working preferences
- shopt -s histappend
- shopt -s extglob
- export EDITOR=vim
- export HISTFILE="$HOME/.bash_history"
- export HISTFILESIZE=20000
- export HISTSIZE=20000
- HISTIGNORE="clear:ls:pwd:history:hig:say:set -*:shopt -*:alias --*:if ! command -v*:export *:# *"
- export HISTTIMEFORMAT='%F %T '
- set -o vi
- 
- # Save history after each command, but only if this an interactive shell
- if [ $SHELL_IS_INTERACTIVE -eq 1 ] && [ -z "$CLAUDECODE" ]; then
-     export PROMPT_COMMAND="history -a; history -c; history -r;"
- fi
- 
- # Default to making nose test be less chatty 
- export NOSE_NOLOGCAPTURE=1
- 
- # --- print any existing reminders to the console
- if [ -f ~/reminders.txt ]
- then
-     cat ~/reminders.txt
- fi
- 
- # Setup bash completion (for git)
- if [ "$OS_TYPE" == "mac" ]; then 
-     if [ "$HAS_BREW" -eq 1 ]; then 
-         if [ -f $(brew --prefix)/etc/bash_completion ]; then
-             . $(brew --prefix)/etc/bash_completion
-         fi
-     fi
- fi
- 
- # If history file doesn't exist, create it
- touch "$HISTFILE"
+# Nose test logging
+export NOSE_NOLOGCAPTURE=1
 
- # Source all existig bash hooks defined by ~/bash_hooks/*.sh
- source_bash_hooks
+# Determine if brew is installed
+if [ -x "$(command -v brew)" ]; then
+    export HAS_BREW=1
+else
+    export HAS_BREW=0
+fi
 
- # This is needed to run jax on mac gpu
- export ENABLE_PJRT_COMPATIBILITY=1
+# ============================================================
+# EARLY EXIT — everything below is interactive-only
+# ============================================================
+[[ $- != *i* ]] && return
 
- # Make compiling default to the homebrew compiler
- # If you get weird compile errors maybe unset these
- export CC=/opt/homebrew/opt/gcc/bin/gcc-15
- export CXX=/opt/homebrew/opt/gcc/bin/g++-15
+# Wrap interactive setup in a function so nothing leaks into history
+_bashrc_interactive_setup() {
+    # Prevent Claude Code bash sessions from polluting history
+    if [ -n "$CLAUDECODE" ]; then
+        unset HISTFILE
+    fi
 
- # Trying out the zoxide command
- eval "$(zoxide init --cmd cd bash)"
- 
+    # History
+    export HISTCONTROL="ignoreboth:erasedups"
+    shopt -s histappend
+    export HISTFILE="$HOME/.bash_history"
+    export HISTFILESIZE=20000
+    export HISTSIZE=20000
+    HISTIGNORE="clear:ls:pwd:history:hig:say:set -*:shopt -*:alias --*:if ! command -v*:export *:# *"
+    export HISTTIMEFORMAT='%F %T '
+
+    # Save/reload history after each command (skip for Claude Code)
+    if [ -z "$CLAUDECODE" ]; then
+        export PROMPT_COMMAND="history -a; history -c; history -r;"
+    fi
+
+    # If history file doesn't exist, create it
+    [ -n "$HISTFILE" ] && touch "$HISTFILE"
+
+    # Shell options
+    shopt -s extglob
+    set -o vi
+
+    # Aliases
+    source_if_exists ~/dot_files/rc_bash_aliases.sh
+
+    # Prompt
+    source_if_exists ~/dot_files/rc_bash_prompt.sh
+
+    # Disable shell meanings of ctrl-s and ctrl-q
+    stty stop '' 2>/dev/null
+    stty start '' 2>/dev/null
+
+    # Make sure the vim backup directory exists
+    mkdir -p ~/.vim_backups
+
+    # Bash completion (for git, etc.)
+    if [ "$OS_TYPE" == "mac" ] && [ "$HAS_BREW" -eq 1 ]; then
+        _brew_prefix="$(brew --prefix)"
+        if [ -f "${_brew_prefix}/etc/bash_completion" ]; then
+            . "${_brew_prefix}/etc/bash_completion"
+        fi
+        unset _brew_prefix
+    fi
+
+    # Zoxide (replaces cd)
+    eval "$(zoxide init --cmd cd bash)"
+
+    # Source all existing bash hooks defined by ~/bash_hooks/*.sh
+    source_bash_hooks
+
+    # Print any existing reminders
+    if [ -f ~/reminders.txt ]; then
+        cat ~/reminders.txt
+    fi
+}
+_bashrc_interactive_setup
+unset -f _bashrc_interactive_setup
+history -c
+history -r
