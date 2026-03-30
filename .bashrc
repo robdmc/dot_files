@@ -84,7 +84,7 @@ export HISTCONTROL="ignoreboth:erasedups"
  set -o vi
  
  # Save history after each command, but only if this an interactive shell
- if [ $SHELL_IS_INTERACTIVE -eq 1 ]; then 
+ if [ $SHELL_IS_INTERACTIVE -eq 1 ] && [ -z "$CLAUDECODE" ]; then
      export PROMPT_COMMAND="history -a; history -c; history -r;"
  fi
  

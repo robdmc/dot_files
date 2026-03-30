@@ -86,5 +86,5 @@
 
  alias cl=" claude --model=claude-opus-4-6"
  alias cl_y=" claude-yolo-fenced"
- alias cl_oy=" claude-yolo-fenced --model=claude-opus-4-6"
+ # alias cl_oy=" claude-yolo-fenced --model=claude-opus-4-6"
 
