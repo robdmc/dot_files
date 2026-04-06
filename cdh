@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# cdh - browse recent cd history from bash_history via fzf
+# Usage: cdh [N]  (default N=50)
+# Tip: bind to a shell function:  cdd() { local d; d=$(cdh "$@") && cd "$d"; }
+
+N="${1:-50}"
+HISTFILE="${BASH_HISTFILE:-$HOME/.bash_history}"
+
+grep -E '^cd\s+[~/.\w]' "$HISTFILE" \
+  | sed 's/^cd[[:space:]]*//' \
+  | sed "s|^~|$HOME|" \
+  | grep -vE '^\.\.*$' \
+  | tac \
+  | awk '!seen[$0]++' \
+  | head -n "$N" \
+  | fzf --no-sort --prompt="cd> "
