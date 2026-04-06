@@ -102,8 +102,8 @@ _bashrc_interactive_setup() {
         unset _brew_prefix
     fi
 
-    # Zoxide (replaces cd)
-    eval "$(zoxide init --cmd cd bash)"
+    # Zoxide
+    eval "$(zoxide init bash)"
 
     # Source all existing bash hooks defined by ~/bash_hooks/*.sh
     source_bash_hooks
@@ -115,5 +115,18 @@ _bashrc_interactive_setup() {
 }
 _bashrc_interactive_setup
 unset -f _bashrc_interactive_setup
+
+# Wrap cd to log directory history
+cd() {
+    builtin cd "$@" || return
+    echo "$PWD" >> ~/.bash_dir_history
+}
+
+# cd into a recent directory picked from dir history via fzf
+cdd() {
+    local d
+    d=$(tac ~/.bash_dir_history | awk '!seen[$0]++' | fzf --no-sort --prompt="cd> ") && cd "$d"
+}
+
 history -c
 history -r

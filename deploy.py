@@ -82,7 +82,6 @@ class Deploy(object):
         ("~/dot_files/myip", "~/bin/myip"),
         ("~/dot_files/mount_miner1.sh", "~/bin/mount_miner1.sh"),
         ("~/dot_files/unmount_miner1.sh", "~/bin/unmount_miner1.sh"),
-        ("~/dot_files/cdh", "~/bin/cdh"),
         ("~/dot_files/CLAUDE.md", "~/.claude/CLAUDE.md"),
     ]
 
