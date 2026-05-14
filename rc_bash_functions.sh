@@ -98,3 +98,4 @@ if hash rg 2>/dev/null; then
   # alias rg=tag  # replace with rg for ripgrep
 fi
 
+

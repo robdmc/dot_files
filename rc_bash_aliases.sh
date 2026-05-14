@@ -86,5 +86,6 @@
 
  alias cl=" claude --model=claude-opus-4-6"
  alias cl_y=" claude-yolo-fenced"
+ alias cc="claude --enable-auto-mode"
  # alias cl_oy=" claude-yolo-fenced --model=claude-opus-4-6"
 

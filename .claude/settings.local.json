@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xargs python3 -c \"\nimport sys, json\nfor line in open\\(sys.argv[1]\\):\n    try:\n        obj = json.loads\\(line\\)\n        if obj.get\\(''type''\\) == ''assistant'':\n            print\\(json.dumps\\(obj.get\\(''message'', {}\\).get\\(''usage'', {}\\), indent=2\\)\\)\n            print\\(''---model:'', obj.get\\(''message'', {}\\).get\\(''model''\\)\\)\n            break\n    except: pass\n\")",
+      "WebFetch(domain:www.anthropic.com)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "Bash(python3:*)",
+      "Bash(grep:*)",
+      "Bash(xargs cat:*)",
+      "Bash(while read f)",
+      "Bash(do grep -l '\"\"assistant\"\"' \"$f\")",
+      "Bash(done)",
+      "Bash(do grep '\"\"assistant\"\"' \"$f\")",
+      "Bash(ls:*)"
+    ]
+  }
+}
