@@ -1,20 +1,21 @@
 # Claude Code Custom Status Line
 
-A custom status line for Claude Code that provides comprehensive session tracking for Claude Pro accounts.
+A custom status line for Claude Code that provides at-a-glance session tracking.
 
 ## What This Does
 
 This status line displays real-time information about your Claude Code session:
 
 ```
-Sonnet 4.5 | [████████░░] 23% | $0.47 | myproject
+Opus 4.8 | high | [████████░░] 23% | dot_files/myproject |  main
 ```
 
 **Features:**
 - **Model name**: Which Claude model you're using
+- **Effort level**: The model's effort/reasoning level (`low`/`medium`/`high`/`xhigh`/`max`) — hidden when the model doesn't support effort
 - **Context battery**: Visual indicator of context window usage (10 segments)
-- **Theoretical cost**: What your session would cost on API pricing (useful for understanding value)
-- **Directory name**: Your current working directory
+- **Directory path**: Your current directory plus its parent (e.g. `dot_files/myproject`)
+- **Git branch**: The current branch — shown only when you're inside a git repository
 
 ## Files in This Directory
 
@@ -49,34 +50,37 @@ If you prefer to install manually, follow the step-by-step instructions in `DEPL
 ## After Installation
 
 1. **Restart Claude Code** - The status line loads on startup
-2. **Send messages** - Context battery fills, cost increases with each message
+2. **Send messages** - Context battery fills as the conversation grows
 3. **Watch it work** - The status line updates as your conversation progresses
 
 ## Example Status Line Evolution
 
 **Fresh conversation:**
 ```
-Sonnet 4.5 | [░░░░░░░░░░] 0% | $0.00 | myproject
+Opus 4.8 | high | [░░░░░░░░░░] 0% | dot_files/myproject |  main
 ```
 
 **After a few messages:**
 ```
-Sonnet 4.5 | [██░░░░░░░░] 8% | $0.23 | myproject
+Opus 4.8 | high | [██░░░░░░░░] 8% | dot_files/myproject |  main
 ```
 
 **Active development session:**
 ```
-Sonnet 4.5 | [██████░░░░] 47% | $2.15 | backend
+Opus 4.8 | high | [██████░░░░] 47% | code/backend |  feature-x
 ```
 
-**Approaching limits:**
+**Outside a git repo (branch segment hidden):**
 ```
-Sonnet 4.5 | [█████████░] 89% | $4.87 | webapp
+Sonnet 4.5 | [█████████░] 89% | home/webapp
 ```
 
-## Why Context Battery AND Cost?
+## Notes on Segments
 
-They measure different things and provide complementary insights:
+**Effort level:**
+- Reads `.effort.level` from the session JSON (`low`/`medium`/`high`/`xhigh`/`max`)
+- Updates live if you change it mid-session (e.g. with `/effort`)
+- Hidden entirely when the current model doesn't expose an effort level
 
 **Context Battery:**
 - **Technical limit**: Model's memory capacity (how much it can remember)
@@ -84,11 +88,9 @@ They measure different things and provide complementary insights:
 - **Tells you when**: Conversation needs to be reset due to context limits
 - **Visual indicator**: Easy to see at a glance how much capacity you've used
 
-**Theoretical Cost:**
-- **Value indicator**: What this conversation would cost at API pricing
-- **Session tracking**: Cumulative for the current conversation
-- **Understanding value**: Shows the "value" you're getting from your Claude Pro subscription
-- **Budget awareness**: Helps you understand the computational resources being used
+**Git branch:**
+- Runs `git -C <cwd> rev-parse --abbrev-ref HEAD` against your current directory
+- Shown only when that directory is inside a git repository; blank otherwise
 
 ## Customization
 
@@ -110,7 +112,7 @@ See `DEPLOY_STATUS.md` for customization options:
 - Are scripts executable? (`ls -l ~/.claude/statusline.sh`)
 - Check settings.json is valid: `jq . ~/.claude/settings.json`
 
-**Context battery or cost not updating?**
+**Context battery not updating?**
 - The status line updates automatically with each interaction
 - Restart Claude Code if values seem frozen
 
@@ -139,4 +141,4 @@ Free to use and modify. Share with other Claude Code users!
 
 ## Credits
 
-Custom status line built to track Claude Pro account usage with rolling 5-hour message windows.
+Custom status line for Claude Code showing model, effort level, context usage, directory, and git branch.

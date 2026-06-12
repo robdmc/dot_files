@@ -6,10 +6,22 @@ json=$(cat)
 # Extract values using jq
 cwd=$(echo "$json" | jq -r '.cwd // .workspace.current_dir // "N/A"')
 model=$(echo "$json" | jq -r '.model.display_name // "N/A"')
-cost=$(echo "$json" | jq -r '.cost.total_cost_usd // 0')
 
-# Shorten the cwd to just the last directory name for brevity
-short_cwd=$(basename "$cwd")
+# Effort level: blank unless the model exposes one (e.g. "high", "max")
+effort=$(echo "$json" | jq -r '.effort.level // empty')
+if [ -n "$effort" ]; then
+  effort_segment=" | $effort"
+else
+  effort_segment=""
+fi
+
+# Show the current directory plus its parent (last two path components)
+parent_dir=$(dirname "$cwd")
+if [ "$parent_dir" = "/" ] || [ "$parent_dir" = "." ]; then
+  short_cwd=$(basename "$cwd")
+else
+  short_cwd="$(basename "$parent_dir")/$(basename "$cwd")"
+fi
 
 # Calculate context usage percentage
 usage=$(echo "$json" | jq '.context_window.current_usage')
@@ -31,8 +43,13 @@ else
 fi
 
 
-# Format cost with 2 decimal places
-formatted_cost=$(printf "%.2f" "$cost")
+# Git branch: blank unless cwd is inside a git repo, then show current branch
+branch=$(git -C "$cwd" rev-parse --abbrev-ref HEAD 2>/dev/null)
+if [ -n "$branch" ]; then
+  git_segment=" |  $branch"
+else
+  git_segment=""
+fi
 
 # Output the status line
-echo "$model | $battery | \$$formatted_cost | $short_cwd"
+echo "$model$effort_segment | $battery | $short_cwd$git_segment"

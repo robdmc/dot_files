@@ -11,7 +11,10 @@
       "Bash(do grep -l '\"\"assistant\"\"' \"$f\")",
       "Bash(done)",
       "Bash(do grep '\"\"assistant\"\"' \"$f\")",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Read(//home/rob/**)",
+      "Bash(bash -n ~/.bashrc)",
+      "Bash(bash -c ' *)"
     ]
   }
 }

@@ -70,7 +70,7 @@ _bashrc_interactive_setup() {
 
     # Save/reload history after each command (skip for Claude Code)
     if [ -z "$CLAUDECODE" ]; then
-        export PROMPT_COMMAND="history -a; history -c; history -r;"
+        export PROMPT_COMMAND="history -a; history -c; history -r; _log_pwd"
     fi
 
     # If history file doesn't exist, create it
@@ -116,9 +116,11 @@ _bashrc_interactive_setup() {
 _bashrc_interactive_setup
 unset -f _bashrc_interactive_setup
 
-# Wrap cd to log directory history
-cd() {
-    builtin cd "$@" || return
+# Log each new working directory to history from the prompt (chpwd-style,
+# via PROMPT_COMMAND). Avoids overriding cd, which mise and zoxide also wrap.
+_log_pwd() {
+    [ "$PWD" = "$_LAST_LOGGED_PWD" ] && return
+    _LAST_LOGGED_PWD="$PWD"
     echo "$PWD" >> ~/.bash_dir_history
 }
 

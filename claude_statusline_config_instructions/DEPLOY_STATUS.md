@@ -2,9 +2,10 @@
 
 This directory contains a custom Claude Code status line setup that displays:
 - Model name
+- Effort level (hidden when the model doesn't support effort)
 - Context window battery (10-segment visual indicator)
-- Theoretical session cost
-- Current directory name
+- Current directory plus its parent
+- Git branch (shown only inside a git repository)
 
 ## Files Included
 
@@ -74,13 +75,13 @@ The status line configuration is loaded when Claude Code starts, so you must res
 After restarting, you should see a status line that looks like:
 
 ```
-Sonnet 4.5 | [████████░░] 23% | $0.00 | tmp
+Opus 4.8 | high | [████████░░] 23% | dot_files/myproject |  main
 ```
 
 Send a few messages and verify:
-- The cost increases with usage
 - The context battery fills as the conversation grows
-- The model name and directory are displayed correctly
+- The model name, effort level, and directory are displayed correctly
+- The git branch appears when you're inside a repository (and is absent otherwise)
 
 ## Troubleshooting
 
@@ -89,7 +90,7 @@ Send a few messages and verify:
 - Verify settings.json syntax is valid: `cat ~/.claude/settings.json | jq .`
 - Restart Claude Code after making changes
 
-**Context battery or cost not updating:**
+**Context battery not updating:**
 - The status line updates automatically with each interaction
 - Restart Claude Code if values seem frozen
 - Check that the script has proper permissions
@@ -102,34 +103,35 @@ Send a few messages and verify:
 
 ### Customize Status Line Format
 
-Edit line 38 of `statusline.sh` to rearrange or remove elements:
+Edit the final `echo` line of `statusline.sh` to rearrange or remove elements:
 
 ```bash
-echo "$model | $battery | \$$formatted_cost | $short_cwd"
+echo "$model$effort_segment | $battery | $short_cwd$git_segment"
 ```
 
 Available variables:
 - `$model` - Model name
+- `$effort_segment` - ` | <level>` when the model exposes an effort level, blank otherwise
 - `$battery` - Context battery indicator
-- `$formatted_cost` - Theoretical cost
-- `$short_cwd` - Directory name (basename)
+- `$short_cwd` - Current directory plus its parent (e.g. `dot_files/myproject`)
+- `$git_segment` - ` |  <branch>` when inside a git repo, blank otherwise
 - `$cwd` - Full directory path
 
 ## Example Status Line Outputs
 
 **Light usage:**
 ```
-Sonnet 4.5 | [██░░░░░░░░] 5% | $0.12 | myproject
+Opus 4.8 | high | [██░░░░░░░░] 5% | dot_files/myproject |  main
 ```
 
 **Moderate usage:**
 ```
-Sonnet 4.5 | [██████░░░░] 45% | $1.47 | backend
+Opus 4.8 | high | [██████░░░░] 45% | code/backend |  feature-x
 ```
 
-**Heavy usage:**
+**Outside a git repo (branch segment hidden):**
 ```
-Sonnet 4.5 | [█████████░] 85% | $3.28 | webapp
+Sonnet 4.5 | [█████████░] 85% | home/webapp
 ```
 
 ## Uninstallation
