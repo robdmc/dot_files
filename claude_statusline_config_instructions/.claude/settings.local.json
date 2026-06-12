@@ -2,7 +2,7 @@
   "permissions": {
     "allow": [
       "Bash(bash:*)",
-      "Bash(/home/rob/dot_files/claude_statusline_config_instructions/statusline.sh)"
+      "Bash(*statusline.sh)"
     ]
   }
 }
