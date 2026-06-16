@@ -14,7 +14,9 @@
       "Bash(ls:*)",
       "Read(//home/rob/**)",
       "Bash(bash -n ~/.bashrc)",
-      "Bash(bash -c ' *)"
+      "Bash(bash -c ' *)",
+      "Read(//Users/rob/**)",
+      "Bash(bash -ic 'type cdd >/dev/null 2>&1 && echo \"cdd: defined\"; command -v cargo >/dev/null && echo \"cargo: $\\(command -v cargo\\)\"; command -v mise >/dev/null && echo \"mise: ok\"')"
     ]
   }
 }
