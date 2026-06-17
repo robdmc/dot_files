@@ -105,6 +105,11 @@ _bashrc_interactive_setup() {
     # Zoxide
     eval "$(zoxide init bash)"
 
+    # mise — tab-complete task names (mise run <TAB>) and subcommands
+    if command -v mise >/dev/null 2>&1; then
+        eval "$(mise completion bash)"
+    fi
+
     # Source all existing bash hooks defined by ~/bash_hooks/*.sh
     source_bash_hooks
 
