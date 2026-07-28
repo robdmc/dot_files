@@ -49,6 +49,17 @@ When I provide implementation plans, I may include inline modification requests 
 
 ---
 
+# Response length
+
+**After delivering a requested artifact, stop.** No trailing observations unless asked.
+
+If I ask for a table, a number, a file, or a diff, the artifact is the whole answer. Do not append
+"two things worth knowing", "one caveat", "want me to also…", or interpretation I didn't ask for.
+A genuine blocker or a correctness problem with what I just asked for is worth raising — an
+interesting adjacent fact is not.
+
+---
+
 # Environment Notes
 
 - **GNU sed** is installed via Homebrew and is the default `sed` in PATH. Use GNU syntax: `sed -i 's/pat/rep/'` — do NOT use BSD syntax `sed -i '' 's/pat/rep/'`.
