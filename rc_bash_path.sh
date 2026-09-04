@@ -24,6 +24,9 @@
    if [ -f '/Users/rob/bin/google-cloud-sdk/path.bash.inc' ]; then . '/Users/rob/bin/google-cloud-sdk/path.bash.inc'; fi
    # The next line enables shell command completion for gcloud.
    if [ -f '/Users/rob/bin/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/rob/bin/google-cloud-sdk/completion.bash.inc'; fi
+
+   # Obsidian CLI
+   export PATH="/Applications/Obsidian.app/Contents/MacOS:$PATH"
  fi
 
  #  add pwd and home bin area to path
