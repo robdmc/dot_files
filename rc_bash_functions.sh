@@ -99,3 +99,79 @@ if hash rg 2>/dev/null; then
 fi
 
 
+ # Herdr session helpers
+ #   H            attach to (or start) the default session
+ #   H <name>     attach to (or create) a named session
+ #   Hl           list sessions
+ #   Hs           stop ALL running sessions (asks first)
+ #   Hs <name>    stop one session (asks first); errors if no session has that name
+ #   Hk           stop ALL running sessions, then delete them (asks first)
+ #   Hk <name>    stop one session, then delete it (asks first); errors if no session has that name
+ function H() {
+     if [ $# -eq 0 ]; then
+         command herdr
+     else
+         command herdr --session "$@"
+     fi
+ }
+
+ function Hl() {
+     command herdr session list "$@"
+ }
+
+ function Hs() {
+     local targets n ans
+     if [ $# -eq 0 ]; then
+         targets=$(command herdr session list --json | jq -r '.sessions[] | select(.running) | .name') || return 1
+         if [ -z "$targets" ]; then
+             echo "Hs: no running herdr sessions" >&2
+             return 1
+         fi
+     else
+         targets=$(command herdr session list --json | jq -r '.sessions[].name') || return 1
+         if ! printf '%s\n' "$targets" | grep -qx -- "$1"; then
+             echo "Hs: no herdr session named '$1'" >&2
+             return 1
+         fi
+         targets="$1"
+     fi
+     echo "This will stop these herdr sessions and every process in their panes:"
+     printf '  %s\n' $targets
+     read -r -p "Continue? [y/N] " ans
+     case "$ans" in
+         y|Y) ;;
+         *) echo "Hs: aborted" >&2; return 1 ;;
+     esac
+     for n in $targets; do
+         command herdr session stop "$n"
+     done
+ }
+
+ function Hk() {
+     local targets n ans
+     if [ $# -eq 0 ]; then
+         targets=$(command herdr session list --json | jq -r '.sessions[].name') || return 1
+         if [ -z "$targets" ]; then
+             echo "Hk: no herdr sessions" >&2
+             return 1
+         fi
+     else
+         targets=$(command herdr session list --json | jq -r '.sessions[].name') || return 1
+         if ! printf '%s\n' "$targets" | grep -qx -- "$1"; then
+             echo "Hk: no herdr session named '$1'" >&2
+             return 1
+         fi
+         targets="$1"
+     fi
+     echo "This will stop AND DELETE these herdr sessions and every process in their panes:"
+     printf '  %s\n' $targets
+     read -r -p "Continue? [y/N] " ans
+     case "$ans" in
+         y|Y) ;;
+         *) echo "Hk: aborted" >&2; return 1 ;;
+     esac
+     for n in $targets; do
+         command herdr session stop "$n"
+         command herdr session delete "$n"
+     done
+ }
