@@ -170,8 +170,12 @@ fi
          y|Y) ;;
          *) echo "Hk: aborted" >&2; return 1 ;;
      esac
+     local running
+     running=$(command herdr session list --json | jq -r '.sessions[] | select(.running) | .name') || return 1
      for n in $targets; do
-         command herdr session stop "$n"
+         if printf '%s\n' "$running" | grep -qx -- "$n"; then
+             command herdr session stop "$n"
+         fi
          command herdr session delete "$n"
      done
  }
