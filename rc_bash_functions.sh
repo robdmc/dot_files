@@ -102,7 +102,7 @@ fi
  # Herdr session helpers
  #   H            attach to (or start) the default session
  #   H <name>     attach to (or create) a named session
- #   Hl           list sessions
+ #   Hl           list sessions (status color-coded: green=running, red=stopped)
  #   Hs           stop ALL running sessions (asks first)
  #   Hs <name>    stop one session (asks first); errors if no session has that name
  #   Hk           stop ALL running sessions, then delete them (asks first)
@@ -116,7 +116,26 @@ fi
  }
 
  function Hl() {
-     command herdr session list "$@"
+     # Plain passthrough for --json, non-tty (pipes/redirects), or NO_COLOR.
+     case " $* " in *" --json "*) command herdr session list "$@"; return ;; esac
+     if [ ! -t 1 ] || [ -n "${NO_COLOR:-}" ]; then
+         command herdr session list "$@"
+         return
+     fi
+     command herdr session list "$@" | awk '
+         BEGIN { grn="\033[32m"; red="\033[31m"; dim="\033[33m"; off="\033[0m" }
+         NR == 1 { print; next }
+         NF < 2  { print; next }
+         {
+             col = ($2 == "running") ? grn : (($2 == "stopped") ? red : dim)
+             # Insert escapes around field 2 only, found after the end of field 1,
+             # so a session literally named "running" cannot be recolored.
+             p = index($0, $1) + length($1)
+             rest = substr($0, p)
+             q = index(rest, $2)
+             printf "%s%s%s%s%s%s\n", substr($0, 1, p - 1), substr(rest, 1, q - 1), \
+                 col, $2, off, substr(rest, q + length($2))
+         }'
  }
 
  function Hs() {
