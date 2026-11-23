@@ -132,7 +132,7 @@ _log_pwd() {
 # cd into a recent directory picked from dir history via fzf
 cdd() {
     local d
-    d=$(tac ~/.bash_dir_history | awk '!seen[$0]++' | fzf --no-sort --prompt="cd> ") && cd "$d"
+    d=$(tac ~/.bash_dir_history | awk '!seen[$0]++' | fzf --no-sort --prompt="cd> " --query="$*") && cd "$d"
 }
 
 history -c
